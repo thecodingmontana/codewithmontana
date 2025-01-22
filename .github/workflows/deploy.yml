@@ -72,6 +72,7 @@ jobs:
             pnpm run build
             
             # Restart application
-            # pm2 restart ecosystem.config.cjs || pm2 start ecosystem.config.cjs
+            # pm2 restart ecosystem.config.cjs || 
+            pm2 start ecosystem.config.cjs
             
             echo "Deployment completed successfully!"
