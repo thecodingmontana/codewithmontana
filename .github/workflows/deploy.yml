@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+          cache: 'pnpm'
+          cache-dependency-path: '**/pnpm-lock.yaml'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+    #   - name: Setup SSH
+    #     env:
+    #       SSH_KEY: ${{ secrets.VPS_DEPLOY_KEY }}
+    #     run: |
+    #       mkdir -p ~/.ssh
+    #       echo "$SSH_KEY" > ~/.ssh/deploy_key
+    #       chmod 600 ~/.ssh/deploy_key
+    #       ssh-keyscan -H ${{ secrets.VPS_HOST }} >> ~/.ssh/known_hosts
+
+    #   - name: Deploy to VPS
+    #     uses: appleboy/ssh-action@master
+    #     with:
+    #       host: ${{ secrets.VPS_HOST }}
+    #       username: ${{ secrets.VPS_USER }}
+    #       key: ${{ secrets.VPS_DEPLOY_KEY }}
+    #       script: |
+    #         # Load NVM
+    #         export NVM_DIR="$HOME/.nvm"
+    #         [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            
+    #         cd ~/projects/codewithmontana || exit 1
+            
+    #         # Pull latest changes
+    #         echo "Pulling changes from GitHub..."
+    #         git fetch origin main
+    #         git reset --hard origin/main
+            
+    #         # Setup Node and PNPM
+    #         echo "Setting up Node.js and PNPM..."
+    #         nvm use 22 || nvm install 22
+            
+    #         # Install global dependencies if needed
+    #         command -v pnpm &> /dev/null || npm install -g pnpm
+    #         command -v pm2 &> /dev/null || npm install -g pm2
+            
+    #         # Install dependencies
+    #         echo "Installing dependencies..."
+    #         pnpm install
+            
+    #         # Lint and build
+    #         echo "Running lint and build..."
+    #         pnpm run lint:fix
+    #         pnpm run build
+            
+    #         # Restart application
+    #         # pm2 restart ecosystem.config.cjs || pm2 start ecosystem.config.cjs
+            
+    #         echo "Deployment completed successfully!"
