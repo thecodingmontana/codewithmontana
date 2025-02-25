@@ -1,11 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-11-01',
-  devtools: { enabled: true },
-
-  future: {
-    compatibilityVersion: 4,
-  },
 
   modules: [
     '@nuxt/eslint',
@@ -17,11 +11,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-og-image',
   ],
-  eslint: {
-    config: {
-      stylistic: true
-    }
-  },
+  devtools: { enabled: true },
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL,
     name: process.env.NUXT_PUBLIC_SITE_NAME,
@@ -37,9 +27,19 @@ export default defineNuxtConfig({
     storage: 'localStorage', // or 'sessionStorage' or 'cookie'
     storageKey: 'thecodingmontana-color-mode',
   },
+
+  future: {
+    compatibilityVersion: 4,
+  },
+  compatibilityDate: '2024-11-01',
   vite: {
     server: {
       allowedHosts: ['08ad-102-220-169-7.ngrok-free.app'],
+    },
+  },
+  eslint: {
+    config: {
+      stylistic: true,
     },
   },
   googleFonts: {
