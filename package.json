@@ -54,6 +54,8 @@
   "devDependencies": {
     "@commitlint/cli": "^19.7.1",
     "@commitlint/config-conventional": "^19.7.1",
+    "@iconify-json/hugeicons": "^1.2.3",
+    "@iconify-json/simple-icons": "^1.2.26",
     "@nuxtjs/tailwindcss": "^6.13.1",
     "husky": "^9.1.7",
     "typescript": "^5.7.3"

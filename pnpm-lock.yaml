@@ -69,6 +69,12 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^19.7.1
         version: 19.7.1
+      '@iconify-json/hugeicons':
+        specifier: ^1.2.3
+        version: 1.2.3
+      '@iconify-json/simple-icons':
+        specifier: ^1.2.26
+        version: 1.2.26
       '@nuxtjs/tailwindcss':
         specifier: ^6.13.1
         version: 6.13.1(magicast@0.3.5)
@@ -721,6 +727,12 @@ packages:
   '@humanwhocodes/retry@0.4.2':
     resolution: {integrity: sha512-xeO57FpIu4p1Ri3Jq/EXq4ClRm86dVF2z/+kvFnyqVYRavTZmaFaUBbWCOuuTh0o/g7DSsk6kc2vrS4Vl5oPOQ==}
     engines: {node: '>=18.18'}
+
+  '@iconify-json/hugeicons@1.2.3':
+    resolution: {integrity: sha512-EujzAC9jlyJY+iFA2ehXoTgGfjKxMMD9xWGQbbo0MlqZelkg/dmENlqIMJjLy9B1sZltw1ol5eYhhzY69TwkQw==}
+
+  '@iconify-json/simple-icons@1.2.26':
+    resolution: {integrity: sha512-NvqRuE+5h/tp4boPlnvfs0alD0CvnRE7oeG9Li5NGmZRx2/rhwlNjW/vEVTyhZcR9zqvRPAVh2GXR+PTEpzV+A==}
 
   '@iconify/collections@1.0.521':
     resolution: {integrity: sha512-fryCall7fKZsBwsg5cA+2n+qBrFyFpJoGdIrdtznX9smwA2djSd4iRwClpmvkWk9xk1M/uPnu1PYUjiSnOiaeQ==}
@@ -5534,6 +5546,14 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@humanwhocodes/retry@0.4.2': {}
+
+  '@iconify-json/hugeicons@1.2.3':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/simple-icons@1.2.26':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify/collections@1.0.521':
     dependencies:

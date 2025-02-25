@@ -59,8 +59,9 @@
 @layer base {
   * {
     @apply border-border;
+    @apply font-geist;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background dark:bg-neutral-900 text-foreground;
   }
 }
