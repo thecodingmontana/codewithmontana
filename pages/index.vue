@@ -2,6 +2,6 @@
 
 <template>
   <section>
-    Coming Soon!
+    Promise to finish working on this!
   </section>
 </template>
