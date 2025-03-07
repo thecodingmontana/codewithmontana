@@ -10,6 +10,8 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-og-image',
     '@nuxt/fonts',
+    '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
   ],
   devtools: { enabled: true },
   site: {
@@ -47,6 +49,16 @@ export default defineNuxtConfig({
       { name: 'Geist', provider: 'google' },
       { name: 'Nyght', src: { url: '/fonts/NyghtSerif-Regular.woff', format: 'woff' } },
     ],
+  },
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
+  piniaPluginPersistedstate: {
+    storage: 'cookies',
+    cookieOptions: {
+      sameSite: 'lax',
+    },
+    debug: true,
   },
   shadcn: {
     /**

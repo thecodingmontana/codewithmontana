@@ -19,11 +19,10 @@
         .
       </h1>
       <p
-        class="text-white animate-fadeInUp relative z-10 mt-4 mb-7 flex flex-col items-center justify-center text-center text-xl delay-600 sm:flex-row md:text-xl lg:mt-7"
+        class="text-white animate-fadeInUp relative z-10 mt-4 mb-7 flex flex-col items-center justify-center text-center delay-600 sm:flex-row md:text-xl lg:mt-7"
       >
         <span
-          class="grad-white flex items-center justify-center fontsninja-font"
-          data-ninja-font="outfit_thin_normal_t3v0z"
+          class="grad-white flex items-center justify-center"
         >
           Hello, I'm Christopher Odhiambo, Software Engineer. <br>
           I focus on crafting beautiful experiences on both web and mobile <br>
@@ -93,7 +92,7 @@
               rx="2"
               ry="2"
             />
-            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>thecodingmontana@gmail.com
+            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>hello@thecodingmontana.com
         </button>
       </div>
     </div>
