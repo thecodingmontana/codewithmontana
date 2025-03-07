@@ -47,6 +47,7 @@
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
     "unstorage": "^1.0.0",
+    "vaul-vue": "^0.3.0",
     "vue": "latest",
     "vue-router": "latest"
   },

@@ -19,7 +19,7 @@
         .
       </h1>
       <p
-        class="text-white animate-fadeInUp relative z-10 mt-4 mb-7 flex flex-col items-center justify-center text-center text-xl delay-600 sm:flex-row md:text-xl lg:mt-7 lg:text-2xl"
+        class="text-white animate-fadeInUp relative z-10 mt-4 mb-7 flex flex-col items-center justify-center text-center text-xl delay-600 sm:flex-row md:text-xl lg:mt-7"
       >
         <span
           class="grad-white flex items-center justify-center fontsninja-font"
@@ -30,15 +30,71 @@
           that are easy to use, enjoyable, and get the job done.
         </span>
       </p>
-      <div>
-        <NuxtLink
-          to="#"
-          as-child
+      <div
+        class="animate-fadeInUp z-100 mt-4 flex flex-col items-center justify-center gap-6 delay-800 md:mt-8 md:flex-row md:gap-10"
+      >
+        <div
+          class="group relative inline-flex cursor-pointer items-center justify-between overflow-hidden rounded-full border border-white/10 bg-white/10 py-[3px] pl-2 pr-[3px] text-base font-medium opacity-85 backdrop-blur-xs transition-all hover:bg-transparent md:py-1 md:pl-3 md:pr-1"
         >
-          <Button class="bg-white text-black hover:bg-zinc-300">
-            Let's Connect
-          </Button>
-        </NuxtLink>
+          <span
+            class="z-10 px-3 text-white transition-colors duration-300 group-hover:text-black"
+          >Let's Connect</span><span
+            class="absolute inset-0 translate-x-[45%] scale-0 rounded-full bg-white opacity-0 transition-all duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100"
+          /><span
+            class="z-10 flex items-center justify-center overflow-hidden rounded-full bg-white p-2 transition-colors duration-300 group-hover:bg-transparent md:p-2.5"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-arrow-right text-black transition-all duration-300 group-hover:translate-x-5 group-hover:opacity-0"
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" /></svg><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-arrow-right absolute -translate-x-5 text-black opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100"
+          >
+            <path d="M5 12h14" />
+            <path d="m12 5 7 7-7 7" /></svg></span>
+        </div>
+        <button
+          class="flex items-center gap-2 py-3 text-base font-light text-white/75 outline-hidden transition-all duration-300 cursor-pointer hover:text-white/90"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-copy"
+          >
+            <rect
+              width="14"
+              height="14"
+              x="8"
+              y="8"
+              rx="2"
+              ry="2"
+            />
+            <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" /></svg>thecodingmontana@gmail.com
+        </button>
       </div>
     </div>
     <div
