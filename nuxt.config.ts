@@ -47,7 +47,7 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       { name: 'Geist', provider: 'google' },
-      { name: 'Nyght', src: { url: '/fonts/NyghtSerif-Regular.woff', format: 'woff' } },
+      { name: 'Nyght', src: { url: '/fonts/NyghtSerif-MediumItalic.woff', format: 'woff' } },
     ],
   },
   pinia: {

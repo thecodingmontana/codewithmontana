@@ -1,5 +1,37 @@
 <script setup lang="ts">
 import CopyToClipboard from '../shared/CopyToClipboard.vue'
+
+const { $gsap } = useNuxtApp()
+
+let timeline: gsap.core.Timeline | null = null
+
+onMounted(async () => {
+  await nextTick()
+
+  timeline = $gsap.timeline({ paused: true })
+
+  timeline
+    .fromTo(
+      '.animate-scaleIn',
+      { scale: 0.5, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 2.5, ease: 'power4.out', delay: 0.3 },
+    )
+    .fromTo('.animate-title', { opacity: 0, y: 20 }, { opacity: 1, duration: 1.8, y: 0, ease: 'power2.out' }, '-=2')
+    .fromTo(
+      '.animate-typing',
+      { opacity: 0, text: '' }, // Start invisible and empty
+      { opacity: 1, text: 'web & mobile', duration: 1.5, ease: 'power2.out' },
+      '-=1.8', // Sync with `.animate-title`
+    )
+    .fromTo('.animate-info', { opacity: 0, y: 20 }, { opacity: 1, duration: 1.5, y: 0, ease: 'power2.out' }, '-=1.5')
+    .fromTo('.animate-buttons', { opacity: 0, y: 20 }, { opacity: 1, duration: 1.5, y: 0, ease: 'power2.out' }, '-=1.5')
+
+  timeline.play()
+})
+
+onUnmounted(() => {
+  timeline?.kill()
+})
 </script>
 
 <template>
@@ -8,20 +40,18 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
       class="animate-fadeInUp relative z-20 mx-auto mt-36 mb-2 flex max-w-full flex-col items-center justify-center px-3 delay-200 md:mt-48 md:max-w-4xl lg:max-w-5xl"
     >
       <h1
-        class="animate-fadeInUp my-2 w-full py-px text-center text-4xl leading-snug! font-semibold text-balance text-white opacity-90 delay-400 md:text-5xl lg:text-6xl dark:text-zinc-100"
+        class="animate-title my-2 w-full py-px text-center text-4xl leading-snug! font-semibold text-balance text-white opacity-90 delay-400 md:text-5xl lg:text-6xl dark:text-zinc-100"
       >
         <span class="md:text-nowrap">Passionate creating great</span>
         <br class="hidden md:block">
         experiences on
         <span
-          class="font-nyght bg-linear-to-b from-zinc-700 via-zinc-200 to-zinc-50 bg-clip-text font-light tracking-wide"
-        >
-          web & mobile
-        </span>
+          class="animate-typing font-nyght bg-linear-to-b from-zinc-700 via-zinc-200 to-zinc-50 bg-clip-text font-light tracking-wide"
+        />
         .
       </h1>
       <p
-        class="text-white animate-fadeInUp relative z-10 mt-4 mb-7 max-w-xl flex flex-col items-center justify-center text-center delay-600 sm:flex-row md:text-xl lg:mt-7"
+        class="animate-info text-white animate-fadeInUp relative z-10 mt-4 mb-7 max-w-xl flex flex-col items-center justify-center text-center delay-600 sm:flex-row md:text-xl lg:mt-7"
       >
         <span class="grad-white flex items-center justify-center">
           Hello, I'm Christopher Odhiambo, Software Engineer.
@@ -30,7 +60,7 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
         </span>
       </p>
       <div
-        class="animate-fadeInUp z-100 mt-4 flex flex-col items-center justify-center gap-6 delay-800 md:mt-8 md:flex-row md:gap-10"
+        class="animate-buttons z-100 mt-4 flex flex-col items-center justify-center gap-6 delay-800 md:mt-8 md:flex-row md:gap-10"
       >
         <NuxtLink
           to="https://cal.com/thecodingmontana"
@@ -75,7 +105,7 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
       </div>
     </div>
     <div
-      class="animate-scaleIn pointer-events-none relative z-10 mx-auto -mt-32 h-96 w-screen max-w-(--breakpoint-2xl) overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)] before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#8350e8,transparent_80%)] before:opacity-60"
+      class="animate-scaleIn pointer-events-none relative z-10 mx-auto -mt-28 h-96 w-screen max-w-(--breakpoint-2xl) overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)] before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#8350e8,transparent_80%)] before:opacity-60"
     >
       <div
         class="absolute top-1/2 -left-1/2 z-20 aspect-[1/0.7] w-[200%] rounded-[100%] border-t-4 border-t-[#ffffff] bg-[#0a0a0a] shadow-[inset_0_2px_20px_#fff,0_-10px_50px_1px_#ffffff6e] animate-glow"

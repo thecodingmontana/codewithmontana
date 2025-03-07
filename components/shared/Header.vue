@@ -1,7 +1,28 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const { $gsap } = useNuxtApp()
+
+let headerAnimation: gsap.core.Tween | null = null
+
+onMounted(async () => {
+  await nextTick()
+
+  headerAnimation = $gsap.fromTo('.header', {
+    opacity: 0,
+    y: -30,
+  }, {
+    opacity: 1,
+    y: 0,
+    delay: 0.5,
+  })
+})
+
+onUnmounted(() => {
+  headerAnimation?.kill()
+})
+</script>
 
 <template>
-  <header class="fixed top-3 left-0 right-0 flex flex-col items-center">
+  <header class="header fixed top-3 left-0 right-0 flex flex-col items-center">
     <div class="w-fit rounded-full backdrop-blur-md flex">
       <nav
         class="group/navigation-menu relative flex max-w-max flex-1 items-center justify-center"
