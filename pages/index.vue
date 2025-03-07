@@ -21,9 +21,7 @@
       <p
         class="text-white animate-fadeInUp relative z-10 mt-4 mb-7 flex flex-col items-center justify-center text-center delay-600 sm:flex-row md:text-xl lg:mt-7"
       >
-        <span
-          class="grad-white flex items-center justify-center"
-        >
+        <span class="grad-white flex items-center justify-center">
           Hello, I'm Christopher Odhiambo, Software Engineer. <br>
           I focus on crafting beautiful experiences on both web and mobile <br>
           that are easy to use, enjoyable, and get the job done.
@@ -32,12 +30,14 @@
       <div
         class="animate-fadeInUp z-100 mt-4 flex flex-col items-center justify-center gap-6 delay-800 md:mt-8 md:flex-row md:gap-10"
       >
-        <div
+        <NuxtLink
+          to="https://cal.com/thecodingmontana"
+          target="_blank"
           class="group relative inline-flex cursor-pointer items-center justify-between overflow-hidden rounded-full border border-white/10 bg-white/10 py-[3px] pl-2 pr-[3px] text-base font-medium opacity-85 backdrop-blur-xs transition-all hover:bg-transparent md:py-1 md:pl-3 md:pr-1"
         >
           <span
             class="z-10 px-3 text-white transition-colors duration-300 group-hover:text-black"
-          >Let's Connect</span><span
+          >Book a call</span><span
             class="absolute inset-0 translate-x-[45%] scale-0 rounded-full bg-white opacity-0 transition-all duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100"
           /><span
             class="z-10 flex items-center justify-center overflow-hidden rounded-full bg-white p-2 transition-colors duration-300 group-hover:bg-transparent md:p-2.5"
@@ -68,7 +68,7 @@
           >
             <path d="M5 12h14" />
             <path d="m12 5 7 7-7 7" /></svg></span>
-        </div>
+        </NuxtLink>
         <button
           class="flex items-center gap-2 py-3 text-base font-light text-white/75 outline-hidden transition-all duration-300 cursor-pointer hover:text-white/90"
         >

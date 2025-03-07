@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Footer from '~/components/shared/Footer.vue'
 import Header from '~/components/shared/Header.vue'
+import ModalProviders from '~/providers/ModalProviders.vue'
 
 useHead({
   meta: [
@@ -33,6 +34,7 @@ defineOgImageComponent('Nuxt', {
 
 <template>
   <main class="min-h-screen relative max-w-8xl overflow-hidden mx-auto flex flex-col">
+    <ModalProviders />
     <Header />
     <div class="flex-1">
       <slot />
