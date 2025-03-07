@@ -5,11 +5,11 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxt/icon',
-    '@nuxtjs/google-fonts',
     '@nuxtjs/tailwindcss',
     'shadcn-nuxt',
     '@nuxtjs/color-mode',
     'nuxt-og-image',
+    '@nuxt/fonts',
   ],
   devtools: { enabled: true },
   site: {
@@ -42,13 +42,11 @@ export default defineNuxtConfig({
       stylistic: true,
     },
   },
-  googleFonts: {
-    families: {
-      Geist: {
-        wght: [100, 400],
-        ital: [100],
-      },
-    },
+  fonts: {
+    families: [
+      { name: 'Geist', provider: 'google' },
+      { name: 'Nyght', src: { url: '/fonts/NyghtSerif-Regular.woff', format: 'woff' } },
+    ],
   },
   shadcn: {
     /**

@@ -8,6 +8,10 @@ export default {
         'Geist',
         'sans-serif',
       ],
+      nyght: [
+        'Nyght',
+        'sans-serif',
+      ],
     },
     extend: {
       borderRadius: {

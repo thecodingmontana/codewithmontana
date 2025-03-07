@@ -62,6 +62,6 @@
     @apply font-geist;
   }
   body {
-    @apply bg-background dark:bg-neutral-900 text-foreground;
+    @apply bg-neutral-900 text-foreground;
   }
 }
