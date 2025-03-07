@@ -19,12 +19,12 @@ onMounted(async () => {
     .fromTo('.animate-title', { opacity: 0, y: 20 }, { opacity: 1, duration: 1.8, y: 0, ease: 'power2.out' }, '-=2')
     .fromTo(
       '.animate-typing',
-      { opacity: 0, text: '' }, // Start invisible and empty
+      { opacity: 0, text: '' },
       { opacity: 1, text: 'web & mobile', duration: 1.5, ease: 'power2.out' },
-      '-=1.8', // Sync with `.animate-title`
+      '-=1.8',
     )
     .fromTo('.animate-info', { opacity: 0, y: 20 }, { opacity: 1, duration: 1.5, y: 0, ease: 'power2.out' }, '-=1.5')
-    .fromTo('.animate-buttons', { opacity: 0, y: 20 }, { opacity: 1, duration: 1.5, y: 0, ease: 'power2.out' }, '-=1.5')
+    .fromTo('.animate-buttons', { opacity: 0, y: 20 }, { opacity: 1, duration: 1.5, y: 0, ease: 'power2.out' }, '-=1')
 
   timeline.play()
 })
