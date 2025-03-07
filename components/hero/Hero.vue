@@ -5,7 +5,7 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
 <template>
   <section class="relative">
     <div
-      class="animate-fadeInUp relative z-20 mx-auto mt-32 mb-2 flex max-w-full flex-col items-center justify-center px-3 delay-200 md:mt-48 md:max-w-4xl lg:max-w-5xl"
+      class="animate-fadeInUp relative z-20 mx-auto mt-36 mb-2 flex max-w-full flex-col items-center justify-center px-3 delay-200 md:mt-48 md:max-w-4xl lg:max-w-5xl"
     >
       <h1
         class="animate-fadeInUp my-2 w-full py-px text-center text-4xl leading-snug! font-semibold text-balance text-white opacity-90 delay-400 md:text-5xl lg:text-6xl dark:text-zinc-100"
@@ -21,11 +21,11 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
         .
       </h1>
       <p
-        class="text-white animate-fadeInUp relative z-10 mt-4 mb-7 flex flex-col items-center justify-center text-center delay-600 sm:flex-row md:text-xl lg:mt-7"
+        class="text-white animate-fadeInUp relative z-10 mt-4 mb-7 max-w-xl flex flex-col items-center justify-center text-center delay-600 sm:flex-row md:text-xl lg:mt-7"
       >
         <span class="grad-white flex items-center justify-center">
-          Hello, I'm Christopher Odhiambo, Software Engineer. <br>
-          I focus on crafting beautiful experiences on both web and mobile <br>
+          Hello, I'm Christopher Odhiambo, Software Engineer.
+          I focus on crafting beautiful experiences on both web and mobile
           that are easy to use, enjoyable, and get the job done.
         </span>
       </p>
@@ -78,7 +78,7 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
       class="animate-scaleIn pointer-events-none relative z-10 mx-auto -mt-32 h-96 w-screen max-w-(--breakpoint-2xl) overflow-hidden [mask-image:radial-gradient(50%_50%,white,transparent)] before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_bottom_center,#8350e8,transparent_80%)] before:opacity-60"
     >
       <div
-        class="absolute top-1/2 -left-1/2 z-20 aspect-[1/0.7] w-[200%] rounded-[100%] border-t-4 border-t-[#ffffff] bg-[#0a0a0a] shadow-[inset_0_2px_20px_#fff,0_-10px_50px_1px_#ffffff6e]"
+        class="absolute top-1/2 -left-1/2 z-20 aspect-[1/0.7] w-[200%] rounded-[100%] border-t-4 border-t-[#ffffff] bg-[#0a0a0a] shadow-[inset_0_2px_20px_#fff,0_-10px_50px_1px_#ffffff6e] animate-glow"
       />
     </div>
   </section>

@@ -61,6 +61,15 @@ export default {
           5: 'hsl(var(--chart-5))',
         },
       },
+      keyframes: {
+        glow: {
+          '0%, 100%': { opacity: '0.5', filter: 'drop-shadow(0 0 20px #fff)' },
+          '50%': { opacity: '1', filter: 'drop-shadow(0 0 40px #fff)' },
+        },
+      },
+      animation: {
+        glow: 'glow 2s infinite ease-in-out',
+      },
     },
   },
   plugins: [require('tailwindcss-animate')],

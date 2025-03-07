@@ -33,15 +33,17 @@ defineOgImageComponent('Nuxt', {
 </script>
 
 <template>
-  <main class="min-h-screen relative max-w-8xl overflow-hidden mx-auto flex flex-col">
-    <Toaster
-      :close-button="true"
-      rich-colors
-    />
-    <Header />
-    <div class="flex-1">
-      <slot />
-    </div>
-    <Footer />
-  </main>
+  <ClientOnly>
+    <main class="min-h-screen relative max-w-8xl overflow-hidden mx-auto flex flex-col">
+      <Toaster
+        :close-button="true"
+        rich-colors
+      />
+      <Header />
+      <div class="flex-1">
+        <slot />
+      </div>
+      <Footer />
+    </main>
+  </ClientOnly>
 </template>
