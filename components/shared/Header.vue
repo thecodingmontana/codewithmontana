@@ -17,7 +17,6 @@
               <NuxtLink
                 to="/"
                 class="focus:text-white data-[active=true]:text-white ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 [&amp;_svg:not([class*='text-'])]:text-muted-foreground gap-1 rounded-full p-2 focus-visible:ring-4 focus-visible:outline-1 [&amp;_svg:not([class*='size-'])]:size-4 inline-block px-4 py-1.5 text-sm font-light text-white/70 transition-[text-shadow,color] duration-300 hover:text-white/85"
-                href="/"
               >
                 <Icon
                   name="hugeicons:home-03"
@@ -52,7 +51,7 @@
               data-slot="navigation-menu-item"
               class="relative"
             >
-              <button
+              <NuxtLink
                 to="https://x.com/codewithmontana"
                 target="_blank"
                 class="group h-9 w-max items-center justify-center rounded-full disabled:pointer-events-none disabled:opacity-50 data-[active=true]:text-accent-foreground ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 group inline-block px-4 py-1.5 text-sm font-light text-white/70 transition-[text-shadow,color] duration-300 hover:text-white/85"
@@ -62,7 +61,7 @@
                   name="i-simple-icons-x"
                   class="size-5"
                 />
-              </button>
+              </NuxtLink>
             </li>
             <li
               class="relative"
