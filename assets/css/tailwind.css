@@ -4,6 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: "Geist", sans-serif;
+  --font-nyght: "Nyght", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -113,10 +115,28 @@
   --sidebar-ring: oklch(0.553 0.013 58.071);
 }
 
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 6s ease-in-out infinite;
+}
+
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    @apply font-sans;
   }
+
   body {
     @apply bg-background text-foreground;
   }
