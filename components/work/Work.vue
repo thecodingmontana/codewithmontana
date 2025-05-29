@@ -1,5 +1,46 @@
 <script setup lang="ts">
 import { motion, AnimatePresence } from 'motion-v'
+import { cn } from '~/lib/utils'
+import type { Project } from '~/types'
+
+const props = defineProps<{
+  project: Project
+}>()
+
+const project = computed(() => {
+  return props?.project
+})
+
+const generateColorVariations = (baseColor: string) => {
+  const hex = baseColor.replace('#', '')
+  const r = parseInt(hex.substr(0, 2), 16)
+  const g = parseInt(hex.substr(2, 2), 16)
+  const b = parseInt(hex.substr(4, 2), 16)
+
+  return {
+    dark: `rgb(${Math.floor(r * 0.3)}, ${Math.floor(g * 0.3)}, ${Math.floor(b * 0.3)})`,
+    medium: baseColor,
+    light: `rgb(${Math.min(255, r + 60)}, ${Math.min(255, g + 60)}, ${Math.min(
+      255,
+      b + 60,
+    )})`,
+    lighter: `rgb(${Math.min(255, r + 120)}, ${Math.min(255, g + 120)}, ${Math.min(
+      255,
+      b + 120,
+    )})`,
+  }
+}
+
+const colorVariations = computed(() => {
+  return props.project.color
+    ? generateColorVariations(props.project.color)
+    : {
+        dark: 'rgb(107, 13, 51)',
+        medium: 'rgb(219, 39, 119)',
+        light: 'rgb(244, 114, 182)',
+        lighter: 'rgb(249, 215, 147)',
+      }
+})
 </script>
 
 <template>
@@ -36,33 +77,39 @@ import { motion, AnimatePresence } from 'motion-v'
           >
             <div
               class="absolute inset-0 -z-1"
-              style="
-                background: linear-gradient(
-                  188.62deg,
-                  rgb(107, 13, 51) 49.9%,
-                  rgb(219, 39, 119) 81.7%,
-                  rgb(244, 114, 182) 93.88%,
-                  rgb(249, 215, 147) 113.5%
-                );
-              "
+              :style="{
+                background: `linear-gradient(
+      188.62deg,
+      ${colorVariations.dark} 49.9%,
+      ${colorVariations.medium} 81.7%,
+      ${colorVariations.light} 93.88%,
+      ${colorVariations.lighter} 113.5%
+    )`,
+              }"
             />
             <div
-              class="absolute inset-x-0 top-px z-10 h-[0.8px] opacity-70"
-              style="
-                background: linear-gradient(
-                  90deg,
-                  rgba(0, 0, 0, 0) 20%,
-                  rgb(255, 255, 255) 50%,
-                  rgba(0, 0, 0, 0) 80%
-                );
-              "
+              className="absolute inset-x-0 top-px z-10 h-[0.8px] opacity-70"
+              :style="{
+                background: `linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 20%,
+      rgb(255, 255, 255) 50%,
+      rgba(0, 0, 0, 0) 80%
+    )`,
+              }"
             />
             <div
-              class="hidden w-full flex-row items-center justify-between px-12 py-8 md:flex text-pink-300"
+              :class="
+                cn(
+                  'hidden w-full flex-row items-center justify-between px-12 py-8 md:flex',
+                )
+              "
+              :style="{
+                color: project.color ? `${project.color}` : '#f9a8d4', // 33 is 20% opacity in hex
+              }"
             >
               <h3 class="max-w-[90%] text-xl lg:text-2xl">
-                A online space for entrepreneurs to pitch ideas, explore others, and gain
-                exposure with clean design.
+                {{ project.tagline }}
               </h3>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +135,12 @@ import { motion, AnimatePresence } from 'motion-v'
               height="753"
               decoding="async"
               data-nimg="1"
-              class="md:group-hover:translsate-y-10 w-full max-w-[85%] translate-y-5 -rotate-3 rounded-t-lg border-[1.5px] border-white/20 transition-all duration-300 will-change-transform md:block md:rotate-0 md:group-hover:scale-[1.08] md:group-hover:-rotate-3 shadow-[0_0_30px_#DB2777]"
+              class="md:group-hover:translsate-y-10 w-full max-w-[85%] translate-y-5 -rotate-3 rounded-t-lg border-[1.5px] border-white/20 transition-all duration-300 will-change-transform md:block md:rotate-0 md:group-hover:scale-[1.08] md:group-hover:-rotate-3"
+              :style="{
+                boxShadow: project.color
+                  ? `0 0 30px ${project.color}`
+                  : '0 0 30px #DB2777',
+              }"
               srcset="
                 https://aayushbharti.in/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnext-venture.9ff457d3.webp&amp;w=1200&amp;q=75 1x
               "
