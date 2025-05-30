@@ -1,4 +1,4 @@
-import type { Project } from '~/types'
+import type { Project, TechStack } from '~/types'
 
 export const projects: Project[] = [
   {
@@ -10,7 +10,28 @@ export const projects: Project[] = [
       'Responsive design with Nativewind (Tailwind CSS for React Native).',
       'Fast load times and intuitive navigation optimized for mobile UX.',
     ],
-    stack: ['Expo', 'React Native', 'Nativewind (Tailwind CSS)', 'TypeScript'],
+    stack: [
+      {
+        name: 'Expo',
+        icon: 'simple-icons:expo',
+      },
+      {
+        name: 'React',
+        icon: 'devicon:react',
+      },
+      {
+        name: 'React Native',
+        icon: 'devicon:reactnative-wordmark',
+      },
+      {
+        name: 'Nativewind',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#F97316',
   },
@@ -23,7 +44,28 @@ export const projects: Project[] = [
       'UI built with Shadcn and TypeScript for maintainability and DX.',
       'Zero-limits conversion pipeline with Next.js App Router.',
     ],
-    stack: ['Next.js', 'Shadcn UI', 'FFmpeg', 'TypeScript', 'Tailwind CSS'],
+    stack: [
+      {
+        name: 'Next.js',
+        icon: 'simple-icons:expo',
+      },
+      {
+        name: 'React',
+        icon: 'devicon:react',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'FFmpeg',
+        icon: 'logos:ffmpeg-icon',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#E2E4F6',
   },
@@ -36,7 +78,28 @@ export const projects: Project[] = [
       'TMDB API for live movie data with dynamic search and filters.',
       'Responsive UI with Tailwind CSS v4 for a cinema-like feel.',
     ],
-    stack: ['Angular 19', 'Angular Signals', 'Tailwind CSS v4', 'TMDB API'],
+    stack: [
+      {
+        name: 'Angular',
+        icon: 'logos:angular-icon',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Signals',
+        icon: 'devicon:angularjs',
+      },
+      {
+        name: 'TMDB API',
+        icon: 'catppuccin:api-blueprint',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#b25a80',
   },
@@ -49,7 +112,44 @@ export const projects: Project[] = [
       'Drizzle ORM and Nuxt.js on the backend for real-time syncing.',
       'Clean UI optimized for speed and usability.',
     ],
-    stack: ['Nuxt.js', 'RxDB', 'Drizzle ORM', 'TypeScript'],
+    stack: [
+      {
+        name: 'Nuxt.js',
+        icon: 'logos:nuxt-icon',
+      },
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: 'Drizzle ORM',
+        icon: 'material-icon-theme:drizzle',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Nuxt Auth Utils',
+        icon: 'devicon:nuxtjs',
+      },
+      {
+        name: 'RxDB',
+        icon: 'logos:rxdb',
+      },
+      {
+        name: 'Shadcn UI',
+        icon: 'simple-icons:shadcnui',
+      },
+      {
+        name: 'PostgreSQL',
+        icon: 'devicon:postgresql',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#3d46be',
   },
@@ -62,7 +162,32 @@ export const projects: Project[] = [
       'Tailwind CSS and smooth animation sequences.',
       'SEO and mobile-friendly layout with fast content delivery.',
     ],
-    stack: ['Nuxt 3', 'Tailwind CSS', 'Motion Animation', 'Nuxt Image'],
+    stack: [
+      {
+        name: 'Nuxt.js',
+        icon: 'logos:nuxt-icon',
+      },
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Nuxt Image',
+        icon: 'devicon:nuxtjs',
+      },
+      {
+        name: 'Motion',
+        icon: 'simple-icons:framer',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#E70E02',
   },
@@ -76,8 +201,42 @@ export const projects: Project[] = [
       'Email templates with Nodemailer + built-in routes and validation.',
     ],
     stack: [
-      'Nuxt.js', 'Lucia', 'Drizzle ORM', 'PostgreSQL',
-      'Shadcn Vue UI', 'Vee-Validate', 'Nodemailer',
+      {
+        name: 'Nuxt.js',
+        icon: 'logos:nuxt-icon',
+      },
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: 'Drizzle ORM',
+        icon: 'material-icon-theme:drizzle',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Lucia Auth',
+        icon: 'simple-icons:lucia',
+      },
+      {
+        name: 'Shadcn UI',
+        icon: 'simple-icons:shadcnui',
+      },
+      {
+        name: 'PostgreSQL',
+        icon: 'devicon:postgresql',
+      },
+      {
+        name: 'Pinia',
+        icon: 'logos:pinia',
+      },
     ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#FFFD82',
@@ -91,7 +250,32 @@ export const projects: Project[] = [
       'Performance-focused with Nuxt 3 and static generation.',
       'Clean animations and tailored content sections.',
     ],
-    stack: ['Nuxt 3', 'Tailwind CSS', 'GSAP'],
+    stack: [
+      {
+        name: 'Nuxt.js',
+        icon: 'logos:nuxt-icon',
+      },
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Nuxt Image',
+        icon: 'devicon:nuxtjs',
+      },
+      {
+        name: 'Motion',
+        icon: 'simple-icons:framer',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#C1666B',
   },
@@ -104,7 +288,40 @@ export const projects: Project[] = [
       'Customizable store pages for creators.',
       'Designed to support large user bases with scalable architecture.',
     ],
-    stack: ['Nuxt.js', 'Tailwind CSS', 'Firebase', 'Drizzle ORM', 'Stripe'],
+    stack: [
+      {
+        name: 'Nuxt.js',
+        icon: 'logos:nuxt-icon',
+      },
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: 'Express.js',
+        icon: 'simple-icons:express',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Shadcn UI',
+        icon: 'simple-icons:shadcnui',
+      },
+      {
+        name: 'Nuxt Image',
+        icon: 'devicon:nuxtjs',
+      },
+      {
+        name: 'Pinia',
+        icon: 'logos:pinia',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#D4CDF4',
   },
@@ -117,7 +334,28 @@ export const projects: Project[] = [
       'WebSocket support for real-time updates.',
       'Role-based dashboard with stats and message logs.',
     ],
-    stack: ['Next.js', 'PostgreSQL', 'Tailwind CSS', 'Socket.IO', 'Drizzle ORM'],
+    stack: [
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: 'Express.js',
+        icon: 'simple-icons:express',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Pinia',
+        icon: 'logos:pinia',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#0f8661',
   },
@@ -130,7 +368,36 @@ export const projects: Project[] = [
       'Responsive layout with Tailwind CSS.',
       'Pinia for global state, with SSR support.',
     ],
-    stack: ['Nuxt.js', 'TypeScript', 'Tailwind CSS', 'Pinia', '@sidebase/nuxt-auth'],
+    stack: [
+      {
+        name: 'Nuxt.js',
+        icon: 'logos:nuxt-icon',
+      },
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: '@sidebase/nuxt-auth',
+        icon: 'devicon:nuxtjs',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Nuxt Image',
+        icon: 'devicon:nuxtjs',
+      },
+      {
+        name: 'Pinia',
+        icon: 'logos:pinia',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#da2f7b',
   },
@@ -143,7 +410,36 @@ export const projects: Project[] = [
       'Full auth flow with guards and session persistence.',
       'Built-in UI components and error handling.',
     ],
-    stack: ['Nuxt.js', 'Firebase', 'Tailwind CSS'],
+    stack: [
+      {
+        name: 'Nuxt.js',
+        icon: 'logos:nuxt-icon',
+      },
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: 'Firebase',
+        icon: 'devicon:firebase',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Shadcn UI',
+        icon: 'simple-icons:shadcnui',
+      },
+      {
+        name: 'Pinia',
+        icon: 'logos:pinia',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#18F2B2',
   },
@@ -156,7 +452,32 @@ export const projects: Project[] = [
       'Uses Puppeteer for accurate page captures.',
       'Download and share screenshots instantly.',
     ],
-    stack: ['Nuxt 3', 'Tailwind CSS', 'Puppeteer'],
+    stack: [
+      {
+        name: 'Nuxt.js',
+        icon: 'logos:nuxt-icon',
+      },
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: 'Puppeteer',
+        icon: 'devicon:puppeteer',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Shadcn UI',
+        icon: 'simple-icons:shadcnui',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#2FE6DE',
   },
@@ -169,7 +490,36 @@ export const projects: Project[] = [
       'Responsive layout with inbox, sent, and draft views.',
       'Search and filter UI with Tailwind CSS.',
     ],
-    stack: ['Nuxt.js', 'Firebase', 'Tailwind CSS'],
+    stack: [
+      {
+        name: 'Nuxt.js',
+        icon: 'logos:nuxt-icon',
+      },
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: 'Firebase',
+        icon: 'devicon:firebase',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'TypeScript',
+        icon: 'logos:typescript-icon',
+      },
+      {
+        name: 'Shadcn UI',
+        icon: 'simple-icons:shadcnui',
+      },
+      {
+        name: 'Pinia',
+        icon: 'logos:pinia',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#FAE1DF',
   },
@@ -182,7 +532,28 @@ export const projects: Project[] = [
       'Realtime Firestore sync with minimal delay.',
       'Responsive UI styled with Tailwind.',
     ],
-    stack: ['React', 'Firebase', 'Tailwind CSS'],
+    stack: [
+      {
+        name: 'React',
+        icon: 'devicon:react',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'JavaScript',
+        icon: 'logos:javascript',
+      },
+      {
+        name: 'Firebase',
+        icon: 'devicon:firebase',
+      },
+      {
+        name: 'Redux',
+        icon: 'logos:redux',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#E4C3AD',
   },
@@ -195,8 +566,128 @@ export const projects: Project[] = [
       'Firebase auth and tweet syncing.',
       'Tailwind-powered layout optimized for mobile.',
     ],
-    stack: ['Vue', 'Pinia', 'Firebase', 'Tailwind CSS'],
+    stack: [
+      {
+        name: 'Vue',
+        icon: 'devicon:react',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
+      },
+      {
+        name: 'JavaScript',
+        icon: 'logos:javascript',
+      },
+      {
+        name: 'Firebase',
+        icon: 'devicon:firebase',
+      },
+      {
+        name: 'Pinia',
+        icon: 'logos:pinia',
+      },
+    ],
     github: 'https://github.com/thecodingmontana/dogdom.git',
     color: '#928779',
+  },
+]
+
+export const techStack: TechStack[] = [
+  {
+    name: 'ReactJS',
+    icon: 'logos:react',
+  },
+  {
+    name: 'React Query',
+    icon: 'logos:react-query',
+  },
+  {
+    name: 'Vue Query',
+    icon: 'logos:react-query-icon',
+  },
+  {
+    name: 'Next.js',
+    icon: 'logos:nextjs-icon',
+  },
+  {
+    name: 'Nuxt.js',
+    icon: 'logos:nuxt-icon',
+  },
+  {
+    name: 'Redux',
+    icon: 'logos:redux',
+  },
+  {
+    name: 'Zustand',
+    icon: 'devicon:zustand',
+  },
+  {
+    name: 'Zod',
+    icon: 'logos:zod',
+  },
+  {
+    name: 'TypeScript',
+    icon: 'logos:typescript-icon',
+  },
+  {
+    name: 'Angular',
+    icon: 'logos:angular-icon',
+  },
+  {
+    name: 'Node.js',
+    icon: 'logos:nodejs-icon-alt',
+  },
+  {
+    name: 'Express.js',
+    icon: 'simple-icons:express',
+  },
+  {
+    name: 'Nest.js',
+    icon: 'logos:nestjs',
+  },
+  {
+    name: 'Git',
+    icon: 'logos:git-icon',
+  },
+  {
+    name: 'GitHub',
+    icon: 'simple-icons:github',
+  },
+  {
+    name: 'Expo',
+    icon: 'simple-icons:expo',
+  },
+  {
+    name: 'React Native',
+    icon: 'devicon:reactnative-wordmark',
+  },
+  {
+    name: 'pnpm',
+    icon: 'devicon:pnpm',
+  },
+  {
+    name: 'Linux',
+    icon: 'logos:linux-tux',
+  },
+  {
+    name: 'PostgreSQL',
+    icon: 'devicon:postgresql',
+  },
+  {
+    name: 'MySQL',
+    icon: 'logos:mysql',
+  },
+  {
+    name: 'Prisma',
+    icon: 'simple-icons:prisma',
+  },
+  {
+    name: 'Golang',
+    icon: 'logos:gopher',
+  },
+  {
+    name: 'Docker',
+    icon: 'logos:docker-icon',
   },
 ]

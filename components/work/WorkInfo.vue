@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { motion, AnimatePresence } from 'motion-v'
+import WorkStack from './WorkStack.vue'
 import type { Project } from '~/types'
 
 const pros = defineProps<{
@@ -58,109 +59,7 @@ const project = computed(() => {
               {{ highlight }}
             </li>
           </ul>
-          <div class="mt-10 flex flex-wrap gap-3 text-sm">
-            <div
-              class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
-              style="opacity: 1; transform: none;"
-            >
-              <img
-                height="16"
-                width="16"
-                alt="Next.js"
-                src="https://cdn.simpleicons.org/nextdotjs/white"
-              >Next.js
-            </div><div
-              class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
-              style="opacity: 1; transform: none;"
-            >
-              <img
-                height="16"
-                width="16"
-                alt="React"
-                src="https://cdn.simpleicons.org/react"
-              >React
-            </div><div
-              class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
-              style="opacity: 1; transform: none;"
-            >
-              <img
-                height="16"
-                width="16"
-                alt="Tailwind CSS"
-                src="https://cdn.simpleicons.org/tailwindcss"
-              >Tailwind CSS
-            </div><div
-              class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
-              style="opacity: 1; transform: none;"
-            >
-              <img
-                height="16"
-                width="16"
-                alt="TypeScript"
-                src="https://cdn.simpleicons.org/typescript"
-              >TypeScript
-            </div><div
-              class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
-              style="opacity: 1; transform: none;"
-            >
-              <img
-                height="16"
-                width="16"
-                alt="Framer Motion"
-                src="https://cdn.simpleicons.org/framer"
-              >Framer Motion
-            </div><div
-              class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
-              style="opacity: 1; transform: none;"
-            >
-              <img
-                height="16"
-                width="16"
-                alt="Sanity cms"
-                src="https://cdn.simpleicons.org/sanity"
-              >Sanity cms
-            </div><div
-              class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
-              style="opacity: 1; transform: none;"
-            >
-              <img
-                height="16"
-                width="16"
-                alt="Auth.js"
-                src="https://cdn.simpleicons.org/nextdns"
-              >Auth.js
-            </div><div
-              class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
-              style="opacity: 1; transform: none;"
-            >
-              <img
-                height="16"
-                width="16"
-                alt="markdown"
-                src="https://cdn.simpleicons.org/markdown/lightblue"
-              >markdown
-            </div><div
-              class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
-              style="opacity: 1; transform: none;"
-            >
-              <img
-                height="16"
-                width="16"
-                alt="GROQ"
-                src="https://cdn.simpleicons.org/zod"
-              >GROQ
-            </div><div
-              class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
-              style="opacity: 1; transform: none;"
-            >
-              <img
-                height="16"
-                width="16"
-                alt="Sentry"
-                src="https://cdn.simpleicons.org/sentry/violet"
-              >Sentry
-            </div>
-          </div>
+          <WorkStack :stacks="project.stack" />
         </div>
       </div>
     </motion.div>
