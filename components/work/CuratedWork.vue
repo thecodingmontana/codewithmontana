@@ -6,9 +6,7 @@ import { projects } from '~/data/projects'
 </script>
 
 <template>
-  <section
-    class="relative mx-auto mt-28 w-full max-w-7xl py-10"
-  >
+  <section class="relative mx-auto mt-28 w-full max-w-7xl py-10">
     <AnimatePresence>
       <motion.h2
         :initial="{ opacity: 0, y: 100 }"
@@ -17,11 +15,20 @@ import { projects } from '~/data/projects'
         :transition="{ type: 'spring', bounce: 0.4 }"
         :exit="{ opacity: 0 }"
         class="relative z-2 mb-20 text-4xl font-medium tracking-tight sm:text-5xl md:mb-36 md:text-6xl text-balance text-center"
-        style="text-shadow: rgba(255, 255, 255, 0.05) 0px 4px 8px rgba(255, 255, 255, 0.25) 0px 8px 30px;"
+        style="
+          text-shadow: rgba(255, 255, 255, 0.05) 0px 4px 8px rgba(255, 255, 255, 0.25) 0px
+            8px 30px;
+        "
       >
-        <p class="mb-3 text-xs font-normal tracking-widest text-white/70 uppercase md:text-sm">
+        <p
+          class="mb-3 text-xs font-normal tracking-widest text-white/70 uppercase md:text-sm"
+        >
           FEATURED CASE STUDIES
-        </p><span class=""><span class="">Curated</span> <span class="bg-[linear-gradient(288deg,_#ff8000,_#f0c_53.2394%,_#04f)] bg-clip-text text-transparent animate-gradient-x font-nyght tracking-wide">work</span></span>
+        </p>
+        <span class=""><span class="">Curated</span>
+          <span
+            class="bg-[linear-gradient(288deg,_#ff8000,_#f0c_53.2394%,_#04f)] bg-clip-text text-transparent animate-gradient-x font-nyght tracking-wide"
+          >work</span></span>
       </motion.h2>
     </AnimatePresence>
     <div class="grid gap-16">
@@ -34,5 +41,55 @@ import { projects } from '~/data/projects'
         <WorkInfo :project="project" />
       </div>
     </div>
+    <NuxtLink
+      class="group flex w-fit items-center justify-center gap-2 text-neutral-300 group-hover:text-neutral-100 mx-auto md:mt-20"
+      to="https://github.com/thecodingmontana"
+      target="_blank"
+    >See more projects
+      <div
+        class="size-6 overflow-hidden rounded-full border border-white/10 bg-white/5 duration-500 group-hover:bg-white/10"
+      >
+        <div
+          class="flex w-12 -translate-x-1/2 duration-500 ease-in-out group-hover:translate-x-0"
+        >
+          <span class="flex size-6">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-right m-auto size-[14px]"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </span>
+          <span class="flex size-6">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="lucide lucide-arrow-right m-auto size-[14px]"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14" />
+              <path d="m12 5 7 7-7 7" />
+            </svg>
+          </span>
+        </div>
+      </div>
+    </NuxtLink>
   </section>
 </template>

@@ -382,38 +382,44 @@ export const projects: Project[] = [
     image_url: '/images/apiwap.png',
   },
   {
-    name: 'Nuxt GitHub Clone',
-    tagline: 'A GitHub-inspired UI with real GitHub data and full auth.',
-    description: 'Nuxt GitHub Clone mimics GitHub’s core UI/UX, using live GitHub APIs for real content. It includes auth, user dashboards, repo views, and responsive design.',
+    name: 'Shop With Hawa',
+    tagline: 'Where elegance meets performance in eCommerce.',
+    description: 'A sleek and powerful eCommerce platform designed for store owners and shoppers alike. With a Nest.js backend and Vue frontend, it combines robust authentication, flexible data handling, and a smooth UI powered by Tailwind CSS and Firebase.',
     highlights: [
-      'GitHub OAuth authentication and repo fetching.',
-      'Responsive layout with Tailwind CSS.',
-      'Pinia for global state, with SSR support.',
+      'Backend built using NestJS with JWT authentication.',
+      'Store admin data securely stored in MongoDB.',
+      'Firebase Admin SDK handles live store updates.',
+      'Frontend built using Vue.js, Tailwind CSS, and Pinia for global state.',
+      'Authentication and store actions backed by Firebase.',
     ],
     stack: [
       {
-        name: 'Nuxt.js',
-        icon: 'logos:nuxt-icon',
+        name: 'Next.js',
+        icon: 'logos:nestjs',
       },
       {
-        name: 'Vue',
-        icon: 'logos:vue',
+        name: 'MongoDB',
+        icon: 'logos:mongodb-icon',
       },
       {
-        name: '@sidebase/nuxt-auth',
-        icon: 'devicon:nuxtjs',
-      },
-      {
-        name: 'Tailwind CSS',
-        icon: 'devicon:tailwindcss',
+        name: 'JWT',
+        icon: 'logos:jwt-icon',
       },
       {
         name: 'TypeScript',
         icon: 'logos:typescript-icon',
       },
       {
-        name: 'Nuxt Image',
-        icon: 'devicon:nuxtjs',
+        name: 'Firebase',
+        icon: 'devicon:firebase',
+      },
+      {
+        name: 'Vue',
+        icon: 'logos:vue',
+      },
+      {
+        name: 'Tailwind CSS',
+        icon: 'devicon:tailwindcss',
       },
       {
         name: 'Pinia',
@@ -421,10 +427,10 @@ export const projects: Project[] = [
       },
     ],
     github: 'https://github.com/thecodingmontana/nuxt-github-clone',
-    color: '#da2f7b',
-    is_working: false,
-    website: 'https://nuxt-github-clone-ke.vercel.app',
-    image_url: '',
+    color: '#2196f3',
+    is_working: true,
+    website: 'https://shop-with-hawa.vercel.app',
+    image_url: '/images/shop-with-hawa.png',
   },
   {
     name: 'Nuxt Firebase Auth Starter',
@@ -721,6 +727,14 @@ export const techStack: TechStack[] = [
   {
     name: 'MySQL',
     icon: 'logos:mysql',
+  },
+  {
+    name: 'MongoDB',
+    icon: 'logos:mongodb-icon',
+  },
+  {
+    name: 'Firebase',
+    icon: 'devicon:firebase',
   },
   {
     name: 'Prisma',
