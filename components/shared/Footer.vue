@@ -28,12 +28,12 @@ import { Button } from '../ui/button'
                 target="_blank"
                 as-child
               >
-                <Button class="rounded-full bg-white text-black hover:bg-white cursor-pointer">
+                <Button class="rounded-full bg-[#c8ff65] text-black hover:bg-[#c8ff65] cursor-pointer">
                   schedule a call
                 </Button>
               </NuxtLink>
               <Button
-                class="rounded-full -ml-1 bg-white text-black hover:bg-white cursor-pointer group-hover:translate-x-3 ease-in-out transition-all duration-500"
+                class="rounded-full -ml-1 bg-[#c8ff65] text-black hover:bg-[#c8ff65] cursor-pointer group-hover:translate-x-3 ease-in-out transition-all duration-500"
                 size="icon"
               >
                 <Icon
