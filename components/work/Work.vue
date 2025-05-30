@@ -54,10 +54,11 @@ const colorVariations = computed(() => {
       class="project-card flex w-full flex-row md:col-span-1 lg:col-span-2"
     >
       <div class="flex flex-col md:mx-10 md:w-full">
-        <a
+        <NuxtLink
           draggable="false"
           class="relative cursor-pointer overflow-hidden rounded-2xl border border-white/15 bg-[#f2f2f20c] p-1.5 shadow-2xl md:h-[460px] lg:h-[560px] md:rounded-3xl md:p-2"
-          href="/projects/next-venture"
+          :to="project.website ? project.website : project.github"
+          target="_blank"
         >
           <div
             class="absolute inset-x-0 top-0 h-px"
@@ -101,14 +102,14 @@ const colorVariations = computed(() => {
             <div
               :class="
                 cn(
-                  'hidden w-full flex-row items-center justify-between px-12 py-8 md:flex',
+                  'w-full flex-row items-center justify-between px-12 py-8 flex',
                 )
               "
               :style="{
                 color: project.color ? `${project.color}` : '#f9a8d4', // 33 is 20% opacity in hex
               }"
             >
-              <h3 class="max-w-[90%] text-xl lg:text-2xl">
+              <h3 class="max-w-[90%] text-base lg:text-2xl">
                 {{ project.tagline }}
               </h3>
               <svg
@@ -129,7 +130,7 @@ const colorVariations = computed(() => {
               </svg>
             </div>
             <img
-              alt="Next Ventures"
+              :alt="project.name"
               loading="lazy"
               width="1203"
               height="753"
@@ -141,14 +142,11 @@ const colorVariations = computed(() => {
                   ? `0 0 30px ${project.color}`
                   : '0 0 30px #DB2777',
               }"
-              srcset="
-                https://aayushbharti.in/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnext-venture.9ff457d3.webp&amp;w=1200&amp;q=75 1x
-              "
-              src="https://aayushbharti.in/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fnext-venture.9ff457d3.webp&amp;w=1200&amp;q=75"
+              :src="project.image_url ? project.image_url : '/images/vue-twitter.png'"
               style="color: transparent"
             >
           </div>
-        </a>
+        </NuxtLink>
       </div>
     </motion.div>
   </AnimatePresence>

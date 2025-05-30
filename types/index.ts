@@ -6,6 +6,9 @@ export interface Project {
   stack: TechStack[]
   github: string
   color: string
+  website?: string
+  is_working: boolean
+  image_url: string
 }
 
 export interface TechStack {
