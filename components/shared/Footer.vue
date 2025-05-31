@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { motion, AnimatePresence } from 'motion-v'
 import { Button } from '../ui/button'
+import ThemeToggle from './ThemeToggle.vue'
 </script>
 
 <template>
@@ -79,9 +80,12 @@ import { Button } from '../ui/button'
           <p>
             ©codewithmontana {{ new Date().getFullYear() }}
           </p>
-          <p>
-            All Rights Reserved
-          </p>
+          <div class="flex items-center gap-x-2">
+            <p>
+              All Rights Reserved
+            </p>
+            <ThemeToggle />
+          </div>
         </div>
       </div>
     </motion.footer>

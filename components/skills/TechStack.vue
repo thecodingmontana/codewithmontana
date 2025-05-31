@@ -50,7 +50,7 @@ const itemVariants = {
         v-for="(stack, index) in props.stacks"
         :key="index"
         :aria-label="stack.name"
-        class="md:group relative flex items-center justify-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-4 py-1.5 text-sm text-white/80 lg:text-base"
+        class="md:group relative flex items-center justify-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-100 dark:bg-neutral-900 px-4 py-1.5 text-sm dark:text-white/80 lg:text-base"
         :variants="itemVariants"
         :while-hover="{
           scale: 1.05,

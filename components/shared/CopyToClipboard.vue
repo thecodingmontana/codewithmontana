@@ -25,7 +25,7 @@ const copyToClipboard = async () => {
 
 <template>
   <button
-    class="flex items-center gap-2 py-3 text-base font-light text-white/75 outline-hidden transition-all duration-300 cursor-pointer hover:text-white/90"
+    class="flex items-center gap-2 py-3 text-base font-light text-primary hover:text-muted-foreground dark:text-white/75 outline-hidden transition-all duration-300 cursor-pointer dark:hover:text-white/90"
     :disabled="isCopied"
     @click="copyToClipboard"
   >

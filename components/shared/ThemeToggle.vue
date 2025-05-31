@@ -1,43 +1,62 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { Moon, Sun } from 'lucide-vue-next'
-import { Button } from '~/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '~/components/ui/dropdown-menu'
+import { Label } from '@/components/ui/label'
+import { Switch } from '@/components/ui/switch'
 
 const colorMode = useColorMode()
+const checked = ref(false)
+
+const onSwitchChange = (payload: boolean) => {
+  if (payload) {
+    colorMode.value = 'light'
+  }
+  else {
+    colorMode.value = 'dark'
+  }
+}
+
+onBeforeMount(() => {
+  if (colorMode.value === 'light') {
+    checked.value = true
+  }
+  else {
+    checked.value = false
+  }
+})
 </script>
 
 <template>
-  <DropdownMenu>
-    <DropdownMenuTrigger>
-      <Button
-        variant="ghost"
-        size="icon"
-        class="rounded-full -ml-2"
+  <div>
+    <div class="relative inline-grid h-9 grid-cols-[1fr_1fr] items-center text-sm font-medium">
+      <Switch
+        id="switch-12"
+        v-model="checked"
+        class="peer absolute inset-0 h-[inherit] w-auto data-[state=checked]:bg-input/50 data-[state=unchecked]:bg-input/50 [&_span]:h-full [&_span]:w-1/2 [&_span]:transition-transform [&_span]:duration-300 [&_span]:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] [&_span]:data-[state=checked]:translate-x-full [&_span]:data-[state=checked]:rtl:-translate-x-full"
+        @update:model-value="onSwitchChange"
+      />
+      <span
+        class="pointer-events-none relative ms-0.5 flex min-w-8 items-center justify-center text-center peer-data-[state=checked]:text-muted-foreground/70 text-black"
+      >
+        <Moon
+          :size="14"
+          stroke-width="2"
+          aria-hidden="true"
+        />
+      </span>
+      <span
+        class="pointer-events-none relative me-0.5 flex min-w-8 items-center justify-center text-center peer-data-[state=unchecked]:text-muted-foreground/70"
       >
         <Sun
-          class="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+          :size="14"
+          stroke-width="2"
+          aria-hidden="true"
         />
-        <Moon
-          class="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
-        />
-        <span class="sr-only">Toggle theme</span>
-      </Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent align="end">
-      <DropdownMenuItem @click="colorMode.preference = 'light'">
-        Light
-      </DropdownMenuItem>
-      <DropdownMenuItem @click="colorMode.preference = 'dark'">
-        Dark
-      </DropdownMenuItem>
-      <DropdownMenuItem @click="colorMode.preference = 'system'">
-        System
-      </DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
+      </span>
+    </div>
+    <Label
+      for="switch-12"
+      class="sr-only"
+    >Theme Switch</Label>
+  </div>
 </template>

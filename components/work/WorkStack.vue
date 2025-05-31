@@ -52,7 +52,7 @@ const itemVariants = {
       <motion.div
         v-for="(stack, index) in props.stacks"
         :key="index"
-        class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-900 px-3 py-1 text-sm"
+        class="flex items-center gap-2 rounded-xl border border-white/[0.14] bg-neutral-100 dark:bg-neutral-900 px-3 py-1 text-sm"
         :variants="itemVariants"
         :while-hover="{
           scale: 1.05,

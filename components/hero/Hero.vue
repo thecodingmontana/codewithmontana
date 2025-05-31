@@ -6,13 +6,13 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
 <template>
   <section class="relative">
     <div
-      class="relative z-20 mx-auto mt-36 mb-2 flex max-w-full flex-col items-center justify-center px-3 md:mt-48 md:max-w-4xl lg:max-w-5xl"
+      class="relative z-20 mx-auto xl:mt-36 mb-2 flex max-w-full flex-col items-center justify-center px-3 md:mt-48 md:max-w-4xl lg:max-w-5xl"
     >
       <motion.h1
         :initial="{ opacity: 0, y: 20 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ delay: 0.5, duration: 1.8, easing: 'ease-out' }"
-        class="my-2 w-full py-px text-center text-4xl leading-snug! font-semibold text-balance text-white opacity-90 md:text-5xl lg:text-6xl dark:text-zinc-100"
+        class="my-2 w-full py-px text-center text-4xl leading-snug! font-semibold text-balance opacity-90 md:text-5xl lg:text-6xl dark:text-zinc-100"
       >
         <span class="md:text-nowrap">Passionate creating great</span>
         <br class="hidden md:block">
@@ -32,7 +32,7 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
         :initial="{ opacity: 0, y: 20 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ delay: 1.2, duration: 1.5 }"
-        class="text-white relative z-10 mt-4 mb-7 max-w-xl flex flex-col items-center justify-center text-center sm:flex-row md:text-xl lg:mt-7"
+        class="text-muted-foreground dark:text-white relative z-10 mt-4 mb-7 max-w-xl flex flex-col items-center justify-center text-center sm:flex-row md:text-xl lg:mt-7"
       >
         <span class="grad-white flex items-center justify-center">
           Hello, I'm Christopher Odhiambo, Software Engineer.
@@ -50,9 +50,9 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
         <NuxtLink
           to="https://cal.com/thecodingmontana"
           target="_blank"
-          class="group relative inline-flex cursor-pointer items-center justify-between overflow-hidden rounded-full border border-white/10 bg-white/10 py-[3px] pl-2 pr-[3px] text-base font-medium opacity-85 backdrop-blur-xs transition-all hover:bg-transparent md:py-1 md:pl-3 md:pr-1"
+          class="group relative inline-flex cursor-pointer items-center justify-between overflow-hidden rounded-full border border-white/10 bg-[#c8ff65] dark:bg-white/10 py-[3px] pl-2 pr-[3px] text-base font-medium opacity-85 backdrop-blur-xs transition-all hover:bg-transparent md:py-1 md:pl-3 md:pr-1"
         >
-          <span class="z-10 px-3 text-white transition-colors duration-300 group-hover:text-black">
+          <span class="z-10 px-3 text-primary dark:hover:text-black dark:text-white transition-colors duration-300 group-hover:text-black">
             Book a call
           </span>
           <span class="absolute inset-0 translate-x-[45%] scale-0 rounded-full bg-white opacity-0 transition-all duration-300 ease-in-out group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100" />
@@ -95,7 +95,7 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
       </motion.div>
     </div>
 
-    <div class="relative h-60 w-full z-[19] mt-12">
+    <div class="relative hidden dark:block h-60 w-full z-[19] mt-12">
       <motion.div
         :initial="{ scale: 0.5, opacity: 0 }"
         :animate="{ scale: 1, opacity: 1 }"

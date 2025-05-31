@@ -24,7 +24,7 @@ import { motion } from 'motion-v'
       >
         <div style="position:relative">
           <ul
-            class="group flex-1 list-none items-center justify-center gap-1 relative rounded-full border border-white/10 bg-white/5 px-1.5 py-1 flex"
+            class="group flex-1 list-none items-center justify-center gap-1 relative rounded-full border border-white/10 bg-black dark:bg-white/5 px-1.5 py-1 flex"
             dir="ltr"
           >
             <li
@@ -40,11 +40,11 @@ import { motion } from 'motion-v'
                 />
               </NuxtLink>
               <div
-                class="bg-primary/5 absolute inset-0 -z-10 w-full rounded-full"
+                class="bg-[#c8ff65] dark:bg-primary/5 absolute inset-0 -z-10 w-full rounded-full"
                 style="opacity: 1;"
               >
-                <div class="bg-white absolute -top-2.5 left-1/2 h-1 w-8 -translate-x-1/2 rounded-t-full">
-                  <div class="bg-primary/20 absolute -top-2 -left-2 h-6 w-12 rounded-full blur-md" /><div class="bg-primary/20 absolute -top-1 h-6 w-8 rounded-full blur-md" /><div class="bg-primary/20 absolute top-0 left-2 h-4 w-4 rounded-full blur-sm" />
+                <div class="bg-emerald-600 dark:bg-white absolute -top-2.5 left-1/2 h-1 w-8 -translate-x-1/2 rounded-t-full">
+                  <div class="bg-emerald-100 dark:bg-primary/20 absolute -top-2 -left-2 h-6 w-12 rounded-full blur-md" /><div class="bg-emerald-100 dark:bg-primary/20 absolute -top-1 h-6 w-8 rounded-full blur-md" /><div class="bg-emerald-100 dark:bg-primary/20 absolute top-0 left-2 h-4 w-4 rounded-full blur-sm" />
                 </div>
               </div>
             </li>

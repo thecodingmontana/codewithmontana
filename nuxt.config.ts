@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     name: process.env.NUXT_PUBLIC_SITE_NAME,
   },
   colorMode: {
-    preference: 'dark', // default value of $colorMode.preference
+    preference: 'system', // default value of $colorMode.preference
     fallback: 'light', // fallback value if not system preference found
     hid: 'nuxt-color-mode-script',
     globalName: '__NUXT_COLOR_MODE__',
@@ -54,6 +54,7 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       { name: 'Geist', provider: 'google' },
+      { name: 'Sora', provider: 'google' },
       {
         name: 'Nyght',
         src: { url: '/fonts/NyghtSerif-MediumItalic.woff', format: 'woff' },

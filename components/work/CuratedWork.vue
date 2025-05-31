@@ -25,10 +25,14 @@ import { projects } from '~/data/projects'
         >
           FEATURED CASE STUDIES
         </p>
-        <span class=""><span class="">Curated</span>
+        <span>
+          <span>Curated</span>
           <span
-            class="bg-[linear-gradient(288deg,_#ff8000,_#f0c_53.2394%,_#04f)] bg-clip-text text-transparent animate-gradient-x font-nyght tracking-wide"
-          >work</span></span>
+            class="bg-[linear-gradient(288deg,_#ff8000,_#f0c_53.2394%,_#04f)] bg-clip-text text-transparent animate-gradient-x font-nyght tracking-wide ml-1"
+          >
+            work
+          </span>
+        </span>
       </motion.h2>
     </AnimatePresence>
     <div class="grid gap-16">
@@ -42,7 +46,7 @@ import { projects } from '~/data/projects'
       </div>
     </div>
     <NuxtLink
-      class="group flex w-fit items-center justify-center gap-2 text-neutral-300 group-hover:text-neutral-100 mx-auto md:mt-20"
+      class="group flex w-fit items-center justify-center gap-2 dark:text-neutral-300 group-hover:text-neutral-100 mx-auto md:mt-20"
       to="https://github.com/thecodingmontana"
       target="_blank"
     >See more projects
