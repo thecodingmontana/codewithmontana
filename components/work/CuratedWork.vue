@@ -21,7 +21,7 @@ import { projects } from '~/data/projects'
         "
       >
         <p
-          class="mb-3 text-xs font-normal tracking-widest text-white/70 uppercase md:text-sm"
+          class="mb-3 text-xs font-normal tracking-widest text-muted-foreground dark:text-white/70 uppercase md:text-sm"
         >
           FEATURED CASE STUDIES
         </p>

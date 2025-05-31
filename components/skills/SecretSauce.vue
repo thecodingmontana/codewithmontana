@@ -54,7 +54,7 @@ import { techStack } from '~/data/projects'
       class="relative text-4xl font-medium tracking-tight sm:text-5xl md:text-6xl text-balance text-center z-30 mb-0 md:mb-0 size-full -translate-y-6 md:-translate-y-10"
     >
       <p
-        class="mb-3 text-xs font-normal tracking-widest text-white/70 uppercase md:text-sm"
+        class="mb-3 text-xs font-normal tracking-widest dark:text-white/70 uppercase md:text-sm"
       >
         My Skills
       </p>
