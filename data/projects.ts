@@ -67,6 +67,10 @@ export const projects: Project[] = [
         name: 'FFmpeg',
         icon: 'logos:ffmpeg-icon',
       },
+      {
+        name: 'Motion',
+        icon: 'simple-icons:framer',
+      },
     ],
     github: 'https://github.com/thecodingmontana/convertle',
     color: '#E2E4F6',
@@ -671,6 +675,10 @@ export const techStack: TechStack[] = [
   {
     name: 'Zustand',
     icon: 'devicon:zustand',
+  },
+  {
+    name: 'Motion',
+    icon: 'simple-icons:framer',
   },
   {
     name: 'Zod',
