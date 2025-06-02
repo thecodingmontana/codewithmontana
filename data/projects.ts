@@ -68,10 +68,10 @@ export const projects: Project[] = [
         icon: 'logos:ffmpeg-icon',
       },
     ],
-    github: 'https://github.com/thecodingmontana/dogdom.git',
+    github: 'https://github.com/thecodingmontana/convertle',
     color: '#E2E4F6',
     is_working: true,
-    website: 'https://github.com/thecodingmontana/convertle',
+    website: 'https://convertle.vercel.app',
     image_url: 'images/convertle.png',
   },
   {

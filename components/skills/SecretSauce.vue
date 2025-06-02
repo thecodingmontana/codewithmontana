@@ -58,11 +58,14 @@ import { techStack } from '~/data/projects'
       >
         My Skills
       </p>
-      <span class=""><span class="">The Secret</span>
+      <span class="">
+        <span class="">The Secret</span>
         <span
           class="bg-[linear-gradient(288deg,_#ff8000,_#f0c_53.2394%,_#04f)] bg-clip-text text-transparent animate-gradient-x font-nyght tracking-wide"
         >
-          Sauce</span></span>
+          Sauce
+        </span>
+      </span>
     </h2>
     <TechStack :stacks="techStack" />
   </section>
