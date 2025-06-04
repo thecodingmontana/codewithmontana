@@ -155,7 +155,7 @@ function onClear() {
           <div class="flex items-center gap-1 px-0.5 text-xs text-red-600">
             <Icon
               v-if="form.errors.value.code"
-              name="lucide-circle-alert"
+              name="lucide:circle-alert"
             />
             <FormMessage />
           </div>

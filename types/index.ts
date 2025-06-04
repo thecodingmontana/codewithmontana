@@ -1,3 +1,46 @@
+import { toTypedSchema } from '@vee-validate/zod'
+import * as z from 'zod'
+
+export const waitlistSchema = toTypedSchema(z.object({
+  email: z.string().email({
+    message: 'Invalid email!',
+  }),
+}))
+
+export const sendUniqueCodeSchema = toTypedSchema(z.object({
+  email: z.string().email('Email is invalid!'),
+}))
+
+export const onboardingProfileSchema = toTypedSchema(z.object({
+  first_name: z.string().min(1),
+  last_name: z.string().min(1),
+}))
+
+export const onboardingWorkspaceSchema = toTypedSchema(z.object({
+  name: z.string().min(1, 'Name is required!'),
+}))
+
+export const signinFormSchema = toTypedSchema(z.object({
+  code: z.string().max(8, {
+    message: 'Code shouldn\'t be more than 8 characters.',
+  }).min(8, {
+    message: 'Code shouldn\'t be less than 8 characters.',
+  }),
+}))
+
+export const twoFactorSetupSchema = toTypedSchema(z.object({
+  code: z.array(z.coerce.string()).length(6, {
+    message: 'Code shouldn\'t be less than 6 characters',
+  }),
+}))
+
+export const registerSecurityKeysSchema = toTypedSchema(z.object({
+  name: z.string().max(32, {
+    message: 'Maximum name length 32 chars!',
+  }).min(3, {
+    message: 'Minimum name length 3 chars!',
+  }),
+}))
 export interface Project {
   name: string
   tagline: string

@@ -7,7 +7,7 @@ const onSigninWith = (provider: IAuthProvider) => {
 </script>
 
 <template>
-  <div class="mt-7 grid gap-4 overflow-hidden">
+  <div class="grid gap-4 overflow-hidden">
     <div class="flex h-[42px] items-center !overflow-hidden">
       <button
         class="flex h-[42px] w-full items-center justify-center gap-2 rounded border px-2 text-sm font-medium duration-300 hover:border-purple-200"

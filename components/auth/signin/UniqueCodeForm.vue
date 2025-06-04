@@ -82,14 +82,14 @@ const onSendUniqueCode = sendUniqueCodeForm.handleSubmit(async (values) => {
               type="text"
               placeholder="name@example.com"
               v-bind="componentField"
-              class="block h-[46px] w-full rounded-md border-0 bg-transparent px-3 py-2 text-sm focus:bg-none focus:outline-none active:bg-transparent"
+              class="block h-[46px] w-full rounded-md border-0 bg-transparent px-3 py-2 text-sm focus:bg-none focus:outline-none active:bg-transparent placeholder:text-muted-foreground"
             >
           </div>
         </FormControl>
         <div class="flex items-center gap-1 px-0.5 text-xs text-red-600">
           <Icon
             v-if="sendUniqueCodeForm.errors.value.email"
-            name="lucide lucide-circle-alert"
+            name="lucide:circle-alert"
           />
           <FormMessage />
         </div>
