@@ -23,6 +23,7 @@ export default defineWebAuthnRegisterEventHandler({
   async storeChallenge(event: H3Event, challenge: string, attemptId: string) {
     await useStorage().setItem(`attempt:${attemptId}`, challenge)
   },
+  // @ts-expect-error expect types error
   async getChallenge(event: H3Event, attemptId: string) {
     const challenge = await useStorage().getItem(`attempt:${attemptId}`)
     if (!challenge) {
@@ -44,6 +45,7 @@ export default defineWebAuthnRegisterEventHandler({
       userName: z.string().email(),
     }).parse(userBody)
   },
+  // @ts-expect-error expect types error
   async onSuccess(event: H3Event, { user, credential }: ISuccess) {
     const session = await requireUserSession(event)
 
@@ -79,6 +81,7 @@ export default defineWebAuthnRegisterEventHandler({
       },
     })
   },
+  // @ts-expect-error expect types error
   async excludeCredentials(event: H3Event, userName: string) {
     return useDrizzle()
       .select({

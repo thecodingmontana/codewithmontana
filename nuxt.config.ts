@@ -75,6 +75,9 @@ export default defineNuxtConfig({
       }),
     ],
   },
+  auth: {
+    webAuthn: true,
+  },
   eslint: {
     config: {
       stylistic: true,

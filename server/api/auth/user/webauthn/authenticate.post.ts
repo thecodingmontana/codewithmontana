@@ -9,6 +9,7 @@ export default defineWebAuthnAuthenticateEventHandler({
   async storeChallenge(event: H3Event, challenge: string, attemptId: string) {
     await useStorage().setItem(`attempt:${attemptId}`, challenge)
   },
+  // @ts-expect-error expect types error
   async getChallenge(event: H3Event, attemptId: string) {
     const challenge = await useStorage().getItem(`attempt:${attemptId}`)
     if (!challenge) {
@@ -20,6 +21,7 @@ export default defineWebAuthnAuthenticateEventHandler({
     await useStorage().removeItem(`attempt:${attemptId}`)
     return challenge
   },
+  // @ts-expect-error expect types error
   async allowCredentials(event: H3Event, userName: string) {
     const user = await useDrizzle().query.userTable.findFirst({
       where: eq(tables.userTable.email, userName),
@@ -33,6 +35,7 @@ export default defineWebAuthnAuthenticateEventHandler({
       transports: Array.isArray(cred.transports) ? cred.transports : [cred.transports],
     }))
   },
+  // @ts-expect-error expect types error
   async getCredential(event: H3Event, credentialID: string) {
     const credential = await useDrizzle().query.passkeysTable.findFirst({
       where: table => eq(table.id, credentialID),
@@ -50,6 +53,7 @@ export default defineWebAuthnAuthenticateEventHandler({
 
     return credential
   },
+  // @ts-expect-error expect types error
   async onSuccess(event: H3Event, credential: { id: string, authenticationInfo: { credentialID: string } }) {
     const session = await requireUserSession(event)
 

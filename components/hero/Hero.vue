@@ -4,7 +4,7 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
 </script>
 
 <template>
-  <section class="relative">
+  <section class="relative xl:py-16">
     <div
       class="relative z-20 mx-auto xl:mt-36 mb-2 flex max-w-full flex-col items-center justify-center px-3 md:mt-48 md:max-w-4xl lg:max-w-5xl"
     >
@@ -92,24 +92,6 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
           </span>
         </NuxtLink>
         <CopyToClipboard text="hello@thecodingmontana.com" />
-      </motion.div>
-    </div>
-
-    <div class="relative hidden dark:block h-60 w-full z-[19] mt-12">
-      <motion.div
-        :initial="{ scale: 0.5, opacity: 0 }"
-        :animate="{ scale: 1, opacity: 1 }"
-        :transition="{ delay: 0.3, duration: 2.5, easing: 'ease-out' }"
-        class="absolute bottom-0 left-1/2 z-0 h-[400px] w-[1200px] -translate-x-1/2 transform overflow-hidden"
-        style="mask-image:linear-gradient(to right, transparent, black 30%, black 70%, transparent);-webkit-mask-image:linear-gradient(to right, transparent, black 30%, black 70%, transparent)"
-      >
-        <div
-          class="absolute bottom-[167px] left-1/2 h-[111px] w-[787px] -translate-x-1/2 transform overflow-hidden bg-[radial-gradient(50%_50%_at_50%_50%,#5506ba_0%,rgba(10,10,10,0)_100%)] blur-[57px]"
-          style="transform: translateX(41.2774px);"
-        /><div class="absolute right-[-432px] bottom-[-753px] left-[-454px] h-[955px] rounded-[100%] bg-gradient-to-b from-white to-transparent" /><div
-          class="absolute right-[-510px] bottom-[-759px] left-[-532px] aspect-[2.346820809248555/1] h-[956px] rounded-[100%] bg-black shadow-[inset_0_2px_20px_#fff,0_-10px_50px_1px_#ffffff7d]"
-          style="box-shadow: rgb(255, 255, 255) 0px 2px 29.5525px inset, rgba(255, 255, 255, 0.627) 0px -10px 59.5525px 1px;"
-        />
       </motion.div>
     </div>
   </section>
