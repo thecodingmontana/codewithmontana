@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     'shadcn-nuxt',
     'nuxt-og-image',
     'motion-v/nuxt',
+    'nuxt-auth-utils',
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/tailwind.css'],
