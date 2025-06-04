@@ -1,6 +1,7 @@
 import tailwindcss from '@tailwindcss/vite'
 import Components from 'unplugin-vue-components/vite'
 import MotionResolver from 'motion-v/resolver'
+import vue from '@vitejs/plugin-vue'
 
 export default defineNuxtConfig({
   modules: [
@@ -31,11 +32,38 @@ export default defineNuxtConfig({
     storage: 'localStorage', // or 'sessionStorage' or 'cookie'
     storageKey: 'thecodingmontana-color-mode',
   },
-
+  runtimeConfig: {
+    oauth: {
+      google: {
+        clientId: process.env.NUXT_OAUTH_GOOGLE_CLIENT_ID,
+        clientSecret: process.env.NUXT_OAUTH_GOOGLE_CLIENT_SECRET,
+        redirectURL: process.env.NUXT_OAUTH_GOOGLE_REDIRECT_URL,
+      },
+    },
+  },
   future: {
     compatibilityVersion: 4,
   },
   compatibilityDate: '2025-05-15',
+  nitro: {
+    rollupConfig: {
+      plugins: [vue()],
+    },
+    experimental: {
+      openAPI: true,
+    },
+    openAPI: {
+      route: '/_docs/openapi.json',
+      ui: {
+        scalar: {
+          route: '/_docs/scalar',
+        },
+        swagger: {
+          route: '/_docs/swagger',
+        },
+      },
+    },
+  },
   vite: {
     plugins: [
       tailwindcss(),

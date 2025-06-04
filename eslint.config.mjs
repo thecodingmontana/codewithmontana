@@ -2,5 +2,11 @@
 import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default withNuxt(
-  // Your custom configs here
+  {
+    name: 'thecodingmontana/tailwind',
+    rules: {
+      'tailwindcss/no-custom-classname': 'off',
+      'vue/no-v-html': 'off',
+    },
+  },
 )
