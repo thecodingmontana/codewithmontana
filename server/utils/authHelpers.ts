@@ -71,37 +71,8 @@ export async function authenticateOauthUser(options: AuthenticateOauthUserOption
       maxAge: Math.floor((session.expiresAt.getTime() - Date.now()) / 1000), // Convert milliseconds to seconds
     })
   }
-  else {
-    const user = await createUser(options)
-    await createOauthAccount(options, user.id)
 
-    // Create session token and store in database
-    const sessionFlags: SessionFlags = {
-      twoFactorVerified: false,
-    }
-
-    const sessionToken = generateSessionToken()
-    const { browser, device, ipAdress, location, os } = await createSessionMetadata(event)
-    const session = await createSession(sessionToken, user.id, sessionFlags, browser, device, os, location, ipAdress)
-
-    // Set user session with token
-    await setUserSession(event, {
-      user: {
-        id: user.id,
-        email: user.email,
-        username: user.username,
-        emailVerified: user.emailVerified,
-        avatar: user.profilePictureUrl,
-        registeredTOTP: false,
-        registeredPasskey: false,
-        registered2FA: false,
-        twoFactorVerified: false,
-      },
-      sessionToken: sessionToken,
-    }, {
-      maxAge: Math.floor((session.expiresAt.getTime() - Date.now()) / 1000), // Convert milliseconds to seconds
-    })
-  }
+  throw createError({ statusCode: 401, statusMessage: 'Unauthorized email address' })
 }
 
 export async function createOauthAccount(options: AuthenticateOauthUserOptions, userId: string) {

@@ -12,6 +12,7 @@ const props = defineProps<{
     viewBox="0 0 1512 900"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    style="outline: none;"
   >
     <g clip-path="url(#clip0_4817_18582)">
       <rect
