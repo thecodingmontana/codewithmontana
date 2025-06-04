@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Loader } from 'lucide-vue-next'
+import { AlertCircleIcon, Loader } from 'lucide-vue-next'
 import { useForm } from 'vee-validate'
 import { toast } from 'vue-sonner'
 import {
@@ -87,9 +87,9 @@ const onSendUniqueCode = sendUniqueCodeForm.handleSubmit(async (values) => {
           </div>
         </FormControl>
         <div class="flex items-center gap-1 px-0.5 text-xs text-red-600">
-          <Icon
+          <AlertCircleIcon
             v-if="sendUniqueCodeForm.errors.value.email"
-            name="lucide:circle-alert"
+            class="size-5"
           />
           <FormMessage />
         </div>

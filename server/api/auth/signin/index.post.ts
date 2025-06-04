@@ -84,7 +84,6 @@ export default defineEventHandler(async (event) => {
         avatar: user.profilePictureUrl,
         registeredTOTP: totp ? true : false,
         registeredPasskey,
-        registeredSecurityKey: false,
         registered2FA: user.registered2FA,
         twoFactorVerified: false,
       },

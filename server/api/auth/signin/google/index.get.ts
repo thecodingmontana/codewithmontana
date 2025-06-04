@@ -1,9 +1,7 @@
 import type { H3Event } from 'h3'
 
 export default defineOAuthGoogleEventHandler({
-  config: {
-    emailRequired: true,
-  },
+  config: {},
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async onSuccess(event: H3Event, { user }: any) {
     await authenticateOauthUser({
@@ -13,7 +11,7 @@ export default defineOAuthGoogleEventHandler({
       providerUsername: user.name,
       providerAvatar: user.picture,
     }, event)
-    return sendRedirect(event, '/dashboard')
+    return sendRedirect(event, '/workspace/dashboard')
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onError(event: H3Event, error: any) {

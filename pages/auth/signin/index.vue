@@ -12,7 +12,7 @@ const { loggedIn } = useUserSession()
 
 watch(() => loggedIn.value, (loggedIn) => {
   if (loggedIn) {
-    navigateTo('/dashboard')
+    navigateTo('/workspace/dashboard')
   }
 }, {
   immediate: true,

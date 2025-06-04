@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Loader } from 'lucide-vue-next'
+import { AlertCircleIcon, Loader } from 'lucide-vue-next'
 import { useForm } from 'vee-validate'
 import { toast } from 'vue-sonner'
 import ResendCodeButton from '../ResendCodeButton.vue'
@@ -49,7 +49,7 @@ const onSubmit = form.handleSubmit(async (values) => {
     })
 
     await refreshSession()
-    return navigateTo('/dashboard')
+    return navigateTo('/workspace/dashboard')
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   catch (error: any) {
@@ -153,9 +153,9 @@ function onClear() {
             </div>
           </FormControl>
           <div class="flex items-center gap-1 px-0.5 text-xs text-red-600">
-            <Icon
+            <AlertCircleIcon
               v-if="form.errors.value.code"
-              name="lucide:circle-alert"
+              class="size-5"
             />
             <FormMessage />
           </div>
