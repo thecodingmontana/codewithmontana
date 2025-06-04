@@ -8,6 +8,13 @@
       "when": 1749026711753,
       "tag": "0000_gifted_iceman",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1749028386461,
+      "tag": "0001_free_spectrum",
+      "breakpoints": true
     }
   ]
 }
