@@ -34,6 +34,10 @@ defineProps({
             },
           },
         },
+        separator: ':',
+        safelist: [],
+        experimental: {},
+        corePlugins: {},
       }"
     >
       <Container class="mx-auto max-w-[650px] bg-gray-100 p-5">
