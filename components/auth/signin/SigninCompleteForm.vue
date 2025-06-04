@@ -1,4 +1,3 @@
-<!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
 import { Loader } from 'lucide-vue-next'
 import { useForm } from 'vee-validate'
@@ -50,8 +49,9 @@ const onSubmit = form.handleSubmit(async (values) => {
     })
 
     await refreshSession()
-    return navigateTo('/workspace/onboarding')
+    return navigateTo('/dashboard')
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   catch (error: any) {
     const errorMessage = error.response
       ? error.response._data.message

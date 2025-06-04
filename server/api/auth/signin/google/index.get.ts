@@ -13,7 +13,7 @@ export default defineOAuthGoogleEventHandler({
       providerUsername: user.name,
       providerAvatar: user.picture,
     }, event)
-    return sendRedirect(event, '/workspace/onboarding')
+    return sendRedirect(event, '/dashboard')
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onError(event: H3Event, error: any) {
