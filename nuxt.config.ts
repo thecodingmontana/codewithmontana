@@ -14,6 +14,8 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     'motion-v/nuxt',
     'nuxt-auth-utils',
+    '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/tailwind.css'],
@@ -92,6 +94,16 @@ export default defineNuxtConfig({
         src: { url: '/fonts/NyghtSerif-MediumItalic.woff', format: 'woff' },
       },
     ],
+  },
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
+  piniaPluginPersistedstate: {
+    storage: 'cookies',
+    cookieOptions: {
+      sameSite: 'lax',
+    },
+    debug: true,
   },
   shadcn: {
     /**

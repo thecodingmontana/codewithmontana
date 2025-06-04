@@ -27,3 +27,19 @@ export interface User {
   avatar: string
   twoFactorVerified: boolean
 }
+
+export type ModalType = 'joinWaitlist' | 'setupAuthenticatorApp' | 'setupPasskeys' | 'setupSecurityKeys' | 'signout' | 'createWorkspace' | 'setupPassword' | 'resetPassword' | 'transferOwnership' | 'deleteWorkspace' | 'mobileSidebar' | 'inviteTeammate' | 'notificationCenter' | 'changeTeammateRole' | 'totpAuthentication' | 'deleteAccount'
+
+export interface ModalData {
+  qrcode?: string
+  encodedTOTPKey?: string
+  encodedCredentialUserId?: string
+  user?: User
+  encodedCredentialIds?: string[]
+}
+
+export interface ModalStore {
+  type: ModalType | null
+  isOpen: boolean
+  data: ModalData
+}
