@@ -62,7 +62,7 @@ export interface TechStack {
 export interface User {
   id: string
   email: string
-  username: string | null
+  username: string
   emailVerified: boolean
   registeredTOTP: boolean
   registeredPasskey: boolean

@@ -15,6 +15,13 @@
       "when": 1749028386461,
       "tag": "0001_free_spectrum",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1749114576076,
+      "tag": "0002_black_edwin_jarvis",
+      "breakpoints": true
     }
   ]
 }

@@ -71,8 +71,9 @@ export async function authenticateOauthUser(options: AuthenticateOauthUserOption
       maxAge: Math.floor((session.expiresAt.getTime() - Date.now()) / 1000), // Convert milliseconds to seconds
     })
   }
-
-  throw createError({ statusCode: 401, statusMessage: 'Unauthorized email address' })
+  else {
+    throw createError({ statusCode: 401, statusMessage: 'Unauthorized email address' })
+  }
 }
 
 export async function createOauthAccount(options: AuthenticateOauthUserOptions, userId: string) {

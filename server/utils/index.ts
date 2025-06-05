@@ -67,3 +67,5 @@ export function generateUniqueCode(length: number): string {
 
   return generateRandomString(random, alphabet, length)
 }
+
+export const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()

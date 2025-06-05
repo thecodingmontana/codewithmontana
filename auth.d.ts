@@ -2,7 +2,7 @@ declare module '#auth-utils' {
   interface User {
     id: string
     email: string
-    username: string | null
+    username: string
     emailVerified: boolean
     registeredTOTP: boolean
     registeredPasskey: boolean
@@ -14,7 +14,7 @@ declare module '#auth-utils' {
     user?: {
       id: string
       email: string
-      username: string | null
+      username: string
       emailVerified: boolean
       registeredTOTP: boolean
       registeredPasskey: boolean

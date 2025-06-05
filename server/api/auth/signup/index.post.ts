@@ -1,6 +1,7 @@
 import { and, eq } from 'drizzle-orm'
 import { v4 as uuidv4 } from 'uuid'
-import { isWithinExpirationDate, generateRandomRecoveryCode } from '~/server/utils'
+import { faker } from '@faker-js/faker'
+import { isWithinExpirationDate, generateRandomRecoveryCode, capitalize } from '~/server/utils'
 import type { SessionFlags } from '~/server/libs/session'
 import { createSession, generateSessionToken } from '~/server/libs/session'
 import { encryptString } from '~/server/utils/encryption'
@@ -66,13 +67,16 @@ export default defineEventHandler(async (event) => {
       'base64',
     )
 
+    const firstName = faker.person.firstName()
+    const lastName = faker.person.lastName()
+
     const [newUser] = await useDrizzle()
       .insert(tables.userTable)
       .values({
         email,
         id: uuidv4(),
         recoveryCode: serializedRecoveryCode,
-        username: '',
+        username: `${capitalize(firstName)} ${capitalize(lastName)}`,
         emailVerified: true,
         profilePictureUrl: `https://avatar.vercel.sh/${email}`,
         createdAt: new Date(),

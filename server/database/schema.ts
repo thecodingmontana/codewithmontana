@@ -14,7 +14,7 @@ export const userTable = pgTable(
   {
     id: text('id').primaryKey(),
     email: varchar('email', { length: 255 }).notNull().unique(),
-    username: varchar('username', { length: 255 }),
+    username: varchar('username', { length: 255 }).notNull(),
     password: text('password'),
     emailVerified: boolean('email_verified').notNull().default(false),
     registered2FA: boolean('registered2FA').notNull().default(false),
