@@ -22,9 +22,10 @@ useHead({
   titleTemplate: '%s - Sign in',
 })
 
-defineOgImageComponent('UseOdama', {
-  title: 'Sign in to your use-odama Dashboard',
-  description: 'Access your workspace and manage restaurant orders, menus, and inventory.',
+defineOgImageComponent('Nuxt', {
+  headline: 'Greetings 👋',
+  title: 'Sign in',
+  description: 'Explore Christopher\'s journey through web engineering, projects, and personal insights.',
 })
 </script>
 

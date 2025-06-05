@@ -5,6 +5,16 @@ definePageMeta({
   layout: 'auth',
   middleware: ['authenticated'],
 })
+
+useHead({
+  titleTemplate: '%s - Two Factor',
+})
+
+defineOgImageComponent('Nuxt', {
+  headline: 'Greetings 👋',
+  title: 'Two Factor Authentication',
+  description: 'Explore Christopher\'s journey through web engineering, projects, and personal insights.',
+})
 </script>
 
 <template>

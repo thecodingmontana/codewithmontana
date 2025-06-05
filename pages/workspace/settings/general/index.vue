@@ -4,6 +4,16 @@ definePageMeta({
   layout: 'workspace',
 })
 
+useHead({
+  titleTemplate: '%s - Settings | General',
+})
+
+defineOgImageComponent('Nuxt', {
+  headline: 'Greetings 👋',
+  title: 'Settings | General',
+  description: 'Explore Christopher\'s journey through web engineering, projects, and personal insights.',
+})
+
 const workspaceStore = useWorkspaceStore()
 
 onMounted(() => {
