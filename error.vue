@@ -124,8 +124,143 @@ const handleError = () => clearError({ redirect: '/' })
           </motion.div>
         </div>
       </div>
-      <div v-if="error?.statusCode === 401">
-        Session expired!
+      <div
+        v-if="error?.statusCode === 401"
+        class="flex flex-col items-center"
+      >
+        <motion.h2
+          :initial="{
+            opacity: 0,
+            y: 20,
+          }"
+          :animate="{
+            opacity: 1,
+            y: 0,
+          }"
+          :transition="{
+            ease: 'easeInOut',
+            duration: 0.5,
+          }"
+          class="text-3xl font-semibold md:text-4xl xl:text-5xl text-[#4803FE] text-center"
+        >
+          OOPS!
+        </motion.h2>
+        <Svgs401Error class="h-auto mx-auto w-80 sm:w-[25rem] md:w-[35rem] xl:w-[40rem] mb-[-8.5rem] mt-[-14.5rem]" />
+        <div class="flex flex-col items-center gap-2">
+          <motion.p
+            :initial="{
+              opacity: 0,
+              y: 20,
+            }"
+            :animate="{
+              opacity: 1,
+              y: 0,
+            }"
+            :transition="{
+              ease: 'easeInOut',
+              duration: 0.5,
+              delay: 0.5,
+            }"
+            class="max-w-md text-center text-base text-muted-foreground md:text-xl xl:text-2xl"
+          >
+            {{ error.statusMessage }}
+          </motion.p>
+          <motion.div
+            :initial="{
+              opacity: 0,
+              y: 20,
+            }"
+            :animate="{
+              opacity: 1,
+              y: 0,
+            }"
+            :transition="{
+              ease: 'easeInOut',
+              duration: 0.5,
+              delay: 0.7,
+            }"
+          >
+            <Button
+              class="group flex w-fit items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-[#4803FE] px-5 py-2 text-sm font-medium text-white transition-all hover:bg-[#4603febd] md:text-base cursor-pointer"
+              @click="handleError"
+            >
+              <Icon
+                name="solar:arrow-right-outline"
+                class="size-5 rotate-[-135deg] transition-transform group-hover:-translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+              Return Home
+            </Button>
+          </motion.div>
+        </div>
+      </div>
+      <div
+        v-if="error?.statusCode === 400"
+        class="flex flex-col items-center"
+      >
+        <motion.h2
+          :initial="{
+            opacity: 0,
+            y: 20,
+          }"
+          :animate="{
+            opacity: 1,
+            y: 0,
+          }"
+          :transition="{
+            ease: 'easeInOut',
+            duration: 0.5,
+          }"
+          class="text-3xl font-semibold md:text-4xl xl:text-5xl text-[#FF4F03]"
+        >
+          OOPS!
+        </motion.h2>
+        <Svgs400Error class="h-auto w-80 sm:w-[25rem] md:w-[35rem] xl:w-[40rem] mb-[-7.5rem] mt-[-12.5rem]" />
+        <div class="flex flex-col items-center gap-2">
+          <motion.p
+            :initial="{
+              opacity: 0,
+              y: 20,
+            }"
+            :animate="{
+              opacity: 1,
+              y: 0,
+            }"
+            :transition="{
+              ease: 'easeInOut',
+              duration: 0.5,
+              delay: 0.5,
+            }"
+            class="max-w-md text-center text-base text-muted-foreground md:text-xl xl:text-2xl"
+          >
+            {{ error.statusMessage }}
+          </motion.p>
+          <motion.div
+            :initial="{
+              opacity: 0,
+              y: 20,
+            }"
+            :animate="{
+              opacity: 1,
+              y: 0,
+            }"
+            :transition="{
+              ease: 'easeInOut',
+              duration: 0.5,
+              delay: 0.7,
+            }"
+          >
+            <Button
+              class="group flex w-fit items-center justify-center gap-1.5 whitespace-nowrap rounded-full bg-[#FF4F03] px-5 py-2 text-sm font-medium text-white transition-all hover:bg-[#ff4f03b3] md:text-base cursor-pointer"
+              @click="handleError"
+            >
+              <Icon
+                name="solar:arrow-right-outline"
+                class="size-5 rotate-[-135deg] transition-transform group-hover:-translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+              Return Home
+            </Button>
+          </motion.div>
+        </div>
       </div>
     </section>
   </main>

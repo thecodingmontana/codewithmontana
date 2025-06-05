@@ -15,7 +15,7 @@ export default defineOAuthGoogleEventHandler({
   },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onError(event: H3Event, error: any) {
-    console.error('GitHub OAuth error:', error)
+    console.error('OAuth error:', error)
     return sendRedirect(event, '/auth/signin')
   },
 })
