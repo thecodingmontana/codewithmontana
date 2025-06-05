@@ -6,7 +6,7 @@ import CopyToClipboard from '../shared/CopyToClipboard.vue'
 <template>
   <section class="relative xl:py-16">
     <div
-      class="relative z-20 mx-auto xl:mt-36 mb-2 flex max-w-full flex-col items-center justify-center px-3 md:mt-48 md:max-w-4xl lg:max-w-5xl"
+      class="relative z-20 mx-auto mt-36 mb-2 flex max-w-full flex-col items-center justify-center px-3 md:mt-48 md:max-w-4xl lg:max-w-5xl"
     >
       <motion.h1
         :initial="{ opacity: 0, y: 20 }"
