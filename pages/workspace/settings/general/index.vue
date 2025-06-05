@@ -8,15 +8,21 @@ const workspaceStore = useWorkspaceStore()
 
 onMounted(() => {
   workspaceStore?.onSetWorkspaceBreadcrumb({
-    name: 'Dashboard',
-    path: `/workspace/dashboard`,
-    children: null,
+    name: 'Settings',
+    path: `/workspace/settings/general`,
+    children: [
+      {
+        name: 'General',
+        path: `/workspace/settings/general`,
+        children: null,
+      },
+    ],
   })
 })
 </script>
 
 <template>
   <section>
-    Welcome to my dashboard
+    Welcome to settings general
   </section>
 </template>

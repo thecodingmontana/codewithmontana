@@ -23,7 +23,7 @@ withDefaults(defineProps<{
       <Button
         variant="ghost"
         size="icon"
-        class="w-full justify-start rounded-md p-2 text-base font-normal hover:bg-[#f1f1f1] dark:hover:bg-[#343434]"
+        class="w-full justify-start rounded-md p-2 text-base font-normal hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer mt-1"
       >
         <Sun
           class="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"

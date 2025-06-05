@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import {
-  Bell,
   ChevronsUpDown,
-  CreditCard,
   LogOut,
-  Sparkles,
 } from 'lucide-vue-next'
 import {
   Avatar,
@@ -15,7 +12,6 @@ import { Button } from '~/components/ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -36,11 +32,6 @@ const onOpenSignoutModal = () => {
   modalStore?.setIsOpen(true)
   modalStore?.onOpen('signout')
 }
-
-const onOpenNotificationModal = () => {
-  modalStore?.setIsOpen(true)
-  modalStore?.onOpen('notificationCenter')
-}
 </script>
 
 <template>
@@ -48,7 +39,7 @@ const onOpenNotificationModal = () => {
     <DropdownMenuTrigger as-child>
       <Button
         variant="ghost"
-        class="w-full px-1 py-3 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground dark:bg-[#1d1d1d]"
+        class="w-full px-1 py-3 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground dark:bg-[#1d1d1d] cursor-pointer"
       >
         <Avatar class="size-8 rounded-lg">
           <AvatarImage
@@ -90,34 +81,6 @@ const onOpenNotificationModal = () => {
           </div>
         </div>
       </DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuGroup>
-        <DropdownMenuItem class="cursor-pointer dark:hover:bg-[#343434]">
-          <Sparkles />
-          Upgrade to Pro
-        </DropdownMenuItem>
-      </DropdownMenuGroup>
-      <DropdownMenuSeparator />
-      <DropdownMenuGroup>
-        <DropdownMenuItem class="cursor-pointer dark:hover:bg-[#343434]">
-          <Icon
-            name="solar:user-rounded-outline"
-            class="size-4"
-          />
-          Profile
-        </DropdownMenuItem>
-        <DropdownMenuItem class="cursor-pointer dark:hover:bg-[#343434]">
-          <CreditCard />
-          Billing
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          class="cursor-pointer dark:hover:bg-[#343434]"
-          @click="onOpenNotificationModal"
-        >
-          <Bell />
-          Notifications
-        </DropdownMenuItem>
-      </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuItem
         class="cursor-pointer dark:hover:bg-[#343434]"

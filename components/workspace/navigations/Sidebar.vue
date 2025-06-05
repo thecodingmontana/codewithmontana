@@ -2,17 +2,17 @@
 import User from './User.vue'
 import ToggleTheme from './ToggleTheme.vue'
 import { ScrollArea } from '~/components/ui/scroll-area'
+import type { WorkspaceBreadcrumb } from '~/types'
 
-const modalStore = useModalStore()
 const workspaceStore = useWorkspaceStore()
 
 const isOpenSidebar = computed(() => {
   return workspaceStore?.isOpenSidebar
 })
 
-const onOpenNotificationModal = () => {
-  modalStore?.setIsOpen(true)
-  modalStore?.onOpen('notificationCenter')
+const onNavigateToPage = (payload: WorkspaceBreadcrumb, pageName: string) => {
+  workspaceStore?.onSetWorkspaceBreadcrumb(payload)
+  navigateTo(`/workspace/${pageName}`)
 }
 </script>
 
@@ -33,7 +33,12 @@ const onOpenNotificationModal = () => {
           class="flex flex-col"
         >
           <button
-            class="flex w-full items-center gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434]"
+            class="flex w-full items-center gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+            @click="onNavigateToPage({
+              name: 'Dashboard',
+              path: `/workspace/dashboard`,
+              children: null,
+            }, 'dashboard')"
           >
             <Icon
               name="solar:home-angle-2-outline"
@@ -42,23 +47,18 @@ const onOpenNotificationModal = () => {
             Dashboard
           </button>
           <button
-            class="flex w-full items-center gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434]"
+            class="flex w-full items-center gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+            @click="onNavigateToPage({
+              name: 'Projects',
+              path: `/workspace/dashboard`,
+              children: null,
+            }, 'projects')"
           >
             <Icon
-              name="solar:chat-line-outline"
+              name="solar:folder-with-files-outline"
               class="size-4"
             />
-            Chat
-          </button>
-          <button
-            class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434]"
-            @click="onOpenNotificationModal"
-          >
-            <Icon
-              name="solar:bell-outline"
-              class="size-4"
-            />
-            Notifications
+            Projects
           </button>
         </div>
         <div class="grid">
@@ -67,7 +67,18 @@ const onOpenNotificationModal = () => {
           </h3>
           <div>
             <button
-              class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434]"
+              class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+              @click="onNavigateToPage({
+                name: 'Settings',
+                path: `/workspace/settings/general`,
+                children: [
+                  {
+                    name: 'General',
+                    path: `/workspace/settings/general`,
+                    children: null,
+                  },
+                ],
+              }, 'settings/general')"
             >
               <Icon
                 name="solar:settings-outline"
@@ -76,31 +87,24 @@ const onOpenNotificationModal = () => {
               General
             </button>
             <button
-              class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434]"
-            >
-              <Icon
-                name="solar:users-group-two-rounded-outline"
-                class="size-4"
-              />
-              Users
-            </button>
-            <button
-              class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434]"
+              class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+              @click="onNavigateToPage({
+                name: 'Settings',
+                path: `/workspace/settings/security`,
+                children: [
+                  {
+                    name: 'Security',
+                    path: `/workspace/settings/security`,
+                    children: null,
+                  },
+                ],
+              }, 'settings/security')"
             >
               <Icon
                 name="solar:lock-password-outline"
                 class="size-4"
               />
               Security
-            </button>
-            <button
-              class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434]"
-            >
-              <Icon
-                name="solar:user-rounded-outline"
-                class="size-4"
-              />
-              Profile
             </button>
             <ToggleTheme side="bottom" />
           </div>
