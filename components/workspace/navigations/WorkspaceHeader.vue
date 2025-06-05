@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PanelLeftIcon } from 'lucide-vue-next'
+import { PanelLeftIcon, PanelRightIcon } from 'lucide-vue-next'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -16,6 +16,10 @@ const modalStore = useModalStore()
 const toggleSidebar = () => {
   workspaceStore.onOpenSidebar()
 }
+
+const isSidebarOpen = computed(() => {
+  return workspaceStore?.isOpenSidebar
+})
 
 const workspaceBreadcrumb = computed(() => {
   return workspaceStore?.breadcrumb as {
@@ -36,15 +40,25 @@ const onToggleMobileSidebar = () => {
     <Button
       size="icon"
       variant="ghost"
-      class="md:hidden"
+      class="md:hidden cursor-pointer"
       @click="onToggleMobileSidebar"
     >
       <PanelLeftIcon class="size-6" />
     </Button>
     <Button
+      v-if="!isSidebarOpen"
       size="icon"
       variant="ghost"
-      class="hidden md:flex"
+      class="hidden md:flex cursor-pointer"
+      @click="toggleSidebar"
+    >
+      <PanelRightIcon class="size-6" />
+    </Button>
+    <Button
+      v-else
+      size="icon"
+      variant="ghost"
+      class="hidden md:flex cursor-pointer"
       @click="toggleSidebar"
     >
       <PanelLeftIcon class="size-6" />

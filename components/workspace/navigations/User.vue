@@ -61,8 +61,8 @@ const onOpenSignoutModal = () => {
     <DropdownMenuContent
       class="w-[--reka-dropdown-menu-trigger-width] min-w-56 rounded-lg dark:bg-[#1d1d1d]"
       :side="side"
-      :align="side ==='top' ? 'start' : 'end'"
-      :side-offset="side ==='top' ? 0: 4"
+      :align="side ==='top' || side==='bottom' ? 'start' : 'end'"
+      :side-offset="side ==='top' || side==='bottom' ? 0: 4"
     >
       <DropdownMenuLabel class="p-0 font-normal ">
         <div class="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
