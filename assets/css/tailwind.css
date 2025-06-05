@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: "Sora", sans-serif;
+  --font-sans: "Geist", sans-serif;
   --font-nyght: "Nyght", sans-serif;
   --color-brand: var(--brand);
   --color-brand-secondary: var(--brand-secondary);

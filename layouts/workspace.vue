@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { Toaster } from 'vue-sonner'
 import 'vue-sonner/style.css'
+import Sidebar from '~/components/workspace/navigations/Sidebar.vue'
+import WorkspaceHeader from '~/components/workspace/navigations/WorkspaceHeader.vue'
+import WorkspaceProvider from '~/providers/WorkspaceProvider.vue'
 
 useHead({
   meta: [
@@ -26,13 +29,23 @@ useHead({
 </script>
 
 <template>
-  <main class="min-h-screen relative max-w-8xl overflow-hidden mx-auto flex flex-col">
-    <Toaster
-      :close-button="true"
-      rich-colors
-    />
-    <div class="flex-1">
-      <slot />
+  <main>
+    <NuxtLoadingIndicator />
+    <div
+      class="flex"
+    >
+      <Sidebar />
+      <div class="grid size-full gap-1 px-5 py-3">
+        <WorkspaceHeader />
+        <div class="sm:p-3">
+          <slot />
+        </div>
+      </div>
     </div>
+    <Toaster
+      :rich-colors="true"
+      :close-button="true"
+    />
+    <WorkspaceProvider />
   </main>
 </template>

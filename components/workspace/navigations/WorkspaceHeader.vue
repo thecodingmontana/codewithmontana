@@ -1,0 +1,77 @@
+<script setup lang="ts">
+import { PanelLeftIcon } from 'lucide-vue-next'
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from '~/components/ui/breadcrumb'
+import { Button } from '~/components/ui/button'
+import { Separator } from '~/components/ui/separator'
+
+const workspaceStore = useWorkspaceStore()
+const modalStore = useModalStore()
+
+const toggleSidebar = () => {
+  workspaceStore.onOpenSidebar()
+}
+
+const workspaceBreadcrumb = computed(() => {
+  return workspaceStore?.breadcrumb as {
+    name: string
+    path: string
+    children: { name: string, path: string }[] | null
+  } | null
+})
+
+const onToggleMobileSidebar = () => {
+  modalStore?.onOpen('mobileSidebar')
+  modalStore?.setIsOpen(true)
+}
+</script>
+
+<template>
+  <div class="sticky inset-x-0 top-0 z-20 flex items-center gap-2 bg-background backdrop-blur-sm sm:px-1">
+    <Button
+      size="icon"
+      variant="ghost"
+      class="md:hidden"
+      @click="onToggleMobileSidebar"
+    >
+      <PanelLeftIcon class="size-6" />
+    </Button>
+    <Button
+      size="icon"
+      variant="ghost"
+      class="hidden md:flex"
+      @click="toggleSidebar"
+    >
+      <PanelLeftIcon class="size-6" />
+    </Button>
+    <Separator
+      orientation="vertical"
+      class="mr-2 h-4"
+    />
+    <Breadcrumb v-if="workspaceBreadcrumb">
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink :href="workspaceBreadcrumb.path">
+            {{ workspaceBreadcrumb.name }}
+          </BreadcrumbLink>
+        </BreadcrumbItem>
+        <template v-if="workspaceBreadcrumb.children?.length">
+          <BreadcrumbSeparator />
+          <BreadcrumbItem
+            v-for="child in workspaceBreadcrumb.children"
+            :key="child.path"
+          >
+            <BreadcrumbLink :href="child.path">
+              {{ child.name }}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </template>
+      </BreadcrumbList>
+    </Breadcrumb>
+  </div>
+</template>

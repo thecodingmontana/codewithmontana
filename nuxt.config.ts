@@ -88,7 +88,6 @@ export default defineNuxtConfig({
   fonts: {
     families: [
       { name: 'Geist', provider: 'google' },
-      { name: 'Sora', provider: 'google' },
       {
         name: 'Nyght',
         src: { url: '/fonts/NyghtSerif-MediumItalic.woff', format: 'woff' },

@@ -86,3 +86,14 @@ export interface ModalStore {
   isOpen: boolean
   data: ModalData
 }
+
+export interface WorkspaceBreadcrumb {
+  name: string
+  path: string
+  children: WorkspaceBreadcrumb[] | null
+}
+
+export interface WorkspaceStore {
+  isOpenSidebar: boolean
+  breadcrumb: WorkspaceBreadcrumb | null
+}
