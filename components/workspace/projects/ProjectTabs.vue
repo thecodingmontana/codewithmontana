@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import BoardProjectsView from './BoardProjectsView.vue'
+import ListProjectsView from './ListProjectsView.vue'
+import TableProjectsView from './TableProjectsView .vue'
+import CalendarProjectsView from './CalendarProjectsView.vue'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 </script>
 
 <template>
   <Tabs
     default-value="board"
-    class="w-[400px]"
+    class="w-full overflow-x-hidden md:col-span-2 xl:col-span-6"
   >
     <TabsList class="rounded-md p-1">
       <TabsTrigger
@@ -50,16 +54,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
       </TabsTrigger>
     </TabsList>
     <TabsContent value="board">
-      Board project overview.
+      <BoardProjectsView />
     </TabsContent>
     <TabsContent value="list">
-      List project overview.
+      <ListProjectsView />
     </TabsContent>
     <TabsContent value="table">
-      Table project overview.
+      <TableProjectsView />
     </TabsContent>
     <TabsContent value="calendar">
-      Calendar project overview.
+      <CalendarProjectsView />
     </TabsContent>
   </Tabs>
 </template>

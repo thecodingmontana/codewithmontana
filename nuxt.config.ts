@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     'nuxt-auth-utils',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
+    'nuxt-charts',
   ],
   devtools: { enabled: true },
   css: ['~/assets/css/tailwind.css'],

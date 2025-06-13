@@ -54,6 +54,8 @@ const handleError = () => clearError({ redirect: '/' })
         >
           Clear errors
         </motion.button>
+
+        {{ error }}
       </div>
       <div
         v-if="error?.statusCode === 404"
