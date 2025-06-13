@@ -97,3 +97,9 @@ export interface WorkspaceStore {
   isOpenSidebar: boolean
   breadcrumb: WorkspaceBreadcrumb | null
 }
+
+export interface IProjectColumn {
+  description: string
+  name: string
+  icon: string
+}

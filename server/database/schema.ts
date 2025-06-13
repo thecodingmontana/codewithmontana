@@ -3,12 +3,28 @@ import {
   boolean,
   index,
   integer,
+  pgEnum,
   pgTable,
   text,
   timestamp,
   uuid,
   varchar,
 } from 'drizzle-orm/pg-core'
+
+export const statusEnum = pgEnum('status', [
+  'IDEA',
+  'TODO',
+  'IN PROGRESS',
+  'IN REVIEW',
+  'COMPLETED',
+  'ABANDONED',
+])
+export const priorityEnum = pgEnum('priority', [
+  'HIGH',
+  'MEDIUM',
+  'LOW',
+  'NONE',
+])
 
 export const userTable = pgTable(
   'user',
@@ -116,10 +132,54 @@ export const cronJobTable = pgTable('cron_jobs', {
   }).defaultNow(),
 })
 
+export const projectTable = pgTable('project', {
+  id: text('id').primaryKey(),
+  title: text('title').notNull(),
+  description: text('description'),
+  status: statusEnum('status').default('IDEA').notNull(),
+  priority: priorityEnum('priority').default('NONE').notNull(),
+  userId: text('userId')
+    .notNull()
+    .references(() => userTable.id, { onDelete: 'cascade' }),
+  createdAt: timestamp('created_at', { mode: 'date', precision: 3 }).notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'date', precision: 3 }).notNull(),
+})
+
+export const subtasksTable = pgTable('subtasks', {
+  id: text('id').primaryKey(),
+  projectId: text('projectId')
+    .notNull()
+    .references(() => projectTable.id, { onDelete: 'cascade' }),
+  is_completed: boolean('is_completed').default(false).notNull(),
+  createdAt: timestamp('created_at', { mode: 'date', precision: 3 }).notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'date', precision: 3 }).notNull(),
+})
+
 // relations
 export const userRelations = relations(userTable, ({ many }) => ({
   credentials: many(passkeysTable),
+  projects: many(projectTable),
 }))
+
+export const projectsRelations = relations(
+  projectTable,
+  ({ one }) => ({
+    user: one(userTable, {
+      fields: [projectTable.userId],
+      references: [userTable.id],
+    }),
+  }),
+)
+
+export const subtasksRelations = relations(
+  subtasksTable,
+  ({ one }) => ({
+    project: one(projectTable, {
+      fields: [subtasksTable.projectId],
+      references: [projectTable.id],
+    }),
+  }),
+)
 
 export const passkeysRelations = relations(
   passkeysTable,
