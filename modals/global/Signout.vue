@@ -60,7 +60,8 @@ function onClose() {
         <DialogDescription class="text-destructive">
           <Icon
             name="twemoji:sad-but-relieved-face"
-            class="mx-auto size-20"
+            class="mx-auto"
+            size="80"
           />
         </DialogDescription>
         <DialogTitle class="text-center text-2xl">

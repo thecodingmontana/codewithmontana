@@ -46,20 +46,33 @@ const onNavigateToPage = (payload: WorkspaceBreadcrumb, pageName: string) => {
             />
             Dashboard
           </button>
-          <button
-            class="flex w-full items-center gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
-            @click="onNavigateToPage({
-              name: 'Projects',
-              path: `/workspace/dashboard`,
-              children: null,
-            }, 'projects')"
-          >
-            <Icon
-              name="solar:folder-with-files-outline"
-              class="size-4"
-            />
+        </div>
+        <div class="grid">
+          <h3 class="p-2 text-xs text-muted-foreground">
             Projects
-          </button>
+          </h3>
+          <div>
+            <button
+              class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+              @click="onNavigateToPage({
+                name: 'Projects',
+                path: `/workspace/projects/all`,
+                children: [
+                  {
+                    name: 'All',
+                    path: `/workspace/projects/all`,
+                    children: null,
+                  },
+                ],
+              }, 'projects/all')"
+            >
+              <Icon
+                name="solar:folder-with-files-outline"
+                class="size-4"
+              />
+              All Projects
+            </button>
+          </div>
         </div>
         <div class="grid">
           <h3 class="p-2 text-xs text-muted-foreground">
