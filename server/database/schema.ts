@@ -6,6 +6,7 @@ import {
   pgTable,
   text,
   timestamp,
+  uuid,
   varchar,
 } from 'drizzle-orm/pg-core'
 
@@ -107,7 +108,8 @@ export const oauthAccountTable = pgTable('oauth_account', {
 })
 
 export const cronJobTable = pgTable('cron_jobs', {
-  id: text('id').notNull(),
+  id: uuid().notNull().primaryKey().defaultRandom(),
+  message: text('message'),
   createdAt: timestamp('created_at', {
     withTimezone: true,
     mode: 'date',

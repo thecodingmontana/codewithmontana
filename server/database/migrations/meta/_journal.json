@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1749026711753,
-      "tag": "0000_gifted_iceman",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1749028386461,
-      "tag": "0001_free_spectrum",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1749114576076,
-      "tag": "0002_black_edwin_jarvis",
+      "when": 1749833228340,
+      "tag": "0000_far_silverclaw",
       "breakpoints": true
     }
   ]

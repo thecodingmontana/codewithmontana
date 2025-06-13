@@ -1,3 +1,9 @@
+CREATE TABLE "cron_jobs" (
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"message" text,
+	"created_at" timestamp with time zone DEFAULT now()
+);
+--> statement-breakpoint
 CREATE TABLE "oauth_account" (
 	"id" text PRIMARY KEY NOT NULL,
 	"userId" text NOT NULL,
@@ -63,7 +69,7 @@ CREATE TABLE "unique-code-request" (
 CREATE TABLE "user" (
 	"id" text PRIMARY KEY NOT NULL,
 	"email" varchar(255) NOT NULL,
-	"username" varchar(255),
+	"username" varchar(255) NOT NULL,
 	"password" text,
 	"email_verified" boolean DEFAULT false NOT NULL,
 	"registered2FA" boolean DEFAULT false NOT NULL,
