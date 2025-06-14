@@ -141,6 +141,7 @@ export const projectTable = pgTable('project', {
   userId: text('userId')
     .notNull()
     .references(() => userTable.id, { onDelete: 'cascade' }),
+  dueDate: timestamp('due_date', { mode: 'date' }),
   createdAt: timestamp('created_at', { mode: 'date', precision: 3 }).notNull(),
   updatedAt: timestamp('updated_at', { mode: 'date', precision: 3 }).notNull(),
 })

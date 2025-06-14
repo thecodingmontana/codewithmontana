@@ -1,0 +1,1 @@
+ALTER TABLE "project" ADD COLUMN "due_date" timestamp;

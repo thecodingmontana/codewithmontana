@@ -42,7 +42,6 @@ const DonutData: DonutItem[] = [
         :labels="DonutData"
         :hide-legend="true"
         :radius="0"
-        :angle-range="[-1.5707963267948966, 1.5707963267948966]"
       >
         <div class="absolute text-center">
           <div class="text-(--ui-text-muted)">

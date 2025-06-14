@@ -15,6 +15,13 @@
       "when": 1749842904681,
       "tag": "0001_condemned_zuras",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1749886176742,
+      "tag": "0002_silent_millenium_guard",
+      "breakpoints": true
     }
   ]
 }

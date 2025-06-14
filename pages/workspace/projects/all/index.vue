@@ -19,6 +19,7 @@ defineOgImageComponent('Nuxt', {
 })
 
 const workspaceStore = useWorkspaceStore()
+const modalStore = useModalStore()
 
 onMounted(() => {
   workspaceStore?.onSetWorkspaceBreadcrumb({
@@ -33,6 +34,11 @@ onMounted(() => {
     ],
   })
 })
+
+const onAddNewProject = () => {
+  modalStore?.onOpen('addProject')
+  modalStore?.setIsOpen(true)
+}
 </script>
 
 <template>
@@ -51,7 +57,10 @@ onMounted(() => {
           </p>
         </div>
       </div>
-      <Button class="cursor-pointer bg-brand text-white hover:bg-brand-secondary transition-all duration-500 ease-in-out hover:-translate-y-1.5 w-full sm:w-auto flex-shrink-0">
+      <Button
+        class="cursor-pointer bg-brand text-white hover:bg-brand-secondary transition-all duration-500 ease-in-out hover:-translate-y-1.5 w-full sm:w-auto flex-shrink-0"
+        @click="onAddNewProject"
+      >
         <Icon
           name="solar:folder-with-files-outline"
           class="size-4"
