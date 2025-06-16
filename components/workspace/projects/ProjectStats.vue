@@ -42,6 +42,7 @@ const DonutData: DonutItem[] = [
         :labels="DonutData"
         :hide-legend="true"
         :radius="0"
+        type="half"
       >
         <div class="absolute text-center">
           <div class="text-(--ui-text-muted)">
