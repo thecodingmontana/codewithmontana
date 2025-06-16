@@ -36,7 +36,7 @@ onMounted(() => {
 })
 
 const onAddNewProject = () => {
-  modalStore?.onOpen('addProject')
+  modalStore?.onOpen('addNewProject')
   modalStore?.setIsOpen(true)
 }
 </script>
@@ -65,9 +65,7 @@ const onAddNewProject = () => {
           name="solar:folder-with-files-outline"
           class="size-4"
         />
-        <span class="ml-2">
-          New Project
-        </span>
+        New Project
       </Button>
     </div>
 

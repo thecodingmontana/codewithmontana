@@ -71,7 +71,7 @@ export interface User {
   twoFactorVerified: boolean
 }
 
-export type ModalType = 'joinWaitlist' | 'setupAuthenticatorApp' | 'setupPasskeys' | 'setupSecurityKeys' | 'signout' | 'addProject' | 'setupPassword' | 'resetPassword' | 'transferOwnership' | 'deleteWorkspace' | 'mobileSidebar' | 'inviteTeammate' | 'notificationCenter' | 'changeTeammateRole' | 'totpAuthentication' | 'deleteAccount'
+export type ModalType = 'joinWaitlist' | 'setupAuthenticatorApp' | 'setupPasskeys' | 'setupSecurityKeys' | 'signout' | 'addNewProject' | 'addNewTask' | 'setupPassword' | 'resetPassword' | 'transferOwnership' | 'deleteWorkspace' | 'mobileSidebar' | 'inviteTeammate' | 'notificationCenter' | 'changeTeammateRole' | 'totpAuthentication' | 'deleteAccount'
 
 export interface ModalData {
   qrcode?: string
@@ -103,3 +103,43 @@ export interface IProjectColumn {
   name: string
   icon: string
 }
+
+export const columns = ref<IProjectColumn[]>([
+  {
+    name: 'Idea',
+    description: 'Raw thoughts or concepts not yet acted upon.',
+    icon: 'hugeicons:ai-idea',
+  },
+  {
+    name: 'Todo',
+    description: 'Planned projects that are queued and ready to start.',
+    icon: 'solar:clipboard-outline',
+  },
+  {
+    name: 'In Progress',
+    description: 'Projects currently being worked on.',
+    icon: 'solar:alarm-outline',
+  },
+  {
+    name: 'In Review',
+    description: 'Projects completed but pending evaluation or feedback.',
+    icon: 'solar:minimalistic-magnifer-bug-outline',
+  },
+  {
+    name: 'Completed',
+    description: 'Projects fully done and verified.',
+    icon: 'solar:check-circle-outline',
+  },
+  {
+    name: 'Abandoned',
+    description: 'Projects intentionally discontinued or no longer relevant.',
+    icon: 'solar:trash-bin-trash-outline',
+  },
+])
+
+export const priorityOptions = [
+  { name: 'High', value: 'HIGH', color: '#ef4444' }, // red-500
+  { name: 'Medium', value: 'MEDIUM', color: '#f59e0b' }, // amber-500
+  { name: 'Low', value: 'LOW', color: '#10b981' }, // emerald-500
+  { name: 'None', value: 'NONE', color: '#9ca3af' }, // gray-400
+]

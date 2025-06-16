@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Signout from '~/modals/global/Signout.vue'
-import AddProject from '~/modals/workspace/AddProject.vue'
+import AddNewProject from '~/modals/workspace/AddNewProject.vue'
 import MobileSidebar from '~/modals/workspace/MobileSidebar.vue'
 </script>
 
@@ -8,6 +8,7 @@ import MobileSidebar from '~/modals/workspace/MobileSidebar.vue'
   <div>
     <Signout />
     <MobileSidebar />
-    <AddProject />
+    <AddNewProject />
+    <AddNewTask />
   </div>
 </template>
