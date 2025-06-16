@@ -9,11 +9,10 @@ import { projects } from '~/data/projects'
   <section class="relative mx-auto mt-28 w-full max-w-7xl py-10">
     <AnimatePresence>
       <motion.h2
-        :initial="{ opacity: 0, y: 100 }"
-        :while-in-view="{ opacity: 1, y: 0 }"
-        :in-view-options="{ amount: 0.8 }"
-        :transition="{ type: 'spring', bounce: 0.4 }"
         :exit="{ opacity: 0 }"
+        :initial="{ opacity: 0, y: 20 }"
+        :animate="{ opacity: 1, y: 0 }"
+        :transition="{ delay: 0.5, duration: 1.8, easing: 'ease-out', type: 'spring' }"
         class="relative z-2 mb-20 text-4xl font-medium tracking-tight sm:text-5xl md:mb-36 md:text-6xl text-balance text-center"
         style="
           text-shadow: rgba(255, 255, 255, 0.05) 0px 4px 8px rgba(255, 255, 255, 0.25) 0px
