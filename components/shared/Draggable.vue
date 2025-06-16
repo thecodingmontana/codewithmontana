@@ -4,7 +4,7 @@ import { computed } from 'vue'
 
 const { index, source } = defineProps<{
   index: number
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   source: any[]
 }>()
 
