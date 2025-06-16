@@ -126,7 +126,7 @@ export async function createSessionMetadata(event: H3Event): Promise<{
     const { browser, device, os } = UAParser(userAgent)
 
     let location = 'Unknown'
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     let ipData: any = null
 
     if (localIp === '127.0.0.1' || localIp === '::1') {
@@ -146,7 +146,7 @@ export async function createSessionMetadata(event: H3Event): Promise<{
       ipAdress: localIp,
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     const errorMessage = error.error ? error.error.message : error.message
     throw createError({

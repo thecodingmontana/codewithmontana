@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
       passkeyCredentials: passkeys,
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     const errorMessage = error ? error.statusMessage : error.message
     throw createError({

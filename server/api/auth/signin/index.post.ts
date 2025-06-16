@@ -96,7 +96,7 @@ export default defineEventHandler(async (event) => {
       message: 'Successfully signed in!',
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     throw createError({
       message: `Failed to signin: ${error.message}`,

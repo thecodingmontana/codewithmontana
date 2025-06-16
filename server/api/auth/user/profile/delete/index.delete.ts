@@ -62,7 +62,7 @@ export default defineEventHandler(async (event) => {
       message: 'You\'ve successfully deleted your account!',
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     console.error('Delete user account error:', error)
     throw createError({

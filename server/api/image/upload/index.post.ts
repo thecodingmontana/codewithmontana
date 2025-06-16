@@ -37,7 +37,7 @@ export default defineEventHandler(async (event) => {
       size: uploadImg.bytes,
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     const errorMessage = error.error ? error.error.message : error.message
     throw createError({

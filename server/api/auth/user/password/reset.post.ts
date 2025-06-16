@@ -61,7 +61,7 @@ export default defineEventHandler(async (event) => {
       message: 'You\'ve successfully reset your password',
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     const errorMessage = error.error ? error.error.message : error.message
     throw createError({

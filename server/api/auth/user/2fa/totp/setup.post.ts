@@ -83,7 +83,7 @@ export default defineEventHandler(async (event) => {
       message: 'You\'ve successfully setup TOTP for your account!',
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     const errorMessage = error ? error.statusMessage : error.message
     throw createError({

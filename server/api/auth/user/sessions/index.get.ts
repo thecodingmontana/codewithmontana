@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
 
     return sessions
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     throw createError({
       message: error.message,

@@ -36,7 +36,7 @@ export default defineEventHandler(async (event) => {
       }
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     throw createError({
       message: error.message,

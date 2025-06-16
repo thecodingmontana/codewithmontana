@@ -69,7 +69,7 @@ export default defineEventHandler(async (event) => {
       message: 'Check your email for the unique code!',
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     throw createError({
       message: error.message,

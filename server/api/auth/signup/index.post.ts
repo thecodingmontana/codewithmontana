@@ -115,7 +115,7 @@ export default defineEventHandler(async (event) => {
       message: 'User account created successfully!',
     }
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     throw createError({
       message: `Failed to signup: ${error.message}`,

@@ -28,7 +28,7 @@ export async function sendWorkspaceInvite({ email, link, sender, workspace, expi
       html,
     })
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   catch (error: any) {
     throw new Error(error.message)
   }
