@@ -41,6 +41,19 @@ export const registerSecurityKeysSchema = toTypedSchema(z.object({
     message: 'Minimum name length 3 chars!',
   }),
 }))
+
+export const newProjectSchema = toTypedSchema(z.object({
+  title: z.string({
+    required_error: 'Title is required!',
+  }).max(100, { message: 'Title must be at most 100 characters long.' }),
+  status: z.string({
+    required_error: 'Status is required!',
+  }),
+  priority: z.string({
+    required_error: 'Priority is required!',
+  }),
+  description: z.string().optional(),
+}))
 export interface Project {
   name: string
   tagline: string
