@@ -7,6 +7,7 @@ export default withNuxt(
     rules: {
       'tailwindcss/no-custom-classname': 'off',
       'vue/no-v-html': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 )
