@@ -34,6 +34,10 @@ const columns = ref<IProjectColumn[]>([
     icon: 'solar:trash-bin-trash-outline',
   },
 ])
+
+const { data: projects, error, status } = await useAsyncData('all_projects', () => useRequestFetch()('/api/workspace/project/all'))
+
+console.log(projects.value, error.value, status.value)
 </script>
 
 <template>
@@ -42,6 +46,17 @@ const columns = ref<IProjectColumn[]>([
       v-for="column in columns"
       :key="column.name"
       :column="column"
+      :data="(projects ?? [])
+        .filter(project => project.status === column.name.toUpperCase())
+        .map(project => ({
+          ...project,
+          createdAt: new Date(project.createdAt),
+          updatedAt: new Date(project.updatedAt),
+          dueDate: project.dueDate ? new Date(project.dueDate) : null,
+          user: {
+            avatar: project.user.profilePictureUrl!,
+          },
+        }))"
     />
   </div>
 </template>

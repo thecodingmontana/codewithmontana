@@ -160,3 +160,17 @@ export const priorityOptions = [
 
 export type Status = 'IDEA' | 'TODO' | 'IN PROGRESS' | 'IN REVIEW' | 'COMPLETED' | 'ABANDONED'
 export type Priority = 'HIGH' | 'MEDIUM' | 'LOW' | 'NONE'
+export interface DBProject {
+  description: string | null
+  status: Status
+  priority: Priority
+  id: string
+  createdAt: Date
+  updatedAt: Date
+  userId: string
+  title: string
+  dueDate: Date | null
+  user: {
+    avatar: string
+  }
+}

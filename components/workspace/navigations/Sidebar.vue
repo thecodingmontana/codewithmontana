@@ -14,6 +14,10 @@ const onNavigateToPage = (payload: WorkspaceBreadcrumb, pageName: string) => {
   workspaceStore?.onSetWorkspaceBreadcrumb(payload)
   navigateTo(`/workspace/${pageName}`)
 }
+
+const { data: projects, error, status } = await useAsyncData('all_projects', () => useRequestFetch()('/api/workspace/project/all'))
+
+console.log(projects.value, error.value, status.value)
 </script>
 
 <template>
@@ -71,6 +75,30 @@ const onNavigateToPage = (payload: WorkspaceBreadcrumb, pageName: string) => {
                 class="size-4"
               />
               All Projects
+            </button>
+            <button
+              v-for="project in projects"
+              :key="project.id"
+              class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+              @click="onNavigateToPage({
+                name: 'Projects',
+                path: `/workspace/projects/all`,
+                children: [
+                  {
+                    name: `${project.title}`,
+                    path: `/workspace/projects/${project.id}`,
+                    children: null,
+                  },
+                ],
+              }, `projects/${project.id}`)"
+            >
+              <Icon
+                name="solar:folder-with-files-outline"
+                class="size-4"
+              />
+              <span class="truncate text-start w-55">
+                {{ project.title }}
+              </span>
             </button>
           </div>
         </div>

@@ -38,8 +38,8 @@ const onSubmit = form.handleSubmit(async (values) => {
       body: newFormValues,
     })
 
+    await refreshNuxtData('all_projects')
     form.resetForm()
-
     onCloseModal()
 
     toast.success(res.message, {

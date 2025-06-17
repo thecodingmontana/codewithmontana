@@ -82,7 +82,6 @@ export default defineEventHandler(async (event) => {
   }
 
   catch (error: any) {
-    console.log()
     const errorMessage = error.error ? error.error.message : error.message
     throw createError({
       statusCode: error.statusCode ? error.statusCode : 500,

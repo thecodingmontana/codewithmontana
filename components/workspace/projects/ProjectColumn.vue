@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import { Badge } from '~/components/ui/badge'
 import { Button } from '~/components/ui/button'
-import type { IProjectColumn } from '~/types'
+import { cn } from '~/lib/utils'
+import type { DBProject, IProjectColumn } from '~/types'
 
 const props = defineProps<{
   column: IProjectColumn
+  data: DBProject[]
 }>()
 </script>
 
@@ -22,6 +25,45 @@ const props = defineProps<{
       <p class="text-xs italic text-muted-foreground">
         {{ props.column.description }}
       </p>
+    </div>
+    <div
+      v-for="project in props.data"
+      :key="project.id"
+      class="bg-background p-2.5 rounded-sm shadow space-y-2"
+    >
+      <div>
+        <Badge
+          :class="cn(
+            'rounded text-xs gap-x-1 flex',
+            project.priority === 'MEDIUM' && 'bg-amber-100 dark:bg-amber-100 text-amber-500',
+            project.priority === 'LOW' && 'bg-purple-100 dark:bg-purple-100 text-purple-500',
+            project.priority === 'HIGH' && 'bg-rose-100 dark:bg-rose-100 text-rose-500',
+            project.priority === 'NONE' && 'bg-zinc-100 dark:bg-zinc-100 text-zinc-500',
+          )"
+        >
+          <div
+            :class="cn(
+              'rounded-full size-1.5 shrink-0',
+              project.priority === 'MEDIUM' && 'bg-amber-500',
+              project.priority === 'LOW' && 'bg-purple-500',
+              project.priority === 'HIGH' && 'bg-rose-500',
+              project.priority === 'NONE' && 'bg-zinc-500',
+            )"
+          />
+          {{ project.priority }}
+        </Badge>
+      </div>
+      <div>
+        <h3>
+          {{ project.title }}
+        </h3>
+        <p
+          v-if="project.description"
+          class="text-sm text-muted-foreground"
+        >
+          {{ project.description }}
+        </p>
+      </div>
     </div>
     <Button
       class="w-full gap-2 cursor-pointer dark:hover:bg-[#343434]"
