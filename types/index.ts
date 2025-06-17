@@ -53,6 +53,7 @@ export const newProjectSchema = toTypedSchema(z.object({
     required_error: 'Priority is required!',
   }),
   description: z.string().optional(),
+  dueDate: z.string().optional(),
 }))
 export interface Project {
   name: string
@@ -151,8 +152,11 @@ export const columns = ref<IProjectColumn[]>([
 ])
 
 export const priorityOptions = [
-  { name: 'High', value: 'HIGH', color: '#ef4444' }, // red-500
-  { name: 'Medium', value: 'MEDIUM', color: '#f59e0b' }, // amber-500
-  { name: 'Low', value: 'LOW', color: '#10b981' }, // emerald-500
-  { name: 'None', value: 'NONE', color: '#9ca3af' }, // gray-400
+  { name: 'High', value: 'HIGH', color: '#ef4444' },
+  { name: 'Medium', value: 'MEDIUM', color: '#f59e0b' },
+  { name: 'Low', value: 'LOW', color: '#10b981' },
+  { name: 'None', value: 'NONE', color: '#9ca3af' },
 ]
+
+export type Status = 'IDEA' | 'TODO' | 'IN PROGRESS' | 'IN REVIEW' | 'COMPLETED' | 'ABANDONED'
+export type Priority = 'HIGH' | 'MEDIUM' | 'LOW' | 'NONE'
