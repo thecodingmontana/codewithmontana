@@ -88,7 +88,7 @@ async function handleDrop(columnKey: Status, project: DBProject, index?: number)
       body: { status: columnKey },
     })
 
-    await refreshNuxtData('all_projects')
+    await refreshNuxtData(['sidebar_projects', 'board_view_projects', 'all_project_stats'])
   }
   catch (error: any) {
     const errorMessage = error.response

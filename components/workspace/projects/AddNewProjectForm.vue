@@ -38,7 +38,7 @@ const onSubmit = form.handleSubmit(async (values) => {
       body: newFormValues,
     })
 
-    await refreshNuxtData(['sidebar_projects', 'board_view_projects'])
+    await refreshNuxtData(['sidebar_projects', 'board_view_projects', 'all_project_stats'])
     form.resetForm()
     onCloseModal()
 
@@ -212,7 +212,7 @@ const onCloseModal = () => {
       </FormField>
     </div>
 
-    <div class="absolute bottom-0 p-1 left-0 right-0 backdrop-blur-xs">
+    <div class="absolute bottom-0 p-2 left-0 right-0 backdrop-blur-xs">
       <Button
         :disabled="props.isAddNewProject"
         class="w-full capitalize cursor-pointer bg-brand hover:bg-brand-secondary text-white"

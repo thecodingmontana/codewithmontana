@@ -11,16 +11,6 @@ definePageMeta({
   layout: 'workspace',
 })
 
-useHead({
-  titleTemplate: '%s - Projects',
-})
-
-defineOgImageComponent('Nuxt', {
-  headline: 'Greetings 👋',
-  title: 'Projects',
-  description: 'Explore Christopher\'s journey through web engineering, projects, and personal insights.',
-})
-
 const route = useRoute()
 const workspaceStore = useWorkspaceStore()
 
@@ -33,7 +23,7 @@ watchEffect(async () => {
   if (status.value === 'success') {
     if (!project.value) {
       navigateTo('/workspace/projects/all')
-      await refreshNuxtData(['sidebar_projects', 'board_view_projects'])
+      await refreshNuxtData(['sidebar_projects', 'board_view_projects', 'all_project_stat'])
     }
     else {
       workspaceStore?.onSetWorkspaceBreadcrumb({
@@ -49,6 +39,16 @@ watchEffect(async () => {
       })
     }
   }
+})
+
+useHead({
+  titleTemplate: `Project - ${project.value?.title}`,
+})
+
+defineOgImageComponent('Nuxt', {
+  headline: 'Greetings 👋',
+  title: `Project - ${project.value?.title}`,
+  description: project.value?.description ? project.value.description : 'Explore Christopher\'s journey through web engineering, projects, and personal insights.',
 })
 </script>
 

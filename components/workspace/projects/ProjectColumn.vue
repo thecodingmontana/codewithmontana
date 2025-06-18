@@ -13,6 +13,8 @@ const props = defineProps<{
   onDrop: (item: DBProject, index?: number) => void
 }>()
 
+const modalStore = useModalStore()
+
 function createDropHandler(targetList: DBProject[], onDrop: (item: DBProject, index?: number) => void) {
   return {
     data: {
@@ -45,6 +47,11 @@ function createDropHandler(targetList: DBProject[], onDrop: (item: DBProject, in
 }
 
 const { elementRef: columnRef, isOvered, isAllowed, isLazyAllowed } = useDroppable(createDropHandler(props.data, props.onDrop))
+
+const onAddNewProject = () => {
+  modalStore?.onOpen('addNewProject')
+  modalStore?.setIsOpen(true)
+}
 </script>
 
 <template>
@@ -135,6 +142,7 @@ const { elementRef: columnRef, isOvered, isAllowed, isLazyAllowed } = useDroppab
       class="w-full gap-2 cursor-pointer dark:hover:bg-[#343434]"
       size="sm"
       variant="outline"
+      @click="onAddNewProject"
     >
       <Icon
         name="hugeicons:plus-sign"
