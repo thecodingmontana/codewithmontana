@@ -31,24 +31,24 @@ const onClose = () => {
   >
     <SheetContent class="dark:bg-[#1d1d1d]">
       <SheetHeader>
-        <SheetTitle class="flex items-center gap-x-2 text-xl">
+        <SheetTitle class="flex items-center gap-x-2 text-xl capitalize">
           <div class="size-10 p-2 rounded-md bg-muted">
             <Icon
-              name="solar:folder-with-files-outline"
+              name="hugeicons:task-02"
               size="25"
             />
           </div>
-          Add new project
+          Add new task
         </SheetTitle>
         <SheetDescription class="sr-only">
-          Add new project
+          Add new task
         </SheetDescription>
       </SheetHeader>
       <div class="p-2 -mt-8">
         <div>
           <Textarea
-            placeholder="Project title"
-            class="outline-none border-0 shadow-none focus-visible:ring-0 resize-none placeholder:text-xl !text-xl"
+            placeholder="Task name"
+            class="outline-none border-0 shadow-none focus-visible:ring-0 resize-none placeholder:text-xl dark:bg-transparent !text-xl"
             @input="(e: Event) => {
               const target = e.target as HTMLTextAreaElement;
               target.style.height = 'auto';

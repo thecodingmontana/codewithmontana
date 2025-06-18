@@ -146,11 +146,25 @@ export const projectTable = pgTable('project', {
   updatedAt: timestamp('updated_at', { mode: 'date', precision: 3 }).notNull(),
 })
 
-export const subtasksTable = pgTable('subtasks', {
+export const tasksTable = pgTable('tasks', {
   id: text('id').primaryKey(),
-  projectId: text('projectId')
+  title: text('title').notNull(),
+  description: text('description'),
+  status: statusEnum('status').default('IDEA').notNull(),
+  priority: priorityEnum('priority').default('NONE').notNull(),
+  projectId: text('userId')
     .notNull()
     .references(() => projectTable.id, { onDelete: 'cascade' }),
+  dueDate: timestamp('due_date', { mode: 'date' }),
+  createdAt: timestamp('created_at', { mode: 'date', precision: 3 }).notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'date', precision: 3 }).notNull(),
+})
+
+export const subtasksTable = pgTable('subtasks', {
+  id: text('id').primaryKey(),
+  taskId: text('projectId')
+    .notNull()
+    .references(() => tasksTable.id, { onDelete: 'cascade' }),
   is_completed: boolean('is_completed').default(false).notNull(),
   createdAt: timestamp('created_at', { mode: 'date', precision: 3 }).notNull(),
   updatedAt: timestamp('updated_at', { mode: 'date', precision: 3 }).notNull(),
@@ -164,20 +178,32 @@ export const userRelations = relations(userTable, ({ many }) => ({
 
 export const projectsRelations = relations(
   projectTable,
-  ({ one }) => ({
+  ({ one, many }) => ({
     user: one(userTable, {
       fields: [projectTable.userId],
       references: [userTable.id],
     }),
+    tasks: many(tasksTable),
+  }),
+)
+
+export const tasksRelations = relations(
+  tasksTable,
+  ({ one, many }) => ({
+    project: one(projectTable, {
+      fields: [tasksTable.projectId],
+      references: [projectTable.id],
+    }),
+    subtasks: many(subtasksTable),
   }),
 )
 
 export const subtasksRelations = relations(
   subtasksTable,
   ({ one }) => ({
-    project: one(projectTable, {
-      fields: [subtasksTable.projectId],
-      references: [projectTable.id],
+    task: one(tasksTable, {
+      fields: [subtasksTable.taskId],
+      references: [tasksTable.id],
     }),
   }),
 )

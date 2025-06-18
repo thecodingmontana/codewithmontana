@@ -13,6 +13,7 @@ definePageMeta({
 
 const route = useRoute()
 const workspaceStore = useWorkspaceStore()
+const modalStore = useModalStore()
 
 const { data: project, status } = await useAsyncData(
   `project-${route.params.projectId}`,
@@ -50,6 +51,11 @@ defineOgImageComponent('Nuxt', {
   title: `Project - ${project.value?.title}`,
   description: project.value?.description ? project.value.description : 'Explore Christopher\'s journey through web engineering, projects, and personal insights.',
 })
+
+const onAddNewTask = () => {
+  modalStore?.onOpen('addNewTask')
+  modalStore?.setIsOpen(true)
+}
 </script>
 
 <template>
@@ -112,7 +118,10 @@ defineOgImageComponent('Nuxt', {
           </div>
         </div>
       </div>
-      <Button class="cursor-pointer bg-brand text-white hover:bg-brand-secondary transition-all duration-500 ease-in-out hover:-translate-y-1.5 w-full sm:w-auto flex-shrink-0">
+      <Button
+        class="cursor-pointer bg-brand text-white hover:bg-brand-secondary transition-all duration-500 ease-in-out hover:-translate-y-1.5 w-full sm:w-auto flex-shrink-0"
+        @click="onAddNewTask"
+      >
         <Icon
           name="hugeicons:task-add-01"
           class="size-4"

@@ -22,6 +22,13 @@
       "when": 1749886176742,
       "tag": "0002_silent_millenium_guard",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1750265698298,
+      "tag": "0003_crazy_maginty",
+      "breakpoints": true
     }
   ]
 }
