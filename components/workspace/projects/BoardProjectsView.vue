@@ -1,5 +1,6 @@
 <!-- Parent.vue -->
 <script setup lang="ts">
+import { toast } from 'vue-sonner'
 import ProjectColumn from './ProjectColumn.vue'
 import type { DBProject, IProjectColumn, Status } from '~/types'
 
@@ -68,17 +69,23 @@ async function handleDrop(columnKey: Status, project: DBProject, index?: number)
     }
   })
 
-  console.log(columnKey, project)
+  try {
+    await $fetch(`/api/workspace/project/${project.id}/update-status`, {
+      method: 'PATCH',
+      body: { status: columnKey },
+    })
 
-  // try {
-  //   await useRequestFetch()(`/api/workspace/project/${project.id}`, {
-  //     method: 'PATCH',
-  //     body: { status: columnKey },
-  //   })
-  // }
-  // catch (err) {
-  //   console.error('Failed to update project status:', err)
-  // }
+    await refreshNuxtData('all_projects')
+  }
+  catch (error: any) {
+    const errorMessage = error.response
+      ? error.response._data.message
+      : error.message
+
+    toast.error(errorMessage, {
+      position: 'top-center',
+    })
+  }
 }
 </script>
 

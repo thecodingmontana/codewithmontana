@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid'
-import type { Priority, Status } from '~/types'
+import { validPriorities, validStatuses, type Priority, type Status } from '~/types'
 
 export default defineEventHandler(async (event) => {
   try {
@@ -26,16 +26,16 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    if (typeof status !== 'string' || !status) {
+    if (typeof status !== 'string' || !validStatuses.includes(status)) {
       throw createError({
         statusMessage: 'Invalid Status!',
         statusCode: 400,
       })
     }
 
-    if (typeof priority !== 'string' || !priority) {
+    if (typeof priority !== 'string' || !validPriorities.includes(priority)) {
       throw createError({
-        statusMessage: 'Invalid title!',
+        statusMessage: 'Invalid Priority!',
         statusCode: 400,
       })
     }

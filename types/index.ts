@@ -1,5 +1,6 @@
 import { toTypedSchema } from '@vee-validate/zod'
 import * as z from 'zod'
+import { ref } from 'vue'
 
 export const waitlistSchema = toTypedSchema(z.object({
   email: z.string().email({
@@ -174,3 +175,6 @@ export interface DBProject {
     avatar: string
   }
 }
+
+export const validStatuses = ['IDEA', 'TODO', 'IN PROGRESS', 'IN REVIEW', 'COMPLETED', 'ABANDONED']
+export const validPriorities = ['HIGH', 'MEDIUM', 'LOW', 'NONE']
