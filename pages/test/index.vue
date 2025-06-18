@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useDroppable, DnDOperations } from '@vue-dnd-kit/core'
+import { useDroppable, type IDnDPayload, type IDnDStore } from '@vue-dnd-kit/core'
 import Draggable from '~/components/shared/Draggable.vue'
 
 const firstColumn = ref([
@@ -15,23 +15,33 @@ const secondColumn = ref([
   { id: 6, name: 'Item 6' },
 ])
 
-const { elementRef: firstColumnRef } = useDroppable({
-  data: {
-    source: firstColumn.value,
-  },
-  events: {
-    onDrop: DnDOperations.applyTransfer,
-  },
-})
+function createDropHandler(targetList: globalThis.Ref<{ id: number, name: string }[], { id: number, name: string }[] | { id: number, name: string }[]>) {
+  return {
+    data: {
+      source: targetList.value,
+    },
+    events: {
+      onDrop: (store: IDnDStore, payload: IDnDPayload) => {
+        const hoveredElementNode = store.hovered.element.value
+        if (!hoveredElementNode) return
 
-const { elementRef: secondColumnRef } = useDroppable({
-  data: {
-    source: secondColumn.value,
-  },
-  events: {
-    onDrop: DnDOperations.applyTransfer,
-  },
-})
+        const hoveredElement = store.elementsMap.value.get(hoveredElementNode)
+        const [draggingElement] = payload.items
+
+        const { source: hoveredSource, index: hoveredIndex } = hoveredElement?.data ?? {}
+        const { source: draggingSource, index: draggingIndex } = draggingElement?.data ?? {}
+
+        if (!hoveredSource || !draggingSource || draggingIndex === undefined) return
+
+        const [moved] = draggingSource.splice(draggingIndex, 1)
+        hoveredSource.splice(hoveredIndex ?? hoveredSource.length, 0, moved)
+      },
+    },
+  }
+}
+
+const { elementRef: firstColumnRef } = useDroppable(createDropHandler(firstColumn))
+const { elementRef: secondColumnRef } = useDroppable(createDropHandler(secondColumn))
 </script>
 
 <template>
@@ -73,42 +83,37 @@ const { elementRef: secondColumnRef } = useDroppable({
 </template>
 
 <style>
-  .container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .dropzone {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    border: 1px dashed rgba(62, 175, 124, 0.3);
-    border-radius: 6px;
-    background-color: rgba(62, 175, 124, 0.1);
-  }
-
-  .list-move {
-    transition: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  .list-enter-active,
-  .list-leave-active {
-    transition: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-  }
-
-  .list-enter-from,
-  .list-leave-to {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-
-  .list-leave-active {
-    position: absolute;
-    pointer-events: none;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.dropzone {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px dashed rgba(62, 175, 124, 0.3);
+  border-radius: 6px;
+  background-color: rgba(62, 175, 124, 0.1);
+}
+.list-move {
+  transition: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.list-enter-active,
+.list-leave-active {
+  transition: 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+.list-leave-active {
+  position: absolute;
+  pointer-events: none;
+}
 </style>

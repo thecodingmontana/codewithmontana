@@ -15,9 +15,11 @@ const onNavigateToPage = (payload: WorkspaceBreadcrumb, pageName: string) => {
   navigateTo(`/workspace/${pageName}`)
 }
 
-const { data: projects, error, status } = await useAsyncData('all_projects', () => useRequestFetch()('/api/workspace/project/all'))
+const { data: projects, error } = await useAsyncData('all_projects', () => useRequestFetch()('/api/workspace/project/all'))
 
-console.log(projects.value, error.value, status.value)
+const status = 'pending'
+
+console.log(projects.value, error.value)
 </script>
 
 <template>
@@ -76,10 +78,14 @@ console.log(projects.value, error.value, status.value)
               />
               All Projects
             </button>
+            <div
+              v-if="status === 'pending'"
+              class="p-[1rem] w-full bg-[#f1f1f1] dark:bg-[#343434] animate-pulse rounded-md"
+            />
             <button
               v-for="project in projects"
               :key="project.id"
-              class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+              class="flex w-full items-center gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
               @click="onNavigateToPage({
                 name: 'Projects',
                 path: `/workspace/projects/all`,
