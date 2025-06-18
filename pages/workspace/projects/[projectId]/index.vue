@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import { format } from 'date-fns'
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
+import { Badge } from '~/components/ui/badge'
+import { Button } from '~/components/ui/button'
+import { cn } from '~/lib/utils'
+import { columns } from '~/types'
+
 definePageMeta({
   middleware: ['authenticated'],
   layout: 'workspace',
@@ -17,43 +24,16 @@ defineOgImageComponent('Nuxt', {
 const route = useRoute()
 const workspaceStore = useWorkspaceStore()
 
-// Fetch project info safely
 const { data: project, status } = await useAsyncData(
   `project-${route.params.projectId}`,
-  () => useRequestFetch()(`/api/workspace/project/${route.params.projectId}/info`), {
-    transform(input) {
-      return {
-        ...input,
-        fetchedAt: new Date(),
-      }
-    },
-    getCachedData(key, nuxtApp) {
-      const data = nuxtApp.payload.data[key] || nuxtApp.static.data[key]
-      // If data is not fetched yet
-      if (!data) {
-      // Fetch the first time
-        return
-      }
-
-      // Check if the data is older than 5 minutes
-      const expirationDate = new Date(data.fetchedAt)
-      expirationDate.setTime(expirationDate.getTime() + 5 * 60 * 1000) // 5 minutes TTL
-      const isExpired = expirationDate.getTime() < Date.now()
-      if (isExpired) {
-      // Refetch the data
-        return
-      }
-
-      return data
-    },
-  },
+  () => useRequestFetch()(`/api/workspace/project/${route.params.projectId}/info`),
 )
 
-// Redirect if no project found
-onBeforeMount(() => {
+watchEffect(async () => {
   if (status.value === 'success') {
     if (!project.value) {
       navigateTo('/workspace/projects/all')
+      await refreshNuxtData(['sidebar_projects', 'board_view_projects'])
     }
     else {
       workspaceStore?.onSetWorkspaceBreadcrumb({
@@ -73,7 +53,77 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <div>
-    Welcome to {{ project?.title }}
-  </div>
+  <section class="grid gap-5">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div class="flex items-center gap-x-3">
+        <Avatar class="size-12 rounded-md">
+          <AvatarImage
+            :src="`https://avatar.vercel.sh/vercel.svg?text=${project?.title?.charAt(0)}`"
+            :alt="project?.title"
+          />
+          <AvatarFallback>
+            {{ project?.title?.slice(0, 2).toUpperCase() || 'PR' }}
+          </AvatarFallback>
+        </Avatar>
+        <div class="min-w-0 flex-1">
+          <h1 class="text-lg sm:text-xl font-semibold truncate capitalize">
+            {{ project?.title }}
+          </h1>
+          <div class="text-sm text-muted-foreground flex items-center gap-x-3">
+            <p>
+              Due: <span class="text-primary">{{ project?.dueDate ? format(new Date(project.dueDate), 'PP') : 'N/A' }}</span>
+            </p>
+            <div class="bg-primary size-1 rounded-full" />
+            <div class="flex items-center gap-x-2">
+              <p>Status:</p>
+              <div class="flex items-center gap-x-1.5 text-primary">
+                <Icon
+                  :name="project?.priority
+                    ? (columns.find(f => f.name.toUpperCase() === project?.status)?.icon || 'hugeicons:ai-idea')
+                    : 'hugeicons:ai-idea'"
+                />
+                <p>{{ project?.status }}</p>
+              </div>
+            </div>
+            <div class="bg-primary size-1 rounded-full" />
+            <div class="flex items-center gap-x-2">
+              <p>Priority:</p>
+              <Badge
+                :class="cn(
+                  'rounded text-xs gap-x-1 flex',
+                  project?.priority === 'MEDIUM' && 'bg-amber-100 dark:bg-amber-100 text-amber-500',
+                  project?.priority === 'LOW' && 'bg-purple-100 dark:bg-purple-100 text-purple-500',
+                  project?.priority === 'HIGH' && 'bg-rose-100 dark:bg-rose-100 text-rose-500',
+                  project?.priority === 'NONE' && 'bg-zinc-100 dark:bg-zinc-100 text-zinc-500',
+                )"
+              >
+                <div
+                  :class="cn(
+                    'rounded-full size-1.5 shrink-0',
+                    project?.priority === 'MEDIUM' && 'bg-amber-500',
+                    project?.priority === 'LOW' && 'bg-purple-500',
+                    project?.priority === 'HIGH' && 'bg-rose-500',
+                    project?.priority === 'NONE' && 'bg-zinc-500',
+                  )"
+                />
+                {{ project?.priority }}
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Button class="cursor-pointer bg-brand text-white hover:bg-brand-secondary transition-all duration-500 ease-in-out hover:-translate-y-1.5 w-full sm:w-auto flex-shrink-0">
+        <Icon
+          name="hugeicons:task-add-01"
+          class="size-4"
+        />
+        New Task
+      </Button>
+    </div>
+
+    <div class="grid md:grid-cols-4 xl:grid-cols-8 gap-10">
+      <!-- <ProjectTabs />
+      <ProjectStats /> -->
+    </div>
+  </section>
 </template>

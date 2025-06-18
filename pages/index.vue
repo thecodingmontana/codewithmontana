@@ -8,6 +8,16 @@ defineOgImageComponent('Nuxt', {
   title: 'Christopher Odhiambo',
   description: 'Explore Christopher\'s journey through web engineering, projects, and personal insights.',
 })
+
+const { loggedIn } = useUserSession()
+
+watch(() => loggedIn.value, (loggedIn) => {
+  if (loggedIn) {
+    navigateTo('/workspace/dashboard')
+  }
+}, {
+  immediate: true,
+})
 </script>
 
 <template>

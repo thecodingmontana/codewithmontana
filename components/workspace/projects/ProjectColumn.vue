@@ -66,7 +66,9 @@ const { elementRef: columnRef, isOvered, isAllowed, isLazyAllowed } = useDroppab
         {{ props.column.description }}
       </p>
     </div>
-    <div class="grid gap-1">
+    <div
+      class="grid gap-1"
+    >
       <TransitionGroup name="list">
         <Draggable
           v-for="(project, index) in props.data"
