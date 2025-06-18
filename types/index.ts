@@ -56,6 +56,26 @@ export const newProjectSchema = toTypedSchema(z.object({
   description: z.string().optional(),
   dueDate: z.string().optional(),
 }))
+
+export const newTaskSchema = toTypedSchema(z.object({
+  name: z.string({
+    required_error: 'Name is required!',
+  }).max(100, { message: 'Name must be at most 100 characters long.' }),
+  status: z.string({
+    required_error: 'Status is required!',
+  }),
+  priority: z.string({
+    required_error: 'Priority is required!',
+  }),
+  description: z.string().optional(),
+  dueDate: z.string().optional(),
+  subtasks: z.array(
+    z.object({
+      name: z.string(),
+      is_completed: z.boolean().default(false),
+    }),
+  ).optional(),
+}))
 export interface Project {
   name: string
   tagline: string
@@ -94,6 +114,7 @@ export interface ModalData {
   encodedCredentialUserId?: string
   user?: User
   encodedCredentialIds?: string[]
+  projectId?: string
 }
 
 export interface ModalStore {

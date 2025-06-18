@@ -55,6 +55,9 @@ defineOgImageComponent('Nuxt', {
 const onAddNewTask = () => {
   modalStore?.onOpen('addNewTask')
   modalStore?.setIsOpen(true)
+  modalStore?.setModalData({
+    projectId: Array.isArray(route.params.projectId) ? route.params.projectId[0] : route.params.projectId!,
+  })
 }
 </script>
 

@@ -148,7 +148,7 @@ export const projectTable = pgTable('project', {
 
 export const tasksTable = pgTable('tasks', {
   id: text('id').primaryKey(),
-  title: text('title').notNull(),
+  name: text('title').notNull(),
   description: text('description'),
   status: statusEnum('status').default('IDEA').notNull(),
   priority: priorityEnum('priority').default('NONE').notNull(),
@@ -162,6 +162,7 @@ export const tasksTable = pgTable('tasks', {
 
 export const subtasksTable = pgTable('subtasks', {
   id: text('id').primaryKey(),
+  name: text('name').notNull(),
   taskId: text('projectId')
     .notNull()
     .references(() => tasksTable.id, { onDelete: 'cascade' }),
