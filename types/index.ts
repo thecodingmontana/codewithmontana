@@ -173,6 +173,39 @@ export const columns = ref<IProjectColumn[]>([
   },
 ])
 
+export const taskColumns = ref<IProjectColumn[]>([
+  {
+    name: 'Idea',
+    description: 'Raw thoughts or concepts not yet acted upon.',
+    icon: 'hugeicons:ai-idea',
+  },
+  {
+    name: 'Todo',
+    description: 'Planned tasks that are queued and ready to start.',
+    icon: 'solar:clipboard-outline',
+  },
+  {
+    name: 'In Progress',
+    description: 'Tasks currently being worked on.',
+    icon: 'solar:alarm-outline',
+  },
+  {
+    name: 'In Review',
+    description: 'Tasks completed but pending evaluation or feedback.',
+    icon: 'solar:minimalistic-magnifer-bug-outline',
+  },
+  {
+    name: 'Completed',
+    description: 'Tasks fully done and verified.',
+    icon: 'solar:check-circle-outline',
+  },
+  {
+    name: 'Abandoned',
+    description: 'Tasks intentionally discontinued or no longer relevant.',
+    icon: 'solar:trash-bin-trash-outline',
+  },
+])
+
 export const priorityOptions = [
   { name: 'High', value: 'HIGH', color: '#ef4444' },
   { name: 'Medium', value: 'MEDIUM', color: '#f59e0b' },

@@ -109,12 +109,22 @@ const onAddNewProject = () => {
               </Badge>
             </div>
             <div>
-              <h3>
+              <h3
+                :class="cn(
+                  'text-sm font-semibold truncate',
+                  project.status === 'COMPLETED' && 'line-through text-emerald-600',
+                  project.status === 'ABANDONED' && 'line-through text-rose-600',
+                )"
+              >
                 {{ project.title }}
               </h3>
               <p
                 v-if="project.description"
-                class="text-sm text-muted-foreground"
+                :class="cn(
+                  'text-sm text-muted-foreground',
+                  project.status === 'COMPLETED' && 'line-through',
+                  project.status === 'ABANDONED' && 'line-through text-rose-300',
+                )"
               >
                 {{ project.description }}
               </p>

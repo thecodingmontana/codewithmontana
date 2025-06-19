@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import TasksColumn from './TasksColumn.vue'
-import { columns, type Status, type Task } from '~/types'
+import { taskColumns, type Status, type Task } from '~/types'
 
 const props = defineProps<{
   projectId: string
 }>()
-
-console.log('TasksBoardsView props:', props)
 
 const tasks = ref<Record<string, Task[]>>({
   'IDEA': [],
@@ -112,7 +110,7 @@ async function handleDrop(columnKey: Status, project: Task, index?: number) {
 <template>
   <div class="flex overflow-x-scroll gap-5 my-2 scrollbar-hide">
     <TasksColumn
-      v-for="column in columns"
+      v-for="column in taskColumns"
       :key="column.name"
       :column="column"
       :data="tasks[column.name.toUpperCase()] ?? []"

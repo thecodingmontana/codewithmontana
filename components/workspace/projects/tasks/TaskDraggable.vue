@@ -7,7 +7,7 @@ const { index, source } = defineProps<{
   source: any[]
 }>()
 
-const { elementRef, handleDragStart, isOvered, isDragging } = useDraggable({
+const { elementRef: elementTaskRef, handleDragStart, isOvered, isDragging } = useDraggable({
   data: computed(() => ({
     index,
     source,
@@ -17,7 +17,7 @@ const { elementRef, handleDragStart, isOvered, isDragging } = useDraggable({
 
 <template>
   <div
-    ref="elementRef"
+    ref="elementTaskRef"
     :data-index="index"
     :class="{
       'is-over': isOvered,
