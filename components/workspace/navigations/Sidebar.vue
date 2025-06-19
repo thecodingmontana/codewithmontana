@@ -5,6 +5,7 @@ import { ScrollArea } from '~/components/ui/scroll-area'
 import type { WorkspaceBreadcrumb } from '~/types'
 
 const workspaceStore = useWorkspaceStore()
+const modalStore = useModalStore()
 
 const isOpenSidebar = computed(() => {
   return workspaceStore?.isOpenSidebar
@@ -13,6 +14,11 @@ const isOpenSidebar = computed(() => {
 const onNavigateToPage = (payload: WorkspaceBreadcrumb, pageName: string) => {
   workspaceStore?.onSetWorkspaceBreadcrumb(payload)
   navigateTo(`/workspace/${pageName}`)
+}
+
+const onAddNewProject = () => {
+  modalStore?.onOpen('addNewProject')
+  modalStore?.setIsOpen(true)
 }
 
 const { data: projects } = await useAsyncData('sidebar_projects', () => useRequestFetch()('/api/workspace/project/all'))
@@ -54,6 +60,16 @@ const { data: projects } = await useAsyncData('sidebar_projects', () => useReque
             Projects
           </h3>
           <div>
+            <button
+              class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+              @click="onAddNewProject"
+            >
+              <Icon
+                name="solar:add-folder-outline"
+                class="size-4"
+              />
+              New Project
+            </button>
             <button
               class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
               @click="onNavigateToPage({

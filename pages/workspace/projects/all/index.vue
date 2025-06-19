@@ -62,8 +62,8 @@ const onAddNewProject = () => {
         @click="onAddNewProject"
       >
         <Icon
-          name="solar:folder-with-files-outline"
-          class="size-4"
+          name="solar:add-folder-outline"
+          class="size-5"
         />
         New Project
       </Button>

@@ -199,3 +199,25 @@ export interface DBProject {
 
 export const validStatuses = ['IDEA', 'TODO', 'IN PROGRESS', 'IN REVIEW', 'COMPLETED', 'ABANDONED']
 export const validPriorities = ['HIGH', 'MEDIUM', 'LOW', 'NONE']
+
+export interface Task {
+  name: string
+  status: Status
+  priority: Priority
+  id: string
+  createdAt: Date | string
+  updatedAt: Date | string
+  description: string | null
+  dueDate: Date | null | string
+  projectId: string
+  subtasks: Subtask[]
+}
+
+export interface Subtask {
+  name: string
+  id: string
+  createdAt: Date | string
+  updatedAt: Date | string
+  taskId: string
+  is_completed: boolean
+}
