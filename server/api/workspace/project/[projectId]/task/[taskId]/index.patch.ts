@@ -4,6 +4,8 @@ export default defineEventHandler(async (event) => {
   try {
     const session = await requireUserSession(event)
     const projectId = getRouterParam(event, 'projectId')
+    const taskId = getRouterParam(event, 'taskId')
+
     const { status } = await readBody(event) as { status: Status }
 
     if (!session) {
@@ -20,6 +22,13 @@ export default defineEventHandler(async (event) => {
       })
     }
 
+    if (!taskId || typeof taskId !== 'string') {
+      throw createError({
+        statusCode: 400,
+        statusMessage: 'taskID is required!',
+      })
+    }
+
     if (typeof status !== 'string' || !validStatuses.includes(status)) {
       throw createError({
         statusMessage: 'Invalid Status!',
@@ -29,7 +38,10 @@ export default defineEventHandler(async (event) => {
 
     // check if project exists
     const project = await useDrizzle().query.projectTable.findFirst({
-      where: table => eq(table.id, projectId),
+      where: table => and(
+        eq(table.id, projectId),
+        eq(table.userId, session.user.id),
+      ),
     })
 
     if (!project) {
@@ -39,18 +51,16 @@ export default defineEventHandler(async (event) => {
       })
     }
 
-    // update project status
-    await useDrizzle().update(tables.projectTable).set({
+    // update task status
+    await useDrizzle().update(tables.tasksTable).set({
       updatedAt: new Date(),
       status,
     }).where(and(
-      eq(tables.projectTable.id, projectId),
-      eq(tables.projectTable.userId, session.user.id),
-    ))
+      eq(tables.tasksTable.id, taskId),
+      eq(tables.tasksTable.projectId, projectId),
+    )).returning()
 
-    return {
-      message: 'Project status updated successfully!',
-    }
+    return { message: 'Task status updated successfully!' }
   }
 
   catch (error: any) {

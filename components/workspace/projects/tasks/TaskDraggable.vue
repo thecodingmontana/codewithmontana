@@ -12,6 +12,7 @@ const { elementRef: elementTaskRef, handleDragStart, isOvered, isDragging } = us
     index,
     source,
   })),
+  groups: ['default'],
 })
 </script>
 
@@ -23,7 +24,7 @@ const { elementRef: elementTaskRef, handleDragStart, isOvered, isDragging } = us
       'is-over': isOvered,
       'is-dragging': isDragging,
     }"
-    class="draggable w-full rounded-md transition-all"
+    class="draggable w-full rounded-md transition-all self-start"
     @pointerdown="handleDragStart"
   >
     <div
