@@ -44,15 +44,19 @@ const onAddNewTask = () => {
       </p>
     </div>
     <div class="grid gap-1">
-      <TaskDraggable
+      <div
         v-for="(task, index) in props.data"
         :key="`${task.id}-${index}`"
-        :index="index"
-        :source="props.data"
-        :task="task"
+        @click="console.log('Task clicked:', task.id)"
       >
-        <Task :task="task" />
-      </TaskDraggable>
+        <TaskDraggable
+          :index="index"
+          :source="props.data"
+          :task="task"
+        >
+          <Task :task="task" />
+        </TaskDraggable>
+      </div>
       <div
         v-if="isOvered && isAllowed && isLazyAllowed && props.data.length <= 0"
         class="text-sm font-medium bg-background/50 my-2 p-9 rounded-md"

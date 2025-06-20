@@ -91,7 +91,7 @@ watchEffect(() => {
 })
 
 function refreshStats() {
-  refreshNuxtData(`/api/workspace/project/${props?.projectId}/task/all`)
+  refreshNuxtData(`all_project_task_stats_${props.projectId}`)
 }
 </script>
 

@@ -131,7 +131,7 @@ export async function taskHandleDrop(columnKey: Status, task: Task, tasks: globa
       body: { status: columnKey },
     })
 
-    await refreshNuxtData([`board_view_project_tasks_${projectId}`])
+    await refreshNuxtData([`board_view_project_tasks_${projectId}`, `all_project_task_stats_${projectId}`])
   }
   catch (error: any) {
     const errorMessage = error.response
