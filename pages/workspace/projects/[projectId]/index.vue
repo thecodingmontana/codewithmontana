@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '~/components/ui/avatar'
 import { Badge } from '~/components/ui/badge'
 import { Button } from '~/components/ui/button'
 import TasksTabs from '~/components/workspace/projects/tasks/TasksTabs.vue'
+import TaskStats from '~/components/workspace/projects/tasks/TaskStats.vue'
 import { cn } from '~/lib/utils'
 import { columns } from '~/types'
 
@@ -136,8 +137,7 @@ const onAddNewTask = () => {
 
     <div class="grid md:grid-cols-4 xl:grid-cols-8 gap-10">
       <TasksTabs :project-id="Array.isArray(route.params.projectId) ? route.params.projectId[0]! : route.params.projectId!" />
-      <!-- <ProjectTabs />
-      <ProjectStats /> -->
+      <TaskStats :project-id="Array.isArray(route.params.projectId) ? route.params.projectId[0]! : route.params.projectId!" />
     </div>
   </section>
 </template>

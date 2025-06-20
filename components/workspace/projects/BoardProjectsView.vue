@@ -18,45 +18,59 @@ const { data } = await useAsyncData('board_view_projects', () =>
   useRequestFetch()('/api/workspace/project/all'),
 )
 
+function mapProjectsByStatus(data: DBProject[]) {
+  const grouped = Object.fromEntries(Object.keys(projects.value).map(k => [k, [] as DBProject[]]))
+
+  for (const project of data) {
+    const key = project.status.toUpperCase()
+    if (grouped[key]) {
+      grouped[key].push({
+        ...project,
+        createdAt: new Date(project.createdAt),
+        updatedAt: new Date(project.updatedAt),
+        dueDate: project.dueDate ? new Date(project.dueDate) : null,
+      })
+    }
+  }
+
+  // sort each column by updatedAt descending
+  Object.keys(grouped).forEach((key) => {
+    (grouped[key] ?? []).sort((a, b) => {
+      if (!a.updatedAt || !b.updatedAt) return 0
+      return b.updatedAt.getTime() - a.updatedAt.getTime()
+    })
+  })
+
+  projects.value = grouped
+}
+
 onMounted(() => {
   if (data.value) {
-    Object.keys(projects.value).forEach(key => (projects.value[key] = []))
-
-    for (const project of data.value) {
-      const key = project.status.toUpperCase()
-      if (projects.value[key]) {
-        projects.value[key].push({
-          ...project,
-          createdAt: new Date(project.createdAt),
-          updatedAt: new Date(project.updatedAt),
-          dueDate: project.dueDate ? new Date(project.dueDate) : null,
-          user: {
-            avatar: project.user.profilePictureUrl!,
-          },
-        })
-      }
-    }
+    const normalized = data.value.map(project => ({
+      ...project,
+      createdAt: new Date(project.createdAt),
+      updatedAt: new Date(project.updatedAt),
+      dueDate: project.dueDate ? new Date(project.dueDate) : null,
+      user: {
+        avatar: project.user?.profilePictureUrl || '',
+      },
+    }))
+    mapProjectsByStatus(normalized)
   }
 })
 
 watch(data, () => {
   if (data.value) {
-    Object.keys(projects.value).forEach(key => (projects.value[key] = []))
-
-    for (const project of data.value) {
-      const key = project.status.toUpperCase()
-      if (projects.value[key]) {
-        projects.value[key].push({
-          ...project,
-          createdAt: new Date(project.createdAt),
-          updatedAt: new Date(project.updatedAt),
-          dueDate: project.dueDate ? new Date(project.dueDate) : null,
-          user: {
-            avatar: project.user.profilePictureUrl!,
-          },
-        })
-      }
-    }
+    const normalized = data.value.map(project => ({
+      ...project,
+      createdAt: new Date(project.createdAt),
+      updatedAt: new Date(project.updatedAt),
+      dueDate: project.dueDate ? new Date(project.dueDate) : null,
+      user: {
+        avatar: project.user?.profilePictureUrl || '',
+      },
+    }))
+    mapProjectsByStatus(normalized)
   }
 }, { immediate: true })
 

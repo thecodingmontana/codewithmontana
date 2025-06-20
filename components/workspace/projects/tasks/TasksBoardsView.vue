@@ -20,49 +20,49 @@ const { data } = await useAsyncData(`board_view_project_tasks_${props?.projectId
   useRequestFetch()(`/api/workspace/project/${props?.projectId}/task/all`),
 )
 
+function mapTasksByStatus(data: any[]) {
+  const grouped = Object.fromEntries(Object.keys(tasks.value).map(k => [k, [] as Task[]]))
+
+  for (const task of data) {
+    const key = task.status.toUpperCase()
+    if (grouped[key]) {
+      grouped[key].push({
+        ...task,
+        createdAt: new Date(task.createdAt),
+        updatedAt: new Date(task.updatedAt),
+        dueDate: task.dueDate ? new Date(task.dueDate) : null,
+        subtasks: (task.subtasks || []).map((subtask: any) => ({
+          ...subtask,
+          taskId: task.id,
+          createdAt: new Date(subtask.createdAt),
+          updatedAt: new Date(subtask.updatedAt),
+        })),
+      } as Task)
+    }
+  }
+
+  // sort each column by updatedAt descending
+  Object.keys(grouped).forEach((key) => {
+    (grouped[key] ?? []).sort((a, b) => {
+      if (!a.updatedAt || !b.updatedAt) return 0
+      const aDate = typeof a.updatedAt === 'string' ? new Date(a.updatedAt) : a.updatedAt
+      const bDate = typeof b.updatedAt === 'string' ? new Date(b.updatedAt) : b.updatedAt
+      return bDate.getTime() - aDate.getTime()
+    })
+  })
+
+  tasks.value = grouped
+}
+
 watchEffect(() => {
   if (data.value) {
-    Object.keys(tasks.value).forEach(key => (tasks.value[key] = []))
-    for (const task of data.value) {
-      const key = task.status.toUpperCase()
-      if (tasks.value[key]) {
-        tasks.value[key].push({
-          ...task,
-          createdAt: new Date(task.createdAt),
-          updatedAt: new Date(task.updatedAt),
-          dueDate: task.dueDate ? new Date(task.dueDate) : null,
-          subtasks: (task.subtasks || []).map((subtask: any) => ({
-            ...subtask,
-            taskId: task.id,
-            createdAt: new Date(subtask.createdAt),
-            updatedAt: new Date(subtask.updatedAt),
-          })),
-        })
-      }
-    }
+    mapTasksByStatus(data.value)
   }
 })
 
 watch(data, () => {
   if (data.value) {
-    Object.keys(tasks.value).forEach(key => (tasks.value[key] = []))
-    for (const task of data.value) {
-      const key = task.status.toUpperCase()
-      if (tasks.value[key]) {
-        tasks.value[key].push({
-          ...task,
-          createdAt: new Date(task.createdAt),
-          updatedAt: new Date(task.updatedAt),
-          dueDate: task.dueDate ? new Date(task.dueDate) : null,
-          subtasks: (task.subtasks || []).map((subtask: any) => ({
-            ...subtask,
-            taskId: task.id,
-            createdAt: new Date(subtask.createdAt),
-            updatedAt: new Date(subtask.updatedAt),
-          })),
-        })
-      }
-    }
+    mapTasksByStatus(data.value)
   }
 }, { immediate: true })
 
