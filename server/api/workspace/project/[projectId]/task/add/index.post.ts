@@ -15,6 +15,8 @@ export default defineEventHandler(async (event) => {
       subtasks?: { name: string, is_completed: boolean }[]
     }
 
+    console.log('Server subtasks:', subtasks)
+
     if (!session) {
       throw createError({
         statusCode: 401,

@@ -258,6 +258,7 @@ const onCloseModal = () => {
           <Checkbox
             v-model:checked="subtask.is_completed"
             class="rounded-full size-5"
+            @update:model-value="(value) => subtask.is_completed = value === true"
           />
           <Input
             v-model="subtask.name"
