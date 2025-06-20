@@ -98,7 +98,7 @@ function refreshStats() {
 <template>
   <div class="md:col-span-2 p-3">
     <div class="flex flex-col gap-4">
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between -mb-8">
         <h2 class="text-lg font-semibold">
           Tasks Stats
         </h2>
@@ -113,7 +113,6 @@ function refreshStats() {
       </div>
 
       <DonutChart
-        v-if="donutData.length"
         :data="donutData.map(i => i.value)"
         :height="275"
         :labels="donutData"
@@ -121,14 +120,8 @@ function refreshStats() {
         :radius="0"
         type="half"
       />
-      <p
-        v-else
-        class="text-center text-muted-foreground"
-      >
-        No tasks data available.
-      </p>
 
-      <div class="grid grid-cols-2">
+      <div class="grid grid-cols-2 -mt-8">
         <div class="flex flex-col items-center">
           <div class="flex items-center gap-x-2">
             <div class="bg-green-500 size-1.5 rounded-full" />
