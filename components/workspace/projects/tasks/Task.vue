@@ -11,9 +11,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div
-    class="bg-background p-2.5 rounded-sm shadow space-y-2"
-  >
+  <div class="space-y-2">
     <div>
       <Badge
         :class="cn(

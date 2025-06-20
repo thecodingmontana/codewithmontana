@@ -3,6 +3,7 @@ import Signout from '~/modals/global/Signout.vue'
 import AddNewProject from '~/modals/workspace/AddNewProject.vue'
 import AddNewTask from '~/modals/workspace/AddNewTask.vue'
 import MobileSidebar from '~/modals/workspace/MobileSidebar.vue'
+import EditProjectTask from '~/modals/workspace/EditProjectTask.vue'
 </script>
 
 <template>
@@ -11,5 +12,6 @@ import MobileSidebar from '~/modals/workspace/MobileSidebar.vue'
     <MobileSidebar />
     <AddNewProject />
     <AddNewTask />
+    <EditProjectTask />
   </div>
 </template>

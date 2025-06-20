@@ -186,6 +186,9 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^19.8.1
         version: 19.8.1
+      '@iconify-json/akar-icons':
+        specifier: ^1.2.2
+        version: 1.2.2
       '@iconify-json/catppuccin':
         specifier: ^1.2.11
         version: 1.2.11
@@ -934,6 +937,9 @@ packages:
   '@humanwhocodes/retry@0.4.3':
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
+
+  '@iconify-json/akar-icons@1.2.2':
+    resolution: {integrity: sha512-PoUMM4FKQ6NumbSUjoM4lsulJ0GPpj979nLjZS8MGwk99MuZc80LV6AP51lfLcF4jvZFmC5G1gDIymQOi66Sqg==}
 
   '@iconify-json/catppuccin@1.2.11':
     resolution: {integrity: sha512-Hc71/cfLZhb8Hetr+tBb9XRe24DNIBM4EPFoHa6mUJdXTHakPeeGLjEa3owDNcGSwZFJCXnBizDpkCL8UwMR9w==}
@@ -7648,6 +7654,10 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@humanwhocodes/retry@0.4.3': {}
+
+  '@iconify-json/akar-icons@1.2.2':
+    dependencies:
+      '@iconify/types': 2.0.0
 
   '@iconify-json/catppuccin@1.2.11':
     dependencies:

@@ -262,7 +262,7 @@ const onCloseModal = () => {
           />
           <Input
             v-model="subtask.name"
-            class="outline-none border-0 shadow-none focus-visible:ring-0 flex-1"
+            class="outline-none border-0 shadow-none focus-visible:ring-0 flex-1 dark:bg-transparent"
             placeholder="Add subtask"
             @keydown.enter="onSubtaskInput(index, $event)"
           />

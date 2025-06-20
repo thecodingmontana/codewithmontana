@@ -3,16 +3,18 @@ import { useDroppable } from '@vue-dnd-kit/core'
 import TaskDraggable from './TaskDraggable.vue'
 import Task from './Task.vue'
 import { Button } from '~/components/ui/button'
-import type { IProjectColumn, Task as ITask } from '~/types'
+import type { IProjectColumn, Task as ITask, IProject } from '~/types'
 import { createTaskDropHandler } from '~/lib/tasks'
 
 const props = defineProps<{
   column: IProjectColumn
   data: ITask[]
   onDrop: (item: ITask, index?: number) => void
+  project: IProject
 }>()
 
 const modalStore = useModalStore()
+const workspaceStore = useWorkspaceStore()
 
 const { elementRef: taskColumnRef, isOvered, isAllowed, isLazyAllowed } = useDroppable(
   createTaskDropHandler(props.data, props.onDrop, props.column.name),
@@ -21,6 +23,15 @@ const { elementRef: taskColumnRef, isOvered, isAllowed, isLazyAllowed } = useDro
 const onAddNewTask = () => {
   modalStore?.onOpen('addNewTask')
   modalStore?.setIsOpen(true)
+}
+
+const onEditTask = (task: ITask) => {
+  modalStore?.onOpen('editProjectTask')
+  modalStore?.setIsOpen(true)
+  workspaceStore?.onSetTask({
+    data: task,
+    project: props.project,
+  })
 }
 </script>
 
@@ -47,7 +58,7 @@ const onAddNewTask = () => {
       <div
         v-for="(task, index) in props.data"
         :key="`${task.id}-${index}`"
-        @click="console.log('Task clicked:', task.id)"
+        @click.stop.prevent="onEditTask(task)"
       >
         <TaskDraggable
           :index="index"

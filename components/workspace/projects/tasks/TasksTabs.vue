@@ -3,10 +3,11 @@ import TasksBoardsView from './TasksBoardsView.vue'
 import TasksCalendarView from './TasksCalendarView.vue'
 import TasksListView from './TasksListView.vue'
 import TasksTableView from './TasksTableView.vue'
+import type { IProject } from '~/types'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 const props = defineProps<{
-  projectId: string
+  project: IProject
 }>()
 </script>
 
@@ -58,16 +59,18 @@ const props = defineProps<{
       </TabsTrigger>
     </TabsList>
     <TabsContent value="board">
-      <TasksBoardsView :project-id="props?.projectId" />
+      <TasksBoardsView
+        :project="props?.project"
+      />
     </TabsContent>
     <TabsContent value="list">
-      <TasksListView :project-id="props?.projectId" />
+      <TasksListView :project-id="props?.project.id" />
     </TabsContent>
     <TabsContent value="table">
-      <TasksTableView :project-id="props?.projectId" />
+      <TasksTableView :project-id="props?.project.id" />
     </TabsContent>
     <TabsContent value="calendar">
-      <TasksCalendarView :project-id="props?.projectId" />
+      <TasksCalendarView :project-id="props?.project.id" />
     </TabsContent>
   </Tabs>
 </template>

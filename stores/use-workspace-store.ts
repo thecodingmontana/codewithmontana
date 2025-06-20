@@ -1,9 +1,10 @@
-import type { WorkspaceStore, WorkspaceBreadcrumb } from '~/types'
+import type { WorkspaceStore, WorkspaceBreadcrumb, IProject, Task } from '~/types'
 
 export const useWorkspaceStore = defineStore('workspaceStore', {
   state: (): WorkspaceStore => ({
     isOpenSidebar: false,
     breadcrumb: null,
+    task: null,
   }),
   actions: {
     onOpenSidebar(): void {
@@ -11,6 +12,9 @@ export const useWorkspaceStore = defineStore('workspaceStore', {
     },
     onSetWorkspaceBreadcrumb(payload: WorkspaceBreadcrumb): void {
       this.breadcrumb = payload
+    },
+    onSetTask(payload: { project: IProject, data: Task } | null): void {
+      this.task = payload
     },
   },
   persist: true,

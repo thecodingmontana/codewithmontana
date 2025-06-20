@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import TasksColumn from './TasksColumn.vue'
-import { taskColumns, type Status, type Task } from '~/types'
+import { taskColumns, type IProject, type Status, type Task } from '~/types'
 import { mapTasksByStatus, taskHandleDrop } from '~/lib/tasks'
 
 const props = defineProps<{
-  projectId: string
+  project: IProject
 }>()
 
 const tasks = ref<Record<string, Task[]>>({
@@ -16,8 +16,8 @@ const tasks = ref<Record<string, Task[]>>({
   'ABANDONED': [],
 })
 
-const { data } = await useAsyncData(`board_view_project_tasks_${props?.projectId}`, () =>
-  useRequestFetch()(`/api/workspace/project/${props?.projectId}/task/all`),
+const { data } = await useAsyncData(`board_view_project_tasks_${props?.project.id}`, () =>
+  useRequestFetch()(`/api/workspace/project/${props?.project.id}/task/all`),
 )
 
 watchEffect(() => {
@@ -33,7 +33,7 @@ watch(data, () => {
 }, { immediate: true })
 
 async function handleDrop(columnKey: Status, task: Task, index?: number) {
-  taskHandleDrop(columnKey, task, tasks, props?.projectId, index)
+  taskHandleDrop(columnKey, task, tasks, props?.project.id, index)
 }
 </script>
 
@@ -45,6 +45,7 @@ async function handleDrop(columnKey: Status, task: Task, index?: number) {
       :column="column"
       :data="tasks[column.name.toUpperCase()] ?? []"
       :on-drop="(project, index) => handleDrop(column.name.toUpperCase() as Status, project, index)"
+      :project="props.project"
     />
   </div>
 </template>

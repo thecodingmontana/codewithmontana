@@ -106,7 +106,7 @@ export interface User {
   twoFactorVerified: boolean
 }
 
-export type ModalType = 'joinWaitlist' | 'setupAuthenticatorApp' | 'setupPasskeys' | 'setupSecurityKeys' | 'signout' | 'addNewProject' | 'addNewTask' | 'setupPassword' | 'resetPassword' | 'transferOwnership' | 'deleteWorkspace' | 'mobileSidebar' | 'inviteTeammate' | 'notificationCenter' | 'changeTeammateRole' | 'totpAuthentication' | 'deleteAccount'
+export type ModalType = 'joinWaitlist' | 'setupAuthenticatorApp' | 'setupPasskeys' | 'setupSecurityKeys' | 'signout' | 'addNewProject' | 'addNewTask' | 'setupPassword' | 'resetPassword' | 'transferOwnership' | 'deleteWorkspace' | 'mobileSidebar' | 'inviteTeammate' | 'notificationCenter' | 'changeTeammateRole' | 'totpAuthentication' | 'deleteAccount' | 'editProject' | 'editProjectTask'
 
 export interface ModalData {
   qrcode?: string
@@ -129,9 +129,15 @@ export interface WorkspaceBreadcrumb {
   children: WorkspaceBreadcrumb[] | null
 }
 
+export interface IProject { id: string, title: string, status: Status, priority: Priority, dueDate: Date | null }
+
 export interface WorkspaceStore {
   isOpenSidebar: boolean
   breadcrumb: WorkspaceBreadcrumb | null
+  task: {
+    project: IProject
+    data: Task
+  } | null
 }
 
 export interface IProjectColumn {

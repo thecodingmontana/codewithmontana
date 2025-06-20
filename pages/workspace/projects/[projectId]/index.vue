@@ -6,6 +6,7 @@ import { Button } from '~/components/ui/button'
 import TasksTabs from '~/components/workspace/projects/tasks/TasksTabs.vue'
 import TaskStats from '~/components/workspace/projects/tasks/TaskStats.vue'
 import { cn } from '~/lib/utils'
+import type { Status, Priority } from '~/types'
 import { columns } from '~/types'
 
 definePageMeta({
@@ -136,7 +137,15 @@ const onAddNewTask = () => {
     </div>
 
     <div class="grid md:grid-cols-4 xl:grid-cols-8 gap-10">
-      <TasksTabs :project-id="Array.isArray(route.params.projectId) ? route.params.projectId[0]! : route.params.projectId!" />
+      <TasksTabs
+        :project="{
+          id: Array.isArray(route.params.projectId) ? route.params.projectId[0]! : route.params.projectId!,
+          title: project?.title || '',
+          status: project?.status as Status,
+          priority: project?.priority as Priority,
+          dueDate: project?.dueDate ? new Date(project.dueDate) : null,
+        }"
+      />
       <TaskStats :project-id="Array.isArray(route.params.projectId) ? route.params.projectId[0]! : route.params.projectId!" />
     </div>
   </section>
