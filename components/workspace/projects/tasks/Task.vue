@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { format } from 'date-fns'
+import { format, isPast } from 'date-fns'
 import { Badge } from '~/components/ui/badge'
 import { Checkbox } from '~/components/ui/checkbox'
 import { cn } from '~/lib/utils'
@@ -77,15 +77,25 @@ const props = defineProps<{
       </div>
     </div>
     <div class="flex items-center justify-between text-muted-foreground text-sm">
-      <div class="flex items-center gap-1">
+      <div
+        :class="cn(
+          'flex items-center gap-1',
+          props?.task.dueDate && props?.task.status !== 'COMPLETED' && props && isPast(props?.task.dueDate) && 'text-red-500',
+        )"
+      >
         <Icon
           name="hugeicons:calendar-02"
           class="size-5 shrink-0 rounded-full"
         />
         <p>
-          {{ props?.task.dueDate ? format(new Date(props?.task.dueDate), 'd MMM') : 'Due' }}
+          {{
+            props?.task.dueDate
+              ? format(new Date(props.task.dueDate), 'd MMM')
+              : 'Due'
+          }}
         </p>
       </div>
+
       <p v-if="props?.task.subtasks.length > 0">
         {{ props?.task.subtasks.filter(s => s.is_completed).length }} / {{ props?.task.subtasks.length }}
       </p>
