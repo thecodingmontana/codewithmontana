@@ -96,7 +96,7 @@ function refreshStats() {
 </script>
 
 <template>
-  <div class="md:col-span-2 p-3">
+  <div class="md:col-span-2 p-3 self-start">
     <div class="flex flex-col gap-4">
       <div class="flex items-center justify-between -mb-8">
         <h2 class="text-lg font-semibold">

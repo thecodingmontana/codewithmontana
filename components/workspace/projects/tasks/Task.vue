@@ -80,7 +80,7 @@ const props = defineProps<{
       <div
         :class="cn(
           'flex items-center gap-1',
-          props?.task.dueDate && props?.task.status !== 'COMPLETED' && props && isPast(props?.task.dueDate) && 'text-red-500',
+          props?.task.dueDate && props?.task.status !== 'COMPLETED' && props?.task.status !== 'ABANDONED' && props && isPast(props?.task.dueDate) && 'text-red-500',
         )"
       >
         <Icon
