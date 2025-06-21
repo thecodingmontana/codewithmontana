@@ -19,8 +19,8 @@ import { Checkbox } from '~/components/ui/checkbox'
 
 const props = defineProps<{
   onClose: () => void
-  isAddNewTask: boolean
-  onSetIsAddNewTask: (payload: boolean) => void
+  isUpdateTask: boolean
+  onSetIsUpdateTask: (payload: boolean) => void
   projectId: string
   task: Task
 }>()
@@ -30,6 +30,8 @@ const form = useForm({
 })
 
 const subtasks = ref([{ name: '', is_completed: false }])
+
+const isDeletingTask = ref(false)
 
 const initialTask = ref<{
   name: string
@@ -141,7 +143,7 @@ onMounted(() => {
 })
 
 const onSubmit = form.handleSubmit(async (values) => {
-  props?.onSetIsAddNewTask(true)
+  props?.onSetIsUpdateTask(true)
   try {
     const newFormValues = {
       ...values,
@@ -150,12 +152,12 @@ const onSubmit = form.handleSubmit(async (values) => {
       subtasks: values.subtasks ? values.subtasks.filter(task => task.name) : [],
     }
 
-    const res = await $fetch(`/api/workspace/project/${props?.projectId}/task/add`, {
-      method: 'POST',
+    const res = await $fetch(`/api/workspace/project/${props?.projectId}/task/${props?.task.id}/update`, {
+      method: 'PATCH',
       body: newFormValues,
     })
 
-    await refreshNuxtData(['sidebar_projects', 'board_view_projects', 'all_project_stats', `board_view_project_tasks_${props?.projectId}`])
+    await refreshNuxtData(['all_project_stats', `board_view_project_tasks_${props?.projectId}`])
     form.resetForm()
     onCloseModal()
 
@@ -168,7 +170,7 @@ const onSubmit = form.handleSubmit(async (values) => {
       ? error.response._data.message
       : error.message
 
-    props?.onSetIsAddNewTask(false)
+    props?.onSetIsUpdateTask(false)
 
     toast.error(errorMessage, {
       position: 'top-center',
@@ -176,8 +178,37 @@ const onSubmit = form.handleSubmit(async (values) => {
   }
 })
 
+const onDeleteTask = async () => {
+  isDeletingTask.value = true
+  try {
+    const res = await $fetch(`/api/workspace/project/${props?.projectId}/task/${props?.task.id}/delete`, {
+      method: 'DELETE',
+    })
+
+    await refreshNuxtData(['all_project_stats', `board_view_project_tasks_${props?.projectId}`])
+    form.resetForm()
+    onCloseModal()
+
+    toast.success(res.message, {
+      position: 'top-center',
+    })
+  }
+  catch (error: any) {
+    const errorMessage = error.response
+      ? error.response._data.message
+      : error.message
+
+    toast.error(errorMessage, {
+      position: 'top-center',
+    })
+  }
+  finally {
+    isDeletingTask.value = false
+  }
+}
+
 const onCloseModal = () => {
-  props?.onSetIsAddNewTask(false)
+  props?.onSetIsUpdateTask(false)
   props?.onClose()
 }
 </script>
@@ -362,16 +393,38 @@ const onCloseModal = () => {
       </div>
     </div>
 
-    <div class="absolute bottom-0 p-2 left-0 right-0 backdrop-blur-xs">
+    <div class="absolute bottom-0 p-2 left-0 right-0 backdrop-blur-xs grid gap-1">
       <Button
-        :disabled="props.isAddNewTask || !isFormChanged"
+        :disabled="props.isUpdateTask || !isFormChanged || isDeletingTask"
         class="w-full capitalize cursor-pointer bg-brand hover:bg-brand-secondary text-white"
       >
         <Loader2
-          v-if="props?.isAddNewTask"
+          v-if="props?.isUpdateTask"
           class="animate-spin size-5"
         />
+        <Icon
+          v-else
+          name="hugeicons:task-edit-02"
+          class="size-5"
+        />
         Update task
+      </Button>
+      <Button
+        variant="destructive"
+        :disabled="props.isUpdateTask || isDeletingTask"
+        class="w-full"
+        @click="onDeleteTask"
+      >
+        <Loader2
+          v-if="isDeletingTask"
+          class="animate-spin size-5"
+        />
+        <Icon
+          v-else
+          name="heroicons:trash"
+          class="size-5"
+        />
+        Delete task
       </Button>
     </div>
   </form>

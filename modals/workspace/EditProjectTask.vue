@@ -22,18 +22,14 @@ const task = computed(() => {
   return workspaceStore?.task
 })
 
-const projectId = computed(() => {
-  return modalStore?.data?.projectId
-})
+const isUpdateTask = ref(false)
 
-const isAddNewTask = ref(false)
-
-const onSetIsAddNewTask = (payload: boolean) => {
-  isAddNewTask.value = payload
+const onSetIsUpdateTask = (payload: boolean) => {
+  isUpdateTask.value = payload
 }
 
 const onClose = () => {
-  if (!isAddNewTask.value) {
+  if (!isUpdateTask.value) {
     modalStore?.setIsOpen(false)
     modalStore?.onClose()
     modalStore?.setModalData({})
@@ -105,10 +101,10 @@ const onClose = () => {
         </SheetDescription>
       </SheetHeader>
       <EditTaskForm
-        :on-set-is-add-new-task="onSetIsAddNewTask"
-        :is-add-new-task="isAddNewTask"
+        :on-set-is-update-task="onSetIsUpdateTask"
+        :is-update-task="isUpdateTask"
         :on-close="onClose"
-        :project-id="projectId!"
+        :project-id="task?.project.id!"
         :task="task?.data!"
       />
     </SheetContent>
