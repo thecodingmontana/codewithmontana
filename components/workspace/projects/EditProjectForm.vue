@@ -332,6 +332,7 @@ const navigateToProject = (path: string) => {
         variant="outline"
         class="w-full cursor-pointer"
         type="button"
+        :disabled="props.isUpdateProject || isDeletingProject"
         @click="navigateToProject(`/workspace/projects/${props?.project.id}`)"
       >
         <Icon
