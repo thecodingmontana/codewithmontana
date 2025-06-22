@@ -6,7 +6,7 @@ import { isEqual } from 'lodash'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select'
 import { Textarea } from '~/components/ui/textarea'
 import DatePicker from '~/components/workspace/DatePicker.vue'
-import { columns, newTaskSchema, priorityOptions, type Task } from '~/types'
+import { columns, newProjectSchema, priorityOptions, type DBProject } from '~/types'
 import {
   FormControl,
   FormField,
@@ -14,136 +14,61 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { Label } from '~/components/ui/label'
-import { Checkbox } from '~/components/ui/checkbox'
 import { formatDateForPicker } from '~/lib/utils'
 
 const props = defineProps<{
   onClose: () => void
-  isUpdateTask: boolean
-  onSetIsUpdateTask: (payload: boolean) => void
-  projectId: string
-  task: Task
+  isUpdateProject: boolean
+  onSetIsUpdateProject: (payload: boolean) => void
+  project: DBProject
 }>()
 
 const form = useForm({
-  validationSchema: newTaskSchema,
+  validationSchema: newProjectSchema,
 })
 
-const subtasks = ref([{ name: '', is_completed: false }])
-
-const isDeletingTask = ref(false)
-
-const initialTask = ref<{
-  name: string
+const initialProject = ref<{
+  title: string
   status: string
   priority: string
   description: string
   dueDate: string | undefined
-  subtasks: { name: string, is_completed: boolean }[]
 }>({
-  name: '',
+  title: '',
   status: '',
   priority: '',
   description: '',
   dueDate: undefined,
-  subtasks: [],
 })
+
+const isDeletingProject = ref(false)
 
 const isFormChanged = computed(() => {
   const current = {
-    name: form.values.name,
+    title: form.values.title,
     status: form.values.status,
     priority: form.values.priority,
     description: form.values.description,
     dueDate: form.values.dueDate,
-    subtasks: subtasks.value.filter(s => s.name), // Skip empty subtasks
   }
-  return !isEqual(initialTask.value, current)
-})
-
-const onSubtaskInput = (index: number, event: KeyboardEvent) => {
-  const input = event.target as HTMLInputElement
-  const value = input.value.trim()
-
-  if (event.key === 'Enter') {
-    event.preventDefault()
-
-    if (value === '') {
-      toast.error('Subtask name cannot be empty.', {
-        position: 'top-center',
-      })
-      return
-    }
-
-    // Only add a new input if it's the last one
-    if (index === subtasks.value.length - 1) {
-      subtasks.value.push({ name: '', is_completed: false })
-    }
-  }
-}
-
-const removeSubtask = (index: number) => {
-  subtasks.value.splice(index, 1)
-  if (subtasks.value.length === 0) {
-    subtasks.value.push({ name: '', is_completed: false })
-  }
-}
-
-watch(subtasks, (newVal) => {
-  form.setFieldValue('subtasks', newVal)
-}, { deep: true })
-
-onMounted(() => {
-  form.setFieldValue('name', props.task?.name || '')
-  form.setFieldValue('status', props.task?.status || '')
-  form.setFieldValue('priority', props.task?.priority || 'LOW')
-  form.setFieldValue('description', props.task?.description || '')
-
-  if (props.task?.subtasks?.length) {
-    subtasks.value = [
-      ...props.task.subtasks.map(subtask => ({
-        name: subtask.name,
-        is_completed: Boolean(subtask.is_completed),
-      })),
-      { name: '', is_completed: false },
-    ]
-  }
-  else {
-    subtasks.value = [{ name: '', is_completed: false }]
-  }
-
-  form.setFieldValue('dueDate', formatDateForPicker(props.task?.dueDate))
-
-  initialTask.value = {
-    name: props.task?.name || '',
-    status: props.task?.status || '',
-    priority: props.task?.priority || 'LOW',
-    description: props.task?.description || '',
-    dueDate: formatDateForPicker(props.task?.dueDate),
-    subtasks: props.task?.subtasks?.map(s => ({
-      name: s.name,
-      is_completed: Boolean(s.is_completed),
-    })) || [],
-  }
+  return !isEqual(initialProject.value, current)
 })
 
 const onSubmit = form.handleSubmit(async (values) => {
-  props?.onSetIsUpdateTask(true)
+  props?.onSetIsUpdateProject(true)
   try {
     const newFormValues = {
       ...values,
       description: values.description ? values.description : '',
       dueDate: values.dueDate ? new Date(values.dueDate) : undefined,
-      subtasks: values.subtasks ? values.subtasks.filter(task => task.name) : [],
     }
 
-    const res = await $fetch(`/api/workspace/project/${props?.projectId}/task/${props?.task.id}/update`, {
-      method: 'PATCH',
+    const res = await $fetch('/api/workspace/project/new', {
+      method: 'POST',
       body: newFormValues,
     })
 
-    await refreshNuxtData(['all_project_stats', `board_view_project_tasks_${props?.projectId}`, `all_project_task_stats_${props.projectId}`])
+    await refreshNuxtData(['sidebar_projects', 'board_view_projects', 'all_project_stats'])
     form.resetForm()
     onCloseModal()
 
@@ -156,7 +81,7 @@ const onSubmit = form.handleSubmit(async (values) => {
       ? error.response._data.message
       : error.message
 
-    props?.onSetIsUpdateTask(false)
+    props?.onSetIsUpdateProject(false)
 
     toast.error(errorMessage, {
       position: 'top-center',
@@ -164,16 +89,29 @@ const onSubmit = form.handleSubmit(async (values) => {
   }
 })
 
-const onDeleteTask = async () => {
-  isDeletingTask.value = true
-  try {
-    const res = await $fetch(`/api/workspace/project/${props?.projectId}/task/${props?.task.id}/delete`, {
-      method: 'DELETE',
-    })
+onMounted(() => {
+  form.setFieldValue('title', props?.project?.title || '')
+  form.setFieldValue('status', props?.project?.status || '')
+  form.setFieldValue('priority', props?.project?.priority || 'LOW')
+  form.setFieldValue('description', props?.project?.description || '')
 
-    await refreshNuxtData(['all_project_stats', `board_view_project_tasks_${props?.projectId}`])
-    form.resetForm()
-    onCloseModal()
+  form.setFieldValue('dueDate', formatDateForPicker(props?.project?.dueDate))
+
+  initialProject.value = {
+    title: props?.project?.title || '',
+    status: props?.project?.status || '',
+    priority: props?.project?.priority || 'LOW',
+    description: props?.project?.description || '',
+    dueDate: formatDateForPicker(props?.project?.dueDate),
+  }
+})
+
+const onDeleteProject = async () => {
+  isDeletingProject.value = true
+  try {
+    const res = await $fetch('/api/workspace/project/new', {
+      method: 'POST',
+    })
 
     toast.success(res.message, {
       position: 'top-center',
@@ -189,12 +127,12 @@ const onDeleteTask = async () => {
     })
   }
   finally {
-    isDeletingTask.value = false
+    isDeletingProject.value = false
   }
 }
 
 const onCloseModal = () => {
-  props?.onSetIsUpdateTask(false)
+  props?.onSetIsUpdateProject(false)
   props?.onClose()
 }
 </script>
@@ -206,13 +144,13 @@ const onCloseModal = () => {
   >
     <FormField
       v-slot="{ componentField }"
-      name="name"
+      name="title"
     >
       <FormItem>
         <FormControl>
           <FormMessage />
           <Textarea
-            placeholder="Task name"
+            placeholder="Project title"
             class="outline-none border-0 shadow-none focus-visible:ring-0 resize-none placeholder:text-xl !text-xl dark:bg-transparent"
             v-bind="componentField"
             @input="(e: Event) => {
@@ -224,7 +162,7 @@ const onCloseModal = () => {
         </FormControl>
       </FormItem>
     </FormField>
-    <div class="px-2 grid gap-3.5">
+    <div class="px-2 grid gap-3">
       <FormField
         v-slot="{ componentField }"
         name="status"
@@ -344,65 +282,32 @@ const onCloseModal = () => {
           </div>
         </FormItem>
       </FormField>
-      <div class="grid gap-2">
-        <Label>Subtasks</Label>
-        <div>
-          <div
-            v-for="(subtask, index) in subtasks"
-            :key="index"
-            class="flex items-center gap-x-2"
-          >
-            <Checkbox
-              class="rounded size-5 border-zinc-300"
-              :model-value="subtask.is_completed"
-              @update:model-value="(value) => subtask.is_completed = value === true"
-            />
-            <Input
-              v-model="subtask.name"
-              class="outline-none border-0 shadow-none focus-visible:ring-0 flex-1 dark:bg-transparent"
-              placeholder="Add subtask"
-              @keydown.enter="onSubtaskInput(index, $event)"
-            />
-            <button
-              v-if="subtasks.length - 1 !== index"
-              type="button"
-              class="text-red-500 hover:text-red-700"
-              @click="removeSubtask(index)"
-            >
-              <Icon
-                name="hugeicons:delete-02"
-                class="size-4"
-              />
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <div class="absolute bottom-0 p-2 left-0 right-0 backdrop-blur-xs grid gap-1">
+    <div class="absolute bottom-0 p-2 left-0 right-0 backdrop-blur-xs grid gap-1.5">
       <Button
-        :disabled="props.isUpdateTask || !isFormChanged || isDeletingTask"
+        :disabled="props.isUpdateProject || !isFormChanged || isDeletingProject"
         class="w-full capitalize cursor-pointer bg-brand hover:bg-brand-secondary text-white"
       >
         <Loader2
-          v-if="props?.isUpdateTask"
+          v-if="props?.isUpdateProject"
           class="animate-spin size-5"
         />
         <Icon
           v-else
-          name="hugeicons:task-edit-02"
+          name="solar:folder-check-outline"
           class="size-5"
         />
-        Update task
+        Update project
       </Button>
       <Button
         variant="destructive"
-        :disabled="props.isUpdateTask || isDeletingTask"
+        :disabled="props.isUpdateProject || isDeletingProject"
         class="w-full"
-        @click="onDeleteTask"
+        @click="onDeleteProject"
       >
         <Loader2
-          v-if="isDeletingTask"
+          v-if="isDeletingProject"
           class="animate-spin size-5"
         />
         <Icon
