@@ -63,8 +63,8 @@ const onSubmit = form.handleSubmit(async (values) => {
       dueDate: values.dueDate ? new Date(values.dueDate) : undefined,
     }
 
-    const res = await $fetch('/api/workspace/project/new', {
-      method: 'POST',
+    const res = await $fetch(`/api/workspace/project/${props?.project.id}/update`, {
+      method: 'PATCH',
       body: newFormValues,
     })
 
@@ -109,8 +109,8 @@ onMounted(() => {
 const onDeleteProject = async () => {
   isDeletingProject.value = true
   try {
-    const res = await $fetch('/api/workspace/project/new', {
-      method: 'POST',
+    const res = await $fetch(`/api/workspace/project/${props?.project.id}/update`, {
+      method: 'PATCH',
     })
 
     toast.success(res.message, {
