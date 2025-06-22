@@ -109,9 +109,13 @@ onMounted(() => {
 const onDeleteProject = async () => {
   isDeletingProject.value = true
   try {
-    const res = await $fetch(`/api/workspace/project/${props?.project.id}/update`, {
-      method: 'PATCH',
+    const res = await $fetch(`/api/workspace/project/${props?.project.id}/delete`, {
+      method: 'DELETE',
     })
+
+    await refreshNuxtData(['sidebar_projects', 'board_view_projects', 'all_project_stats'])
+    form.resetForm()
+    onCloseModal()
 
     toast.success(res.message, {
       position: 'top-center',
@@ -132,6 +136,12 @@ const onDeleteProject = async () => {
 }
 
 const onCloseModal = () => {
+  props?.onSetIsUpdateProject(false)
+  props?.onClose()
+}
+
+const navigateToProject = (path: string) => {
+  navigateTo(path)
   props?.onSetIsUpdateProject(false)
   props?.onClose()
 }
@@ -287,7 +297,7 @@ const onCloseModal = () => {
     <div class="absolute bottom-0 p-2 left-0 right-0 backdrop-blur-xs grid gap-1.5">
       <Button
         :disabled="props.isUpdateProject || !isFormChanged || isDeletingProject"
-        class="w-full capitalize cursor-pointer bg-brand hover:bg-brand-secondary text-white"
+        class="w-full capitalize bg-brand hover:bg-brand-secondary text-white cursor-pointer"
       >
         <Loader2
           v-if="props?.isUpdateProject"
@@ -303,7 +313,8 @@ const onCloseModal = () => {
       <Button
         variant="destructive"
         :disabled="props.isUpdateProject || isDeletingProject"
-        class="w-full"
+        class="w-full cursor-pointer"
+        type="button"
         @click="onDeleteProject"
       >
         <Loader2
@@ -316,6 +327,18 @@ const onCloseModal = () => {
           class="size-5"
         />
         Delete task
+      </Button>
+      <Button
+        variant="outline"
+        class="w-full cursor-pointer"
+        type="button"
+        @click="navigateToProject(`/workspace/projects/${props?.project.id}`)"
+      >
+        <Icon
+          name="solar:folder-with-files-outline"
+          class="size-5"
+        />
+        View project
       </Button>
     </div>
   </form>

@@ -47,7 +47,7 @@ const onClose = () => {
               size="25"
             />
           </div>
-          Update project
+          Edit project
         </SheetTitle>
         <SheetDescription class="sr-only">
           Project title
