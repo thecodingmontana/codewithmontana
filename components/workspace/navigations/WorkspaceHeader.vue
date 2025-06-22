@@ -9,6 +9,7 @@ import {
 } from '~/components/ui/breadcrumb'
 import { Button } from '~/components/ui/button'
 import { Separator } from '~/components/ui/separator'
+import SearchCommand from '~/modals/workspace/SearchCommand.vue'
 
 const workspaceStore = useWorkspaceStore()
 const modalStore = useModalStore()
@@ -36,56 +37,59 @@ const onToggleMobileSidebar = () => {
 </script>
 
 <template>
-  <div class="sticky inset-x-0 top-0 z-20 flex items-center gap-2 bg-background backdrop-blur-sm sm:px-1">
-    <Button
-      size="icon"
-      variant="ghost"
-      class="md:hidden cursor-pointer"
-      @click="onToggleMobileSidebar"
-    >
-      <PanelLeftIcon class="size-6" />
-    </Button>
-    <Button
-      v-if="!isSidebarOpen"
-      size="icon"
-      variant="ghost"
-      class="hidden md:flex cursor-pointer"
-      @click="toggleSidebar"
-    >
-      <PanelRightIcon class="size-6" />
-    </Button>
-    <Button
-      v-else
-      size="icon"
-      variant="ghost"
-      class="hidden md:flex cursor-pointer"
-      @click="toggleSidebar"
-    >
-      <PanelLeftIcon class="size-6" />
-    </Button>
-    <Separator
-      orientation="vertical"
-      class="mr-2 h-4"
-    />
-    <Breadcrumb v-if="workspaceBreadcrumb">
-      <BreadcrumbList>
-        <BreadcrumbItem>
-          <BreadcrumbLink :href="workspaceBreadcrumb.path">
-            {{ workspaceBreadcrumb.name }}
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-        <template v-if="workspaceBreadcrumb.children?.length">
-          <BreadcrumbSeparator />
-          <BreadcrumbItem
-            v-for="child in workspaceBreadcrumb.children"
-            :key="child.path"
-          >
-            <BreadcrumbLink :href="child.path">
-              {{ child.name }}
+  <div class="sticky inset-x-0 top-0 z-20 flex items-center justify-between gap-2 bg-background backdrop-blur-sm sm:px-1">
+    <div class="flex items-center">
+      <Button
+        size="icon"
+        variant="ghost"
+        class="md:hidden cursor-pointer"
+        @click="onToggleMobileSidebar"
+      >
+        <PanelLeftIcon class="size-6" />
+      </Button>
+      <Button
+        v-if="!isSidebarOpen"
+        size="icon"
+        variant="ghost"
+        class="hidden md:flex cursor-pointer"
+        @click="toggleSidebar"
+      >
+        <PanelRightIcon class="size-6" />
+      </Button>
+      <Button
+        v-else
+        size="icon"
+        variant="ghost"
+        class="hidden md:flex cursor-pointer"
+        @click="toggleSidebar"
+      >
+        <PanelLeftIcon class="size-6" />
+      </Button>
+      <Separator
+        orientation="vertical"
+        class="mr-2 h-4"
+      />
+      <Breadcrumb v-if="workspaceBreadcrumb">
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink :href="workspaceBreadcrumb.path">
+              {{ workspaceBreadcrumb.name }}
             </BreadcrumbLink>
           </BreadcrumbItem>
-        </template>
-      </BreadcrumbList>
-    </Breadcrumb>
+          <template v-if="workspaceBreadcrumb.children?.length">
+            <BreadcrumbSeparator />
+            <BreadcrumbItem
+              v-for="child in workspaceBreadcrumb.children"
+              :key="child.path"
+            >
+              <BreadcrumbLink :href="child.path">
+                {{ child.name }}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          </template>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
+    <SearchCommand />
   </div>
 </template>
