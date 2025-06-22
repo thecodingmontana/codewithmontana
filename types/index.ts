@@ -115,6 +115,7 @@ export interface ModalData {
   user?: User
   encodedCredentialIds?: string[]
   projectId?: string
+  project?: DBProject | null
 }
 
 export interface ModalStore {

@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { useDroppable, type IDnDPayload, type IDnDStore } from '@vue-dnd-kit/core'
-import { format } from 'date-fns'
+import { useDroppable } from '@vue-dnd-kit/core'
+import Project from './Project.vue'
 import Draggable from '~/components/shared/Draggable.vue'
-import { Badge } from '~/components/ui/badge'
 import { Button } from '~/components/ui/button'
-import { cn } from '~/lib/utils'
 import type { DBProject, IProjectColumn } from '~/types'
+import { createProjectDropHandler } from '~/lib/projects'
 
 const props = defineProps<{
   column: IProjectColumn
@@ -15,51 +14,28 @@ const props = defineProps<{
 
 const modalStore = useModalStore()
 
-function createDropHandler(targetList: DBProject[], onDrop: (item: DBProject, index?: number) => void) {
-  return {
-    data: {
-      source: targetList,
-    },
-    events: {
-      onDrop: (store: IDnDStore, payload: IDnDPayload) => {
-        const [draggingElement] = payload.items
-        const { source: draggingSource, index: draggingIndex } = draggingElement?.data ?? {}
-
-        if (!draggingSource || draggingIndex === undefined) return
-
-        const [moved] = draggingSource.splice(draggingIndex, 1)
-
-        const hoveredElementNode = store.hovered.element.value
-        if (hoveredElementNode) {
-          const hoveredElement = store.elementsMap.value.get(hoveredElementNode)
-          const { index: hoveredIndex } = hoveredElement?.data ?? {}
-
-          // Always notify parent to insert item at specific position
-          onDrop(moved, hoveredIndex)
-        }
-        else {
-          // Empty list or no hover target
-          onDrop(moved)
-        }
-      },
-    },
-  }
-}
-
-const { elementRef: columnRef, isOvered, isAllowed, isLazyAllowed } = useDroppable(createDropHandler(props.data, props.onDrop))
+const { elementRef: columnRef, isOvered, isAllowed, isLazyAllowed } = useDroppable(createProjectDropHandler(props.data, props.onDrop))
 
 const onAddNewProject = () => {
   modalStore?.onOpen('addNewProject')
   modalStore?.setIsOpen(true)
+}
+
+const onEditProject = (project: DBProject) => {
+  modalStore?.onOpen('editProject')
+  modalStore?.setIsOpen(true)
+  modalStore?.setModalData({
+    project,
+  })
 }
 </script>
 
 <template>
   <div
     ref="columnRef"
-    class="bg-muted rounded-md p-3 w-[350px] flex-shrink-0 self-start grid gap-5"
+    class="bg-muted rounded-md w-[350px] flex-shrink-0 self-start grid gap-1"
   >
-    <div>
+    <div class="px-3 py-2">
       <div class="flex items-center justify-between">
         <div class="flex items-center gap-x-2">
           <Icon :name="props.column.icon" />
@@ -73,92 +49,40 @@ const onAddNewProject = () => {
         {{ props.column.description }}
       </p>
     </div>
-    <div
-      class="grid gap-1"
+    <ScrollArea
+      class="max-h-[610px] overflow-y-auto px-3"
     >
-      <TransitionGroup name="list">
+      <div
+        v-for="(project, index) in props.data"
+        :key="project.id"
+        class="my-2"
+        @click.stop.prevent="onEditProject(project)"
+      >
         <Draggable
-          v-for="(project, index) in props.data"
-          :key="project.id"
           :index="index"
           :source="props.data"
         >
-          <div
-            class="bg-background p-2.5 rounded-sm shadow space-y-2"
-          >
-            <div>
-              <Badge
-                :class="cn(
-                  'rounded text-xs gap-x-1 flex',
-                  project.priority === 'MEDIUM' && 'bg-amber-100 dark:bg-amber-100 text-amber-500',
-                  project.priority === 'LOW' && 'bg-purple-100 dark:bg-purple-100 text-purple-500',
-                  project.priority === 'HIGH' && 'bg-rose-100 dark:bg-rose-100 text-rose-500',
-                  project.priority === 'NONE' && 'bg-zinc-100 dark:bg-zinc-100 text-zinc-500',
-                )"
-              >
-                <div
-                  :class="cn(
-                    'rounded-full size-1.5 shrink-0',
-                    project.priority === 'MEDIUM' && 'bg-amber-500',
-                    project.priority === 'LOW' && 'bg-purple-500',
-                    project.priority === 'HIGH' && 'bg-rose-500',
-                    project.priority === 'NONE' && 'bg-zinc-500',
-                  )"
-                />
-                {{ project.priority }}
-              </Badge>
-            </div>
-            <div>
-              <h3
-                :class="cn(
-                  'text-sm font-semibold truncate',
-                  project.status === 'COMPLETED' && 'line-through text-emerald-600',
-                  project.status === 'ABANDONED' && 'line-through text-rose-600',
-                )"
-              >
-                {{ project.title }}
-              </h3>
-              <p
-                v-if="project.description"
-                :class="cn(
-                  'text-sm text-muted-foreground',
-                  project.status === 'COMPLETED' && 'line-through',
-                  project.status === 'ABANDONED' && 'line-through text-rose-300',
-                )"
-              >
-                {{ project.description }}
-              </p>
-            </div>
-            <div>
-              <div class="flex items-center gap-1 text-muted-foreground text-sm">
-                <Icon
-                  name="hugeicons:calendar-02"
-                  class="size-5 shrink-0"
-                />
-                <p>
-                  {{ project.dueDate ? format(new Date(2017, 10, 6), 'd MMM') : 'Due' }}
-                </p>
-              </div>
-            </div>
-          </div>
+          <Project :project="project" />
         </Draggable>
-      </TransitionGroup>
+      </div>
       <div
         v-if="isOvered && isAllowed && isLazyAllowed && props.data.length <= 0"
         class="text-sm font-medium bg-background/50 my-2 p-9 rounded-md"
       />
+    </ScrollArea>
+    <div class="px-3 pb-2">
+      <Button
+        class="w-full gap-2 cursor-pointer dark:hover:bg-[#343434]"
+        size="sm"
+        variant="outline"
+        @click="onAddNewProject"
+      >
+        <Icon
+          name="hugeicons:plus-sign"
+          class="size-4"
+        />
+        Add Project
+      </Button>
     </div>
-    <Button
-      class="w-full gap-2 cursor-pointer dark:hover:bg-[#343434]"
-      size="sm"
-      variant="outline"
-      @click="onAddNewProject"
-    >
-      <Icon
-        name="hugeicons:plus-sign"
-        class="size-4"
-      />
-      Add Project
-    </Button>
   </div>
 </template>
