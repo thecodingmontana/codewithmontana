@@ -37,7 +37,7 @@ const onToggleMobileSidebar = () => {
 </script>
 
 <template>
-  <div class="sticky inset-x-0 top-0 z-20 flex items-center justify-between gap-2 bg-background backdrop-blur-sm sm:px-1">
+  <div class="sticky inset-x-0 top-0 z-20 p-2 md:p-2 flex items-center justify-between gap-2 bg-background backdrop-blur-sm sm:px-1">
     <div class="flex items-center">
       <Button
         size="icon"

@@ -24,9 +24,16 @@ const isModalOpen = computed(() => {
   return modalStore?.type === 'mobileSidebar' && modalStore?.isOpen
 })
 
+const { data: projects } = await useAsyncData('sidebar_projects', () => useRequestFetch()('/api/workspace/project/all'))
+
 const onClose = () => {
   modalStore?.setIsOpen(false)
   modalStore?.onClose()
+}
+
+const onAddNewProject = () => {
+  modalStore?.onOpen('addNewProject')
+  modalStore?.setIsOpen(true)
 }
 </script>
 
@@ -71,20 +78,67 @@ const onClose = () => {
               />
               Dashboard
             </button>
-            <button
-              class="flex w-full items-center gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
-              @click="onNavigateToPage({
-                name: 'Projects',
-                path: `/workspace/dashboard`,
-                children: null,
-              }, 'projects')"
-            >
-              <Icon
-                name="solar:folder-with-files-outline"
-                class="size-4"
-              />
+          </div>
+          <div class="grid">
+            <h3 class="p-2 text-xs text-muted-foreground">
               Projects
-            </button>
+            </h3>
+            <div>
+              <button
+                class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+                @click="onAddNewProject"
+              >
+                <Icon
+                  name="solar:add-folder-outline"
+                  class="size-4"
+                />
+                New Project
+              </button>
+              <button
+                class="flex w-full items-center   gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+                @click="onNavigateToPage({
+                  name: 'Projects',
+                  path: `/workspace/projects/all`,
+                  children: [
+                    {
+                      name: 'All',
+                      path: `/workspace/projects/all`,
+                      children: null,
+                    },
+                  ],
+                }, 'projects/all')"
+              >
+                <Icon
+                  name="solar:folder-with-files-outline"
+                  class="size-4"
+                />
+                All Projects
+              </button>
+              <button
+                v-for="project in projects"
+                :key="project.id"
+                class="flex w-full items-center gap-2 rounded-md p-2 hover:bg-[#f1f1f1] dark:hover:bg-[#343434] cursor-pointer"
+                @click="onNavigateToPage({
+                  name: 'Projects',
+                  path: `/workspace/projects/all`,
+                  children: [
+                    {
+                      name: `${project.title}`,
+                      path: `/workspace/projects/${project.id}`,
+                      children: null,
+                    },
+                  ],
+                }, `projects/${project.id}`)"
+              >
+                <Icon
+                  name="solar:folder-with-files-outline"
+                  class="size-4"
+                />
+                <span class="truncate text-start w-55">
+                  {{ project.title }}
+                </span>
+              </button>
+            </div>
           </div>
           <div class="grid">
             <h3 class="p-2 text-xs text-muted-foreground">
