@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import AllTasksStats from '~/components/workspace/dashboard/AllTasksStats.vue'
 import Greetings from '~/components/workspace/dashboard/Greetings.vue'
+import ProjectStats from '~/components/workspace/projects/ProjectStats.vue'
 
 definePageMeta({
   middleware: ['authenticated'],
@@ -28,12 +30,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="grid grid-cols-1 gap-10 md:grid-cols-6">
-    <div class="col-span-1 md:col-span-4">
+  <section class="grid grid-cols-1 gap-10 md:grid-cols-4">
+    <div class="col-span-1 md:col-span-3">
       <Greetings />
     </div>
-    <div class="col-span-1 md:col-span-2">
-      Hello
+    <div class="col-span-1">
+      <ProjectStats />
+      <AllTasksStats />
     </div>
   </section>
 </template>

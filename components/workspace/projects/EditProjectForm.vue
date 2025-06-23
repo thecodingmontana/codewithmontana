@@ -286,7 +286,7 @@ const navigateToProject = (path: string) => {
             <FormControl>
               <Textarea
                 v-bind="componentField"
-                class="h-24 min-h-24 max-h-24 resize-none overflow-y-auto"
+                class="h-24 min-h-24 max-h-24 resize-none overflow-y-auto dark:border dark:border-ring"
               />
             </FormControl>
           </div>

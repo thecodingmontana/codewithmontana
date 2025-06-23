@@ -143,7 +143,7 @@ const onSubmit = form.handleSubmit(async (values) => {
       body: newFormValues,
     })
 
-    await refreshNuxtData(['all_project_stats', `board_view_project_tasks_${props?.projectId}`, `all_project_task_stats_${props.projectId}`])
+    await refreshNuxtData(['all_project_stats', `board_view_project_tasks_${props?.projectId}`, `all_project_task_stats_${props.projectId}`, 'all_project_task_stats'])
     form.resetForm()
     onCloseModal()
 
@@ -171,7 +171,7 @@ const onDeleteTask = async () => {
       method: 'DELETE',
     })
 
-    await refreshNuxtData(['all_project_stats', `board_view_project_tasks_${props?.projectId}`])
+    await refreshNuxtData(['all_project_stats', `board_view_project_tasks_${props?.projectId}`, 'all_project_task_stats', `all_project_task_stats_${props.projectId}`])
     form.resetForm()
     onCloseModal()
 
@@ -338,7 +338,7 @@ const onCloseModal = () => {
             <FormControl>
               <Textarea
                 v-bind="componentField"
-                class="h-24 min-h-24 max-h-24 resize-none overflow-y-auto"
+                class="h-24 min-h-24 max-h-24 resize-none overflow-y-auto dark:border dark:border-ring"
               />
             </FormControl>
           </div>
@@ -398,7 +398,7 @@ const onCloseModal = () => {
       <Button
         variant="destructive"
         :disabled="props.isUpdateTask || isDeletingTask"
-        class="w-full"
+        class="w-full cursor-pointer"
         @click="onDeleteTask"
       >
         <Loader2

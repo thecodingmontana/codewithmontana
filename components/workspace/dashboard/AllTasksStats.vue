@@ -28,17 +28,17 @@ function isLastWeek(date: Date) {
   return date >= lastWeekStart && date <= lastWeekEnd
 }
 
-const { data } = await useAsyncData('all_project_stats', () =>
-  useRequestFetch()('/api/workspace/project/all'),
+const { data } = await useAsyncData(`all_project_task_stats`, () =>
+  useRequestFetch()(`/api/workspace/project/stats/tasks`),
 )
 
 watchEffect(() => {
   if (data.value && data.value.length > 0) {
-    const projects = data.value
+    const tasks = data.value
 
-    const completed = projects.filter(p => p.status === 'COMPLETED').length
-    const inProgress = projects.filter(p => p.status === 'IN PROGRESS').length
-    const total = projects.length
+    const completed = tasks.filter(p => p.status === 'COMPLETED').length
+    const inProgress = tasks.filter(p => p.status === 'IN PROGRESS').length
+    const total = tasks.length
 
     totalCompleted.value = completed
     totalInProgress.value = inProgress
@@ -56,13 +56,13 @@ watchEffect(() => {
       },
     ]
 
-    const completedThisWeek = projects.filter(
+    const completedThisWeek = tasks.filter(
       p =>
         p.status === 'COMPLETED'
         && isThisWeek(new Date(p.updatedAt)),
     ).length
 
-    const completedLastWeek = projects.filter(
+    const completedLastWeek = tasks.filter(
       p =>
         p.status === 'COMPLETED'
         && isLastWeek(new Date(p.updatedAt)),
@@ -91,7 +91,7 @@ watchEffect(() => {
 async function refreshStats() {
   isRefreshing.value = true
   try {
-    await refreshNuxtData('all_project_stats')
+    await refreshNuxtData(`all_project_task_stats`)
   }
   catch (error) {
     console.error('Error refreshing stats:', error)
@@ -103,13 +103,11 @@ async function refreshStats() {
 </script>
 
 <template>
-  <div class="md:col-span-2 p-3">
-    <div class="flex flex-col">
-      <div
-        class="flex items-center justify-between -mb-2.5"
-      >
+  <div class="md:col-span-2 p-3 self-start">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center justify-between -mb-8">
         <h2 class="text-lg font-semibold">
-          Project Stats
+          All Tasks Stats
         </h2>
         <Button
           :disabled="isRefreshing"
@@ -135,9 +133,7 @@ async function refreshStats() {
         type="half"
       />
 
-      <div
-        class="grid grid-cols-2 -mt-6"
-      >
+      <div class="grid grid-cols-2 -mt-8">
         <div class="flex flex-col items-center">
           <div class="flex items-center gap-x-2">
             <div class="bg-green-500 size-1.5 rounded-full" />
@@ -180,7 +176,7 @@ async function refreshStats() {
                   : 'same'
             }}
           </strong>
-          of projects this week than last week.
+          of tasks this week than last week.
         </template>
         <template v-else>
           No comparison data available.
