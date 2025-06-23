@@ -37,7 +37,7 @@ const props = defineProps<{
     <div>
       <h3
         :class="cn(
-          'text-sm font-semibold truncate',
+          'text-sm font-semibold',
           props?.task.status === 'COMPLETED' && 'line-through text-emerald-600',
           props?.task.status === 'ABANDONED' && 'line-through text-rose-600',
         )"

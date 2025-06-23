@@ -160,6 +160,18 @@ export const tasksTable = pgTable('tasks', {
   updatedAt: timestamp('updated_at', { mode: 'date', precision: 3 }).notNull(),
 })
 
+export const tasksActivityTable = pgTable('tasks_activity', {
+  id: text('id').primaryKey(),
+  status: statusEnum('status').default('IDEA').notNull(),
+  taskId: text('task_id')
+    .notNull()
+    .references(() => tasksTable.id, { onDelete: 'cascade' }),
+  changedBy: text('changed_by')
+    .notNull()
+    .references(() => userTable.id, { onDelete: 'cascade' }),
+  changedAt: timestamp('changed_at', { mode: 'date', precision: 3 }).notNull(),
+})
+
 export const subtasksTable = pgTable('subtasks', {
   id: text('id').primaryKey(),
   name: text('name').notNull(),
@@ -175,6 +187,7 @@ export const subtasksTable = pgTable('subtasks', {
 export const userRelations = relations(userTable, ({ many }) => ({
   credentials: many(passkeysTable),
   projects: many(projectTable),
+  tasks_activities: many(tasksActivityTable),
 }))
 
 export const projectsRelations = relations(
@@ -196,6 +209,7 @@ export const tasksRelations = relations(
       references: [projectTable.id],
     }),
     subtasks: many(subtasksTable),
+    activities: many(tasksActivityTable),
   }),
 )
 
@@ -205,6 +219,20 @@ export const subtasksRelations = relations(
     task: one(tasksTable, {
       fields: [subtasksTable.taskId],
       references: [tasksTable.id],
+    }),
+  }),
+)
+
+export const tasksActivityRelations = relations(
+  tasksActivityTable,
+  ({ one }) => ({
+    task: one(tasksTable, {
+      fields: [tasksActivityTable.taskId],
+      references: [tasksTable.id],
+    }),
+    user: one(userTable, {
+      fields: [tasksActivityTable.changedBy],
+      references: [userTable.id],
     }),
   }),
 )
