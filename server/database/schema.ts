@@ -168,7 +168,7 @@ export const tasksActivityTable = pgTable('tasks_activity', {
     .references(() => tasksTable.id, { onDelete: 'cascade' }),
   changedBy: text('changed_by')
     .notNull()
-    .references(() => userTable.id, { onDelete: 'cascade' }),
+    .references(() => userTable.id),
   changedAt: timestamp('changed_at', { mode: 'date', precision: 3 }).notNull(),
 })
 

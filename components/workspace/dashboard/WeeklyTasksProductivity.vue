@@ -1,30 +1,50 @@
 <script setup lang="ts">
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { weekDays } from '~/types'
 
-const selectedValue = ref('on')
-
-type RevenueDataItem = {
+type ProductivityDataItem = {
   day: string
-  desktop: number
-  mobile: number
+  completed: number
+  inReview: number
+  abandoned: number
 }
 
-const RevenueData: RevenueDataItem[] = [
-  { day: 'Mon', desktop: 186, mobile: 80 },
-  { day: 'Tue', desktop: 305, mobile: 200 },
-  { day: 'Wed', desktop: 237, mobile: 120 },
-  { day: 'Thur', desktop: 73, mobile: 190 },
-  { day: 'Fri', desktop: 209, mobile: 130 },
-  { day: 'Sat', desktop: 214, mobile: 140 },
-  { day: 'Sun', desktop: 237, mobile: 120 },
-]
+const selectedValue = ref<'on' | 'off'>('on') // 'on' = this week, 'off' = last week
+const productivityData = ref<ProductivityDataItem[]>([])
 
-const RevenueCategoriesMultple = {
-  desktop: { name: 'Desktop', color: '#3b82f6' },
-  mobile: { name: 'Mobile', color: '#22c55e' },
+const normalizeData = (raw: Partial<ProductivityDataItem>[]): ProductivityDataItem[] => {
+  return weekDays.map((day) => {
+    const match = raw.find(d => d.day === day)
+    return {
+      day,
+      completed: match?.completed || 0,
+      inReview: match?.inReview || 0,
+      abandoned: match?.abandoned || 0,
+    }
+  })
 }
 
-const xFormatter = (i: number): string => `${RevenueData[i]?.day}`
+const fetchData = async () => {
+  try {
+    const res = await $fetch(`/api/workspace/project/stats/tasks/productivity?range=${selectedValue.value === 'on' ? 'this' : 'last'}`, {
+      method: 'GET',
+    })
+    productivityData.value = normalizeData(res)
+  }
+  catch (err) {
+    console.error('Error loading productivity data', err)
+  }
+}
+
+watch(selectedValue, fetchData, { immediate: true })
+
+const ProductivityCategories = {
+  completed: { name: 'Completed', color: '#22c55e' },
+  inReview: { name: 'In Review', color: '#eab308' },
+  abandoned: { name: 'Abandoned', color: '#ef4444' },
+}
+
+const xFormatter = (i: number): string => productivityData.value[i]?.day ?? ''
 const yFormatter = (tick: number) => tick.toString()
 </script>
 
@@ -61,18 +81,18 @@ const yFormatter = (tick: number) => tick.toString()
         </RadioGroup>
       </div>
     </div>
-    <div>
+    <div class="text-primary">
       <BarChart
-        :data="RevenueData"
+        :data="productivityData"
         :height="300"
-        :categories="RevenueCategoriesMultple"
-        :y-axis="['desktop', 'mobile']"
-        :group-padding="0"
-        :bar-padding="0.2"
+        :categories="ProductivityCategories"
+        :y-axis="['completed', 'inReview', 'abandoned']"
         :x-num-ticks="6"
-        :radius="4"
         :x-formatter="xFormatter"
         :y-formatter="yFormatter"
+        :group-padding="0"
+        :bar-padding="0.2"
+        :radius="4"
         :legend-position="LegendPosition.Top"
         :hide-legend="false"
         :y-grid-line="true"

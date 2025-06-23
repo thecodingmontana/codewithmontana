@@ -139,6 +139,17 @@ export default defineEventHandler(async (event) => {
       eq(tables.tasksTable.projectId, projectId),
     )).returning()
 
+    // save the task activity if task is either status is changed to 'COMPLETED' or 'IN REVIEW' or 'ABANDONED'
+    if (['COMPLETED', 'IN REVIEW', 'ABANDONED'].includes(status)) {
+      await useDrizzle().insert(tables.tasksActivityTable).values({
+        id: uuidv4(),
+        taskId: task.id,
+        changedBy: session.user.id,
+        status,
+        changedAt: new Date(),
+      })
+    }
+
     // update subtasks
     if (subtasks && subtasks.length > 0) {
       // delete existing subtasks for the task

@@ -24,7 +24,7 @@ const isModalOpen = computed(() => {
   return modalStore?.type === 'mobileSidebar' && modalStore?.isOpen
 })
 
-const { data: projects } = await useAsyncData('sidebar_projects', () => useRequestFetch()('/api/workspace/project/all'))
+const { data: projects } = await useAsyncData('mobile_sidebar_projects', () => useRequestFetch()('/api/workspace/project/all'))
 
 const onClose = () => {
   modalStore?.setIsOpen(false)

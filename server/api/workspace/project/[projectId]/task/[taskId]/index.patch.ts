@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import { validStatuses, type Status } from '~/types'
 
 export default defineEventHandler(async (event) => {
@@ -59,6 +60,17 @@ export default defineEventHandler(async (event) => {
       eq(tables.tasksTable.id, taskId),
       eq(tables.tasksTable.projectId, projectId),
     )).returning()
+
+    // save the task activity if task is either status is changed to 'COMPLETED' or 'IN REVIEW' or 'ABANDONED'
+    if (['COMPLETED', 'IN REVIEW', 'ABANDONED'].includes(status)) {
+      await useDrizzle().insert(tables.tasksActivityTable).values({
+        id: uuidv4(),
+        taskId: taskId,
+        changedBy: session.user.id,
+        status,
+        changedAt: new Date(),
+      })
+    }
 
     return { message: 'Task status updated successfully!' }
   }

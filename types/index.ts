@@ -261,3 +261,5 @@ export interface Subtask {
   taskId: string
   is_completed: boolean
 }
+
+export const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
