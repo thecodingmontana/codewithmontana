@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AllTasksStats from '~/components/workspace/dashboard/AllTasksStats.vue'
 import Greetings from '~/components/workspace/dashboard/Greetings.vue'
+import WeeklyTasksProductivity from '~/components/workspace/dashboard/WeeklyTasksProductivity.vue'
 import ProjectStats from '~/components/workspace/projects/ProjectStats.vue'
 
 definePageMeta({
@@ -31,10 +32,11 @@ onMounted(() => {
 
 <template>
   <section class="grid grid-cols-1 gap-10 md:grid-cols-4">
-    <div class="col-span-1 md:col-span-3">
+    <div class="col-span-1 md:col-span-3 flex flex-col gap-8 self-start">
       <Greetings />
+      <WeeklyTasksProductivity />
     </div>
-    <div class="col-span-1">
+    <div class="col-span-1 self-start flex flex-col gap-8">
       <ProjectStats />
       <AllTasksStats />
     </div>
