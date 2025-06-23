@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { format, isPast } from 'date-fns'
+import { format, isBefore, isPast } from 'date-fns'
 import { Badge } from '~/components/ui/badge'
 import { Checkbox } from '~/components/ui/checkbox'
 import { cn } from '~/lib/utils'
@@ -80,12 +80,12 @@ const props = defineProps<{
       <div
         :class="cn(
           'flex items-center gap-1',
-          props?.task.dueDate && props?.task.status !== 'COMPLETED' && props?.task.status !== 'ABANDONED' && props && isPast(props?.task.dueDate) && 'text-red-500',
+          props?.task.dueDate && props?.task.status !== 'COMPLETED' && props?.task.status !== 'ABANDONED' && props && (isPast(props?.task.dueDate) && isBefore(props?.task.dueDate, new Date())) && 'text-red-500',
         )"
       >
         <Icon
           name="hugeicons:calendar-02"
-          class="size-5 shrink-0 rounded-full"
+          class="size-5 shrink-0"
         />
         <p>
           {{

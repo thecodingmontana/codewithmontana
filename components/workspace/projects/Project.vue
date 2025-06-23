@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { format } from 'date-fns'
+import { format, isBefore, isPast } from 'date-fns'
 import { Badge } from '~/components/ui/badge'
 import { cn } from '~/lib/utils'
 import type { DBProject } from '~/types'
@@ -56,8 +56,13 @@ const props = defineProps<{
         {{ props?.project.description }}
       </p>
     </div>
-    <div>
-      <div class="flex items-center gap-1 text-muted-foreground text-sm">
+    <div class="flex items-center justify-between text-muted-foreground text-sm">
+      <div
+        :class="cn(
+          'flex items-center gap-1',
+          props?.project.dueDate && props?.project.status !== 'COMPLETED' && props?.project.status !== 'ABANDONED' && props && (isPast(props?.project.dueDate) && isBefore(props?.project.dueDate, new Date())) && 'text-red-500',
+        )"
+      >
         <Icon
           name="hugeicons:calendar-02"
           class="size-5 shrink-0"
