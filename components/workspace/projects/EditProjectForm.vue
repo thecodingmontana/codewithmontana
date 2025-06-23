@@ -2,7 +2,7 @@
 import { useForm } from 'vee-validate'
 import { toast } from 'vue-sonner'
 import { Loader2 } from 'lucide-vue-next'
-import { isEqual } from 'lodash'
+import isEqual from 'lodash/isEqual'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select'
 import { Textarea } from '~/components/ui/textarea'
 import DatePicker from '~/components/workspace/DatePicker.vue'
