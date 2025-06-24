@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Loader2 } from 'lucide-vue-next'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { weekDays } from '~/types'
 
@@ -11,6 +12,7 @@ type ProductivityDataItem = {
 
 const selectedValue = ref<'on' | 'off'>('on') // 'on' = this week, 'off' = last week
 const productivityData = ref<ProductivityDataItem[]>([])
+const isLoadingData = ref(true)
 
 const normalizeData = (raw: Partial<ProductivityDataItem>[]): ProductivityDataItem[] => {
   return weekDays.map((day) => {
@@ -25,14 +27,19 @@ const normalizeData = (raw: Partial<ProductivityDataItem>[]): ProductivityDataIt
 }
 
 const fetchData = async () => {
+  isLoadingData.value = true
   try {
-    const res = await $fetch(`/api/workspace/project/stats/tasks/productivity?range=${selectedValue.value === 'on' ? 'this' : 'last'}`, {
+    const range = selectedValue.value === 'on' ? 'this' : 'last'
+    const res = await $fetch(`/api/workspace/project/stats/tasks/productivity?range=${range}`, {
       method: 'GET',
     })
     productivityData.value = normalizeData(res)
   }
   catch (err) {
     console.error('Error loading productivity data', err)
+  }
+  finally {
+    isLoadingData.value = false
   }
 }
 
@@ -81,8 +88,16 @@ const yFormatter = (tick: number) => tick.toString()
         </RadioGroup>
       </div>
     </div>
-    <div class="text-primary">
+    <div class="w-full overflow-hidden">
+      <div
+        v-if="isLoadingData"
+        class="flex items my-10 gap-x-2 justify-center text-muted-foreground"
+      >
+        <Loader2 class="animate-spin" />
+        Loading Graph Data..
+      </div>
       <BarChart
+        v-else
         :data="productivityData"
         :height="300"
         :categories="ProductivityCategories"
