@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     const session = await requireUserSession(event)
     const query = getQuery(event)
 
-    const range = query.range ? 'this' : 'last'
+    const range = query.range
 
     if (!session) {
       throw createError({

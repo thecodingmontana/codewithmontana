@@ -110,7 +110,7 @@ const yFormatter = (tick: number) => tick.toString()
         :radius="4"
         :legend-position="LegendPosition.Top"
         :hide-legend="false"
-        :y-grid-line="true"
+        :y-grid-line="false"
       />
     </div>
   </div>

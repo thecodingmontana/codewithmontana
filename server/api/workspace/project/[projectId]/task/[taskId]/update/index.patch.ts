@@ -133,7 +133,7 @@ export default defineEventHandler(async (event) => {
       updatedAt: new Date(),
       priority,
       status,
-      dueDate: parsedDueDate,
+      dueDate: parsedDueDate ? parsedDueDate : null,
     }).where(and(
       eq(tables.tasksTable.id, taskId),
       eq(tables.tasksTable.projectId, projectId),
