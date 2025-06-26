@@ -32,7 +32,7 @@ useHead({
   <main>
     <NuxtLoadingIndicator />
     <div
-      class="flex"
+      class="flex overflow-hidden"
     >
       <Sidebar />
       <div class="grid size-full gap-1 px-5 py-3">

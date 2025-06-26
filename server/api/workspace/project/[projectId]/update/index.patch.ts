@@ -87,7 +87,7 @@ export default defineEventHandler(async (event) => {
       updatedAt: new Date(),
       status,
       description,
-      dueDate: parsedDueDate,
+      dueDate: parsedDueDate ? parsedDueDate : null,
       priority,
       title,
     }).where(and(
