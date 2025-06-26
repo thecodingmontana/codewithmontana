@@ -43,6 +43,13 @@
       "when": 1750674305317,
       "tag": "0005_ambitious_vin_gonzales",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1750913257791,
+      "tag": "0006_greedy_talos",
+      "breakpoints": true
     }
   ]
 }
