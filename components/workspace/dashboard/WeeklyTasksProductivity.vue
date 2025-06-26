@@ -50,15 +50,15 @@ const yFormatter = (tick: number) => tick.toString()
 
 <template>
   <div class="p-5 rounded-md border grid gap-5">
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between xl:flex-row flex-col gap-2">
       <h2 class="text-lg font-medium">
         Weekly Tasks Productivity Overview
       </h2>
-      <div class="inline-flex h-9 rounded-lg bg-input/50 p-0.5">
+      <div class="inline-flex h-9 rounded-lg bg-input/50 p-0.5 w-full xl:w-auto">
         <RadioGroup
           v-model="selectedValue"
           :data-state="selectedValue"
-          class="group relative inline-grid grid-cols-[1fr_1fr] items-center gap-0 text-sm font-medium after:absolute after:inset-y-0 after:w-1/2 after:rounded-md after:bg-background after:shadow-xs after:shadow-black/[.04] after:ring-offset-background after:transition-transform after:duration-300 after:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] has-focus-visible:after:ring-2 has-focus-visible:after:ring-ring has-focus-visible:after:ring-offset-2 data-[state=off]:after:translate-x-0 data-[state=on]:after:translate-x-full"
+          class="group relative inline-grid grid-cols-[1fr_1fr] items-center gap-0 text-sm font-medium after:absolute after:inset-y-0 after:w-1/2 after:rounded-md after:bg-background after:shadow-xs after:shadow-black/[.04] after:ring-offset-background after:transition-transform after:duration-300 after:[transition-timing-function:cubic-bezier(0.16,1,0.3,1)] has-focus-visible:after:ring-2 has-focus-visible:after:ring-ring has-focus-visible:after:ring-offset-2 data-[state=off]:after:translate-x-0 data-[state=on]:after:translate-x-full w-full xl:w-auto"
         >
           <label
             class="relative z-10 inline-flex h-full min-w-8 cursor-pointer items-center justify-center whitespace-nowrap px-4 group-data-[state=on]:text-muted-foreground/70"

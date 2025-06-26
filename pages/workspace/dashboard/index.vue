@@ -38,7 +38,9 @@ onMounted(() => {
     </div>
     <div class="col-span-1 md:col-span-2 xl:col-span-1 self-start flex flex-col gap-8">
       <ProjectStats />
-      <AllTasksStats />
+      <div>
+        <AllTasksStats />
+      </div>
     </div>
   </section>
 </template>
