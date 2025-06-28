@@ -73,3 +73,7 @@ export const formatDateForPicker = (dateValue: string | Date | null | undefined)
     return undefined
   }
 }
+
+export function capitalize(word: string) {
+  return word.charAt(0).toUpperCase() + word.slice(1)
+}

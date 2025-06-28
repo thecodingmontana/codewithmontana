@@ -232,9 +232,6 @@ export interface DBProject {
   userId: string
   title: string
   dueDate: Date | null
-  user: {
-    avatar: string
-  }
 }
 
 export const validStatuses = ['IDEA', 'TODO', 'IN PROGRESS', 'IN REVIEW', 'COMPLETED', 'ABANDONED']
