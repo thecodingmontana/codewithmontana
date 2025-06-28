@@ -39,7 +39,7 @@ const onOpenSignoutModal = () => {
     <DropdownMenuTrigger as-child>
       <Button
         variant="ghost"
-        class="w-full px-1 py-3 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground dark:bg-[#1d1d1d] cursor-pointer"
+        class="w-full px-1 py-3 data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground dark:bg-[#1d1d1d] cursor-pointer bg-transparent"
       >
         <Avatar class="size-8 rounded-lg">
           <AvatarImage

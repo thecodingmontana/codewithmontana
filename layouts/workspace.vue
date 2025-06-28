@@ -26,22 +26,34 @@ useHead({
   ],
   title: `Christopher Odhiambo`,
 })
+
+const workspaceStore = useWorkspaceStore()
+
+const isOpenSidebar = computed(() => {
+  return workspaceStore?.isOpenSidebar
+})
 </script>
 
 <template>
-  <main>
+  <main class="min-h-screen flex flex-col">
     <NuxtLoadingIndicator />
-    <div
-      class="flex overflow-hidden"
-    >
+
+    <div class="flex flex-1">
       <Sidebar />
-      <div class="grid size-full gap-1 px-5 py-3">
+      <div
+        class="flex-1 relative flex flex-col size-full gap-1 px-5 transition-all duration-300"
+        :class="{ 'pl-[0rem]': !isOpenSidebar, 'pl-[18rem]': isOpenSidebar }"
+      >
         <WorkspaceHeader />
-        <div class="sm:p-3">
-          <slot />
+
+        <div class="overflow-y-auto flex-1">
+          <div class="sm:p-3">
+            <slot />
+          </div>
         </div>
       </div>
     </div>
+
     <Toaster
       :rich-colors="true"
       :close-button="true"

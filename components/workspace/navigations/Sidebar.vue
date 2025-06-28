@@ -26,17 +26,17 @@ const { data: projects } = await useAsyncData('sidebar_projects', () => useReque
 
 <template>
   <div
-    class="sticky top-0 z-20 h-screen shrink-0 overflow-hidden bg-[#fafafa] transition-all duration-300 dark:bg-[#1d1d1d] md:block"
+    class="fixed top-0 z-20 h-screen shrink-0 bg-[#fafafa] transition-all duration-300 dark:bg-[#1d1d1d] md:block"
     :class="{ 'w-0': !isOpenSidebar, 'hidden p-1 md:w-72': isOpenSidebar }"
   >
     <div
       class="relative flex h-full flex-col"
       :class="{ 'opacity-0': !isOpenSidebar, 'opacity-100': isOpenSidebar }"
     >
-      <div class="w-full bg-background dark:bg-[#1d1d1d]">
+      <div class="w-full bg-transparent dark:bg-[#1d1d1d]">
         <User />
       </div>
-      <ScrollArea class="flex-1 py-3 space-y-3">
+      <ScrollArea class="flex-1 h-full py-3 space-y-3">
         <div
           class="flex flex-col"
         >
